@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment">
-    android:background="#EDEDED"
+    tools:context=".ui.book.bookFragment">
 
     <TextView
         android:id="@+id/text_dashboard"

@@ -1,4 +1,4 @@
-package com.example.readease3.ui.notifications;
+package com.example.readease3.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

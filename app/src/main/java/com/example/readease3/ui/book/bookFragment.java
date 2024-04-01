@@ -1,4 +1,4 @@
-package com.example.readease3.ui.dashboard;
+package com.example.readease3.ui.book;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.readease3.databinding.FragmentDashboardBinding;
+import com.example.readease3.databinding.BookBinding;
 
-public class DashboardFragment extends Fragment {
+public class bookFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private BookBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        bookViewModel bookViewModel =
+                new ViewModelProvider(this).get(bookViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = BookBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        bookViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

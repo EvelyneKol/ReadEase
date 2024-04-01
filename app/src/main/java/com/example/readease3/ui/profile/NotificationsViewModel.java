@@ -1,4 +1,4 @@
-package com.example.readease3.ui.notifications;
+package com.example.readease3.ui.profile;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
