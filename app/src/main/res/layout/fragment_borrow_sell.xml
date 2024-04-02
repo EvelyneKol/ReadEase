@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EDEDED"
-    tools:context=".borrow_sell">
+    tools:context=".ui.book.borrow_sell">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:src="@drawable/Book" />
+        android:src="@drawable/book" />
 
     <TextView
         android:layout_width="match_parent"
