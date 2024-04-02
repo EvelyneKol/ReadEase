@@ -36,11 +36,4 @@
         app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteY="675dp">
-
-    </FrameLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
