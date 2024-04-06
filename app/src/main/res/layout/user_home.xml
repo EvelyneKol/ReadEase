@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EDEDED"
-    tools:context=".ui.home.user_home_fragment">
+    tools:context=".ui.home.HomeFragment">
 
     <Button
         android:id="@+id/button2"
@@ -13,7 +13,6 @@
         android:layout_height="52dp"
         android:background="@drawable/round_button"
         android:text="ΕΚΔΗΛΩΣΕΙΣ"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
@@ -26,8 +25,7 @@
         android:layout_width="251dp"
         android:layout_height="52dp"
         android:background="@drawable/round_button"
-        android:text="ΑΙΤΗΣΗ ΓΙΑ AUDIO BOOK"
-        android:textColor="@color/black"
+        android:text="AUDIO BOOK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
@@ -40,8 +38,7 @@
         android:layout_width="251dp"
         android:layout_height="52dp"
         android:background="@drawable/round_button"
-        android:text="ΑΓΟΡΑ E-BOOK"
-        android:textColor="@color/black"
+        android:text="E-BOOK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
@@ -55,7 +52,6 @@
         android:layout_height="52dp"
         android:background="@drawable/round_button"
         android:text="ΑΝΑΦΟΡΑ ΠΡΟΒΛΗΜΑΤΟΣ"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
@@ -67,20 +63,20 @@
         android:id="@+id/imageView"
         android:layout_width="374dp"
         android:layout_height="291dp"
-        android:layout_marginBottom="464dp"
         android:src="@drawable/readease"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002" />
 
     <Button
-        android:id="@+id/create_add"
+        android:id="@+id/button1"
         android:layout_width="251dp"
         android:layout_height="52dp"
         android:background="@drawable/round_button"
         android:text="ΔΗΜΙΟΥΡΓΙΑ ΑΓΓΕΛΙΑΣ"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
