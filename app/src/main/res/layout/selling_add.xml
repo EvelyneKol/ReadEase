@@ -11,16 +11,34 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="400dp"
-        android:layout_height="800dp"
+        android:layout_height="750dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
         android:src="@drawable/selling_add_backround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="174dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="675dp"
+        android:layout_marginEnd="94dp"
+        android:background="@drawable/black_button"
+        android:text="ΥΠΟΒΟΛΗ"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.801" />
 
     <TextView
         android:id="@+id/title"
@@ -281,23 +299,28 @@
         app:layout_constraintTop_toBottomOf="@+id/condition"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="174dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="675dp"
-        android:layout_marginEnd="94dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/black_button"
-        android:text="ΥΠΟΒΟΛΗ"
-        android:textSize="17dp"
-        app:layout_constraintBottom_toBottomOf="@id/imageView3"
-        app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.473"
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/decription"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="362dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="11dp"
+        android:hint="Προσθεσε μια περιγραφή..."
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.613"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.961">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_field"
+            android:baselineAligned="false" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
