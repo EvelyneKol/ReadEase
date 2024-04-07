@@ -12,6 +12,11 @@
         android:title="Search" />
 
     <item
+        android:id="@+id/cart"
+        android:icon="@drawable/baseline_shopping_cart_24"
+        android:title="Cart" />
+
+    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/profile"
         android:title="Profile" />

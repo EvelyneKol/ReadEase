@@ -1,4 +1,4 @@
-package com.example.readease3.ui.home;
+package com.example.readease3.ui.search;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.readease3.databinding.ClientBinding;
-import com.example.readease3.databinding.ClientBinding;
+import com.example.readease3.databinding.SearchBinding;
 
-public class HomeFragment extends Fragment {
+public class search_fragment extends Fragment {
 
-    private ClientBinding binding;
+    private SearchBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        search_ViewModel search_ViewModel =
+                new ViewModelProvider(this).get(search_ViewModel.class);
 
-        binding = ClientBinding.inflate(inflater, container, false);
+        binding = SearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
+        final TextView textView = binding.textDashboard;
+        search_ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

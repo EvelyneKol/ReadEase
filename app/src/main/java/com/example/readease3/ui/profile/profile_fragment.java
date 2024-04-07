@@ -1,4 +1,4 @@
-package com.example.readease3.ui.book;
+package com.example.readease3.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,23 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.readease3.databinding.FragmentBookBinding;
-import com.example.readease3.databinding.FragmentBookBinding;
+import com.example.readease3.databinding.ProfileBinding;
 
-public class bookFragment extends Fragment {
+public class profile_fragment extends Fragment {
 
-    private FragmentBookBinding binding;
+    private ProfileBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        bookViewModel bookViewModel =
-                new ViewModelProvider(this).get(bookViewModel.class);
+        profile_ViewModel profile_ViewModel =
+                new ViewModelProvider(this).get(profile_ViewModel.class);
 
-        binding = FragmentBookBinding.inflate(inflater, container, false);
+        binding = ProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        bookViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textNotifications;
+        profile_ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

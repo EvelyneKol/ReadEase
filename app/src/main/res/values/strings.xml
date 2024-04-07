@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">ReadEase3</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">ReadEase</string>
+    <string name="title_home">ReadEase</string>
+    <string name="title_search">ReadEase</string>
+    <string name="title_cart">ReadEase</string>
+    <string name="title_profile">ReadEase</string>
 </resources>

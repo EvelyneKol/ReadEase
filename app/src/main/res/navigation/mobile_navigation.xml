@@ -7,21 +7,24 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.readease3.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/client" />
+        android:name="com.example.readease3.ui.home.user_home_fragment"
+        tools:layout="@layout/user_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.readease3.ui.book.bookFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_book" />
+        android:name="com.example.readease3.ui.search.search_fragment"
+        tools:layout="@layout/search" />
+
+    <fragment
+        android:id="@+id/cart"
+        android:name="com.example.readease3.ui.cart.cart_fragment"
+        tools:layout="@layout/cart" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.readease3.ui.profile.profileFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_profile" />
+        android:name="com.example.readease3.ui.profile.profile_fragment"
+        tools:layout="@layout/profile" />
+
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.readease3.MainActivity"
