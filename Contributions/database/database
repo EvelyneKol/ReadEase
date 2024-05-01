@@ -1,1 +1,14 @@
+drop database readease;
+
 create database readease;
+
+use readease;
+create table book(
+	isbn VARCHAR(155) NOT NULL,
+	title VARCHAR(255)  NOT NULL DEFAULT 'unknown', 
+    book_description text  NOT NULL,
+    book_author VARCHAR(255)  NOT NULL DEFAULT 'unknown', 
+    pages INT  NOT NULL DEFAULT '0',
+    category ENUM('ΑΙΣΘΗΜΑΤΙΚΑ', 'ΕΠΙΣΤΗΜΟΝΙΚΗΣ ΦΑΝΤΑΣΙΑΣ', 'ΑΣΤΥΝΟΜΙΚΑ', 'ΑΥΤΟΒΕΛΤΙΩΣΗ'),
+    PRIMARY KEY (isbn)
+)engine=InnoDB;
