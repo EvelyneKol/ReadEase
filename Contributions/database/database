@@ -12,3 +12,30 @@ create table book(
     category ENUM('ΑΙΣΘΗΜΑΤΙΚΑ', 'ΕΠΙΣΤΗΜΟΝΙΚΗΣ ΦΑΝΤΑΣΙΑΣ', 'ΑΣΤΥΝΟΜΙΚΑ', 'ΑΥΤΟΒΕΛΤΙΩΣΗ'),
     PRIMARY KEY (isbn)
 )engine=InnoDB;
+
+create table borrow_ad(
+	borrow_ad_id INT NOT NULL AUTO_INCREMENT,
+	borrow_publisher INT NOT NULL,
+	borrow_ad_isbn VARCHAR(155) NOT NULL,
+    available_start_date DATE,
+    avalaible_end_date DATE,
+	borrow_status ENUM('ΚΑΚΗ', 'ΜΕΤΡΙΑ', 'ΚΑΛΗ', 'ΠΟΛΥ ΚΑΛΗ'),
+    PRIMARY KEY (borrow_ad_id),
+    CONSTRAINT BORROWISBN FOREIGN KEY (borrow_ad_isbn) REFERENCES book(isbn)
+	ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT USERID FOREIGN KEY (borrow_publisher) REFERENCES user(user_id)
+	ON UPDATE CASCADE ON DELETE CASCADE
+)engine=InnoDB;
+
+create table borrow(
+	borrow_id INT NOT NULL AUTO_INCREMENT,
+    ad_id INT NOT NULL,
+    borrower INT NOT NULL,
+	borrow_start_date DATE,
+    borrow_end_date DATE,
+	PRIMARY KEY (borrow_id),
+    CONSTRAINT ADID FOREIGN KEY (ad_id) REFERENCES borrow_ad(borrow_ad_id)
+	ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT BORROWER FOREIGN KEY (borrower) REFERENCES user(user_id)
+	ON UPDATE CASCADE ON DELETE CASCADE
+)engine=InnoDB;
