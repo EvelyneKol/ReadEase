@@ -18,14 +18,11 @@ public class search_fragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        search_ViewModel search_ViewModel =
-                new ViewModelProvider(this).get(search_ViewModel.class);
+        search_ViewModel search_ViewModel = new ViewModelProvider(this).get(search_ViewModel.class);
 
         binding = SearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        search_ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
