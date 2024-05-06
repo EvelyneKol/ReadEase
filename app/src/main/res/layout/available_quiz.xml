@@ -22,24 +22,9 @@
 
     <TextView
         android:id="@+id/quiz1"
-        android:layout_width="243dp"
-        android:layout_height="63dp"
-        android:text="Διάλεξε ένα από τα διαθέσιμα quiz!"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.785"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047" />
-
-    <TextView
-        android:id="@+id/quiz1"
         android:layout_width="318dp"
         android:layout_height="50dp"
         android:gravity="left|center"
-        android:text="Πόσο καλά ξέρεις τον &quot;Harry Potter&quot;;"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,28 +32,13 @@
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212"
-        tools:ignore="DuplicateIds" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#6d6b6b"
-        android:text="Παίξε τώρα"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.212" />
 
     <TextView
         android:id="@+id/quiz2"
         android:layout_width="318dp"
         android:layout_height="46dp"
         android:gravity="left|center"
-        android:text="Πόσο μεγάλος ReadEaser είσαι;"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +53,6 @@
         android:layout_width="318dp"
         android:layout_height="84dp"
         android:gravity="left|center"
-        android:text="Μάντεψε τον συγγραφέα των αγαπημένων βιβλίων των Read Easers;"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -94,7 +63,7 @@
         app:layout_constraintVertical_bias="0.638" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#6d6b6b"
@@ -104,7 +73,7 @@
         app:layout_constraintHorizontal_bias="0.84"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.709" />
+        app:layout_constraintVertical_bias="0.27" />
 
     <Button
         android:id="@+id/button8"
@@ -118,5 +87,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.486" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#6d6b6b"
+        android:text="Παίξε τώρα"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
