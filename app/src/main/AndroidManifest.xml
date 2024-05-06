@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ReadEase3"
         tools:targetApi="31">
         <activity
+            android:name=".available_quiz"
+            android:exported="false" />
+        <activity
             android:name=".upload_ebook"
             android:exported="false" />
         <activity
@@ -26,4 +29,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
