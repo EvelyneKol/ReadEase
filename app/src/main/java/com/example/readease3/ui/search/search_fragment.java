@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.readease3.DBHandler;
+import com.example.readease3.R;
 import com.example.readease3.databinding.SearchBinding;
 
 import android.widget.SearchView;
@@ -20,11 +24,21 @@ public class search_fragment extends Fragment {
 
     private SearchBinding binding;
     private DBHandler dbHandler;
+    private Button buttonBuy;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = SearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        buttonBuy = root.findViewById(R.id.buyButton);
+
+        buttonBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to EbookFormActivity
+                Navigation.findNavController(v).navigate(R.id.action_searchFragment_to_adresult);
+            }
+        });
 
         // Instantiate the DBHandler class
         dbHandler = new DBHandler(requireContext());
@@ -79,10 +93,6 @@ public class search_fragment extends Fragment {
 
         }
     }
-
-
-
-
 
 
 

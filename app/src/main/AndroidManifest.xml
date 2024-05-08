@@ -15,6 +15,7 @@
 
         <activity android:name=".ebook_form" />
         <activity android:name=".ad_options" />
+        <activity android:name=".ad_result" />
 
         <activity
             android:name=".MainActivity"

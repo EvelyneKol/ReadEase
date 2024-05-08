@@ -78,9 +78,31 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(createParticipateTableQuery);
 
 
+
+        // Create the selling_ad table
+        String createSellingAdTableQuery = "CREATE TABLE selling_ad (" +
+                "selling_ad_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "selling_ad_isbn TEXT NOT NULL," +
+                "selling_price REAL NOT NULL," +
+                "selling_publisher INTEGER," +
+                "selling_status TEXT CHECK(selling_status IN ('ΚΑΚΗ', 'ΜΕΤΡΙΑ', 'ΚΑΛΗ', 'ΠΟΛΥ ΚΑΛΗ'))," +
+                "FOREIGN KEY (selling_ad_isbn) REFERENCES book(isbn) ON UPDATE CASCADE ON DELETE CASCADE," +
+                "FOREIGN KEY (selling_publisher) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE" +
+                ")";
+        db.execSQL(createSellingAdTableQuery);
+
         // Insert initial books
         insertBook(db, "9786180149173", "Ψιλά Γράμματα", "LAUREN ASHER", "Description of the book", 445, "Αισθηματικα");
         insertBook(db, "9786810146189", "Το τρίτο κορίτσι", "Agatha Christie", "Description of the book", 277, "Αστυνομικα");
+
+        // Insert some random values into the user table
+        insertUser(db, "John Doe", "123", "USER", "john@example.com", 123456789, "New York", 100);
+        insertUser(db, "Jane Smith", "456", "WRITER", "jane@example.com", 987654321, "Los Angeles", 150);
+        insertUser(db, "Alice Johnson", "789", "USER", "alice@example.com", 555555555, "Chicago", 200);
+
+        // Insert records into the selling_ad table
+        insertSellingAd(db, "9786180149173", 18, 1, "ΚΑΛΗ");
+        insertSellingAd(db, "9786810146189", 12, 3, "ΠΟΛΥ ΚΑΛΗ");
     }
 
         @Override
@@ -102,7 +124,29 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
 
+    // Method to insert a user into the user table
+    private void insertUser(SQLiteDatabase db, String name, String password, String type, String mail, int phone, String userLocation, int points) {
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        values.put("password", password);
+        values.put("type", type);
+        values.put("mail", mail);
+        values.put("phone", phone);
+        values.put("user_location", userLocation);
+        values.put("points", points);
 
+        db.insert("user", null, values);
+    }
+    // Method to insert a selling ad into the selling_ad table
+    private void insertSellingAd(SQLiteDatabase db, String isbn, float price, int publisher, String status) {
+        ContentValues values = new ContentValues();
+        values.put("selling_ad_isbn", isbn);
+        values.put("selling_price", price);
+        values.put("selling_publisher", publisher);
+        values.put("selling_status", status);
+
+        db.insert("selling_ad", null, values);
+    }
     public List<Book> searchBooksByTitle(String title) {
         List<Book> books = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
