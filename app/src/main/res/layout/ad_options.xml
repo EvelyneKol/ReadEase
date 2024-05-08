@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EDEDED"
     tools:context=".create_add">
 
     <ImageView
@@ -47,11 +48,11 @@
         android:layout_height="52dp"
         android:layout_marginBottom="232dp"
         android:background="@drawable/round_button"
-        android:text="ΑΓΟΡΑ"
+        android:text="ΠΩΛΗΣΗ"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
