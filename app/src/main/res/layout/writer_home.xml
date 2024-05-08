@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EDEDED"
+        tools:context=".writer_home">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="379dp"
+            android:layout_height="256dp"
+            android:layout_marginBottom="700dp"
+            android:src="@drawable/readease"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.567"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/create_add"
+            android:layout_width="251dp"
+            android:layout_height="52dp"
+            android:background="@drawable/round_button"
+            android:text="ΔΗΜΙΟΥΡΓΙΑ ΑΓΓΕΛΙΑΣ"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.255" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="251dp"
+            android:layout_height="52dp"
+            android:background="@drawable/round_button"
+            android:text="ΕΚΔΗΛΩΣΕΙΣ"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.344" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="251dp"
+            android:layout_height="52dp"
+            android:background="@drawable/round_button"
+            android:text="ΑΓΟΡΑ E-BOOK"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.43" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="251dp"
+            android:layout_height="52dp"
+            android:background="@drawable/round_button"
+            android:text="ΑΙΤΗΣΗ ΓΙΑ AUDIO BOOK"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.512" />
+
+        <Button
+            android:id="@+id/b"
+            android:layout_width="251dp"
+            android:layout_height="52dp"
+            android:background="@drawable/writer_round_button"
+            android:text="ΑΝΑΡΤΗΣΗ E-BOOK"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.598" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="251dp"
+            android:layout_height="52dp"
+            android:background="@drawable/writer_round_button"
+            android:text="ΔΗΜΙΟΥΡΓΙΑ ΠΑΙΧΝΙΔΙΟΥ ΕΡΩΤΗΣΕΩΝ"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.677" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="251dp"
+            android:layout_height="52dp"
+            android:background="@drawable/writer_round_button"
+            android:text="ΔΗΜΙΟΥΡΓΙΑ ΕΚΔΗΛΩΣΗΣ"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.479"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.751" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="251dp"
+            android:layout_height="52dp"
+            android:background="@drawable/writer_round_button"
+            android:text="ΣΤΑΤΙΣΤΙΚΑ ΠΩΛΗΣΕΩΝ"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.826" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="251dp"
+            android:layout_height="52dp"
+            android:background="@drawable/round_button"
+            android:text="ΑΝΑΦΟΡΑ ΠΡΟΒΛΗΜΑΤΟΣ"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.481"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.912" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
