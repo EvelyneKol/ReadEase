@@ -16,6 +16,7 @@ import com.example.readease3.R;
 import com.example.readease3.create_add;
 import com.example.readease3.databinding.UserHomeBinding;
 
+import com.example.readease3.R;
 
 public class user_home_fragment extends Fragment {
 
@@ -40,7 +41,6 @@ public class user_home_fragment extends Fragment {
 
         return rootView;
     }
-
 
 
     @Override

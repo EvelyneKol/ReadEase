@@ -27,54 +27,55 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="155dp"
-        android:layout_height="435dp"
+        android:layout_width="126dp"
+        android:layout_height="378dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:layout_marginTop="-350dp"
+        android:layout_marginTop="160dp"
         android:src="@drawable/upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextName"
-        app:layout_constraintVertical_bias="0.921" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="390dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-120dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="337dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="-180dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="-80dp"
         android:background="@drawable/edittext_border"
-        android:hint="Λίγα λόγια για το βιβλίο"
         android:gravity="top|start"
+        android:hint="Λίγα λόγια για το βιβλίο"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPrice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextName"
+        app:layout_constraintVertical_bias="0.643" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="146dp"
         android:layout_height="29dp"
-        android:layout_marginTop="380dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginBottom="-300dp"
         android:text='Τιμή Πώλησης'
         android:textColor="@color/black"
         android:textSize="17sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/imageView3"
-        app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toStartOf="@id/imageView3"
-        app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.173" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.185" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -108,77 +109,80 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.22000003" />
 
+
     <TextView
         android:id="@+id/writer_name"
         android:layout_width="146dp"
         android:layout_height="29dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
         android:text='Όνομα Συγγραφέα'
         android:textColor="@color/black"
         android:textSize="17sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/imageView3"
+        app:layout_constraintBottom_toTopOf="@+id/editTextName"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="@id/imageView3"
-        app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.22000003" />
-
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextName"
-        android:layout_width="389dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-320dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="340dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="-220dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/edittext_border"
         android:hint="Enter your name"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.495" />
+        app:layout_constraintVertical_bias="0.508" />
 
     <EditText
         android:id="@+id/editTextPrice"
         android:layout_width="132dp"
         android:layout_height="51dp"
-        android:layout_marginStart="-240dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="120dp"
-        android:hint="€"
-        android:gravity="right|center_vertical"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/edittext_border"
+        android:gravity="right|center_vertical"
+        android:hint="€"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/writer_name"
         app:layout_constraintTop_toBottomOf="@+id/editTextName"
-        app:layout_constraintVertical_bias="0.501" />
+        app:layout_constraintVertical_bias="0.414" />
 
     <Button
         android:id="@+id/uploadButton"
         android:layout_width="130dp"
         android:layout_height="55dp"
         android:layout_marginStart="-240dp"
-        android:layout_marginTop="-190dp"
+        android:layout_marginTop="-170dp"
         android:onClick="openFilePicker"
         android:text="Ανεβασε PDF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrice"
+        app:layout_constraintVertical_bias="0.546" />
 
     <Button
         android:id="@+id/button9"
         android:layout_width="196dp"
         android:layout_height="56dp"
-        android:layout_marginTop="-190dp"
+        android:layout_marginTop="-170dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/black_button"
         android:text="ΥΠΟΒΟΛΗ"

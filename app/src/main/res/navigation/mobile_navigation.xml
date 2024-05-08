@@ -8,7 +8,13 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.readease3.ui.home.user_home_fragment"
-        tools:layout="@layout/user_home" />
+        tools:layout="@layout/user_home" >
+
+        <action
+            android:id="@+id/action_userHomeFragment_to_ebookFormActivity"
+            app:destination="@id/ebookFormActivity" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -29,16 +35,6 @@
         android:id="@+id/mainActivity"
         android:name="com.example.readease3.MainActivity"
         android:label="MainActivity" />
-
-    <fragment
-        android:id="@+id/userHomeFragment"
-        android:name="com.example.readease3.ui.home.user_home_fragment"
-        android:label="fragment_user_home"
-        tools:layout="@layout/user_home">
-        <action
-            android:id="@+id/action_userHomeFragment_to_ebookFormActivity"
-            app:destination="@id/ebookFormActivity" />
-    </fragment>
 
     <activity
         android:id="@+id/ebookFormActivity"
