@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.readease3.R;
 import com.example.readease3.create_add;
 import com.example.readease3.databinding.UserHomeBinding;
@@ -20,29 +21,27 @@ public class user_home_fragment extends Fragment {
 
     private UserHomeBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        user_home_ViewModel userhomeViewModel =
-                new ViewModelProvider(this).get(user_home_ViewModel.class);
+    private Button buttonEbook;
 
-        binding = UserHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.user_home, container, false);
 
-        // Find the button by its ID
-        Button CreateaddButton = root.findViewById(R.id.create_add);
+        buttonEbook = rootView.findViewById(R.id.button3);
 
-        // Set OnClickListener for button_buy_books
-        CreateaddButton.setOnClickListener(new View.OnClickListener() {
+        buttonEbook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an Intent to navigate to the Buy_Books activity
-                Intent intent = new Intent(getActivity(), create_add.class);
-                startActivity(intent);
+                // Navigate to EbookFormActivity
+                Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_ebookFormActivity);
             }
         });
 
-        return root;
+        return rootView;
     }
+
+
 
     @Override
     public void onDestroyView() {
