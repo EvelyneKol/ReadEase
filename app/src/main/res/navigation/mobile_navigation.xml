@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_userHomeFragment_to_ebookFormActivity"
             app:destination="@id/ebookFormActivity" />
+        <action
+            android:id="@+id/action_userHomeFragment_to_adOptionsActivity"
+            app:destination="@id/adOptionsActivity" />
     </fragment>
 
 
@@ -41,5 +44,11 @@
         android:name="com.example.readease3.ebook_form"
         android:label="EbookFormActivity"
         tools:layout="@layout/activity_ebook_form" />
+
+    <activity
+        android:id="@+id/adOptionsActivity"
+        android:name="com.example.readease3.ad_options"
+        android:label="Ad Options Activity" />
+
 
 </navigation>

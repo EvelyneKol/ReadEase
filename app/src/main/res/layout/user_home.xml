@@ -63,7 +63,7 @@
         android:id="@+id/imageView"
         android:layout_width="372dp"
         android:layout_height="282dp"
-        android:layout_marginTop="-50dp"
+        android:layout_marginTop="-60dp"
         android:src="@drawable/readease"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

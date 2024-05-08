@@ -30,6 +30,54 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.execSQL(createTableQuery);
 
+        // Create the user table
+        String createUserTableQuery = "CREATE TABLE user (" +
+                "user_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "name TEXT NOT NULL," +
+                "password TEXT NOT NULL," +
+                "type TEXT CHECK(type IN ('USER', 'WRITER'))," +
+                "mail TEXT NOT NULL," +
+                "phone INTEGER NOT NULL," +
+                "user_location TEXT NOT NULL," +
+                "points INTEGER" +
+                ")";
+        db.execSQL(createUserTableQuery);
+
+
+        // Create the ebook table
+        String createEbookTableQuery = "CREATE TABLE ebook (" +
+                "ebook_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ebook_author TEXT NOT NULL DEFAULT 'unknown'," +
+                "ebook_description TEXT NOT NULL," +
+                "price INTEGER NOT NULL DEFAULT 0" +
+                ")";
+
+        db.execSQL(createEbookTableQuery);
+
+        // Create the events table
+        String createEventsTableQuery = "CREATE TABLE events (" +
+                "event_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "event_title TEXT NOT NULL," +
+                "event_description TEXT NOT NULL DEFAULT 'unknown'," +
+                "date_time DATETIME NOT NULL," +
+                "event_location TEXT NOT NULL," +
+                "capacity INTEGER NOT NULL," +
+                "writer_creator INTEGER," +
+                "CONSTRAINT CREATOR FOREIGN KEY (writer_creator) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE" +
+                ")";
+        db.execSQL(createEventsTableQuery);
+
+        // Create the participate table
+        String createParticipateTableQuery = "CREATE TABLE participate (" +
+                "participants_user_id INTEGER NOT NULL," +
+                "participate_event_id INTEGER NOT NULL," +
+                "PRIMARY KEY (participants_user_id, participate_event_id)," +
+                "CONSTRAINT PARTICIPANTS FOREIGN KEY (participants_user_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE," +
+                "CONSTRAINT EVENT FOREIGN KEY (participate_event_id) REFERENCES events(event_id) ON UPDATE CASCADE ON DELETE CASCADE" +
+                ")";
+        db.execSQL(createParticipateTableQuery);
+
+
         // Insert initial books
         insertBook(db, "9786180149173", "Ψιλά Γράμματα", "LAUREN ASHER", "Description of the book", 445, "Αισθηματικα");
         insertBook(db, "9786810146189", "Το τρίτο κορίτσι", "Agatha Christie", "Description of the book", 277, "Αστυνομικα");
