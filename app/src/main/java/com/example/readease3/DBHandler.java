@@ -46,7 +46,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // Create the ebook table
         String createEbookTableQuery = "CREATE TABLE ebook (" +
-                "ebook_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ebook_id INTEGER PRIMARY KEY ," +
                 "ebook_author TEXT NOT NULL DEFAULT 'unknown'," +
                 "ebook_description TEXT NOT NULL," +
                 "price INTEGER NOT NULL DEFAULT 0" +
@@ -56,7 +56,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // Create the events table
         String createEventsTableQuery = "CREATE TABLE events (" +
-                "event_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "event_id INTEGER PRIMARY KEY NOT NULL," +
                 "event_title TEXT NOT NULL," +
                 "event_description TEXT NOT NULL DEFAULT 'unknown'," +
                 "date_time DATETIME NOT NULL," +
@@ -103,6 +103,10 @@ public class DBHandler extends SQLiteOpenHelper {
         // Insert records into the selling_ad table
         insertSellingAd(db, "9786180149173", 18, 1, "ΚΑΛΗ");
         insertSellingAd(db, "9786810146189", 12, 3, "ΠΟΛΥ ΚΑΛΗ");
+
+        // Insert records into events table
+        insertEvents(db,82224,"Book mania","description1","2024-08-22 12:30:00", "Greece",40,1);
+        insertEvents(db,81324,"Learn About books","description2","2024-08-13 15:30:00", "Greece",50,2);
     }
 
         @Override
@@ -147,6 +151,20 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert("selling_ad", null, values);
     }
+
+    private void insertEvents(SQLiteDatabase db, int eventId, String title, String description, String dateTime, String location, int capacity, int creator) {
+        ContentValues values = new ContentValues();
+        values.put("event_id", eventId);
+        values.put("event_title", title);
+        values.put("event_description", description);
+        values.put("date_time", dateTime);
+        values.put("event_location", location);
+        values.put("capacity", capacity );
+        values.put("writer_creator", creator );
+
+        db.insert("events", null, values);
+    }
+
     public List<Book> searchBooksByTitle(String title) {
         List<Book> books = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -194,6 +212,58 @@ public class DBHandler extends SQLiteOpenHelper {
         // Return the list of books
         return books;
     }
+
+    public List<events> returnEventsInfo() {
+        List<events> eventsList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Define the query to search for events
+        String query = "SELECT * FROM events";
+
+        // Execute the query
+        Cursor cursor = db.rawQuery(query, null);
+
+        // Iterate through the cursor to retrieve events
+        if (cursor.moveToFirst()) {
+            do {
+                int eventIdIndex = cursor.getColumnIndex("event_id");
+                int titleIndex = cursor.getColumnIndex("event_title");
+                int descriptionIndex = cursor.getColumnIndex("event_description");
+                int dateTimeIndex = cursor.getColumnIndex("date_time");
+                int locationIndex = cursor.getColumnIndex("event_location");
+                int capacityIndex = cursor.getColumnIndex("capacity");
+                int creatorIndex = cursor.getColumnIndex("writer_creator");
+
+                // Check if column indices are valid
+                if (eventIdIndex != -1 && titleIndex != -1 && descriptionIndex != -1 &&
+                        dateTimeIndex != -1 && locationIndex != -1 && capacityIndex != -1 && creatorIndex != -1) {
+                    int eventId = cursor.getInt(eventIdIndex);
+                    String title = cursor.getString(titleIndex);
+                    String description = cursor.getString(descriptionIndex);
+                    String dateTime = cursor.getString(dateTimeIndex);
+                    String location = cursor.getString(locationIndex);
+                    int capacity = cursor.getInt(capacityIndex);
+                    int creator = cursor.getInt(creatorIndex);
+
+                    // Create an Event object for each row and add it to the list
+                    events event = new events(eventId, title, description, dateTime, location, capacity, creator);
+                    eventsList.add(event);
+                } else {
+                    // Handle case where one or more columns are missing
+                    // Log a warning or take appropriate action
+                }
+            } while (cursor.moveToNext());
+        }
+
+        // Close the cursor and database
+        cursor.close();
+        db.close();
+
+        // Return the list of events
+        return eventsList;
+    }
+
+
 
 
 }

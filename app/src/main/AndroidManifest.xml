@@ -12,11 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadEase3"
         tools:targetApi="31">
-
-        <activity android:name=".ebook_form" />
-        <activity android:name=".ad_options" />
-        <activity android:name=".ad_result" />
-
+        <activity android:name=".events_screen"/>
+        <activity android:name=".ebook_form"/>
+        <activity android:name=".ad_options"/>
+        <activity android:name=".ad_result"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

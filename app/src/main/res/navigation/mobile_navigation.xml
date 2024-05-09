@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_userHomeFragment_to_adOptionsActivity"
             app:destination="@id/adOptionsActivity" />
+        <action
+            android:id="@+id/action_userHomeFragment_to_eventsActivity"
+            app:destination="@id/eventsActivity" />
 
 
     </fragment>
@@ -62,6 +65,12 @@
         android:id="@+id/adresult"
         android:name="com.example.readease3.ad_result"
         android:label="Ad Result" />
+
+    <activity
+        android:id="@+id/eventsActivity"
+        android:name="com.example.readease3.events_screen"
+        android:label="EventsActivity"
+        tools:layout="@layout/events_screen" />
 
 
 </navigation>
