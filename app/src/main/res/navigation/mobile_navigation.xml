@@ -15,13 +15,10 @@
             app:destination="@id/navigation_home" />
     </fragment>
 
-
-
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.readease3.ui.home.user_home_fragment"
         tools:layout="@layout/user_home" >
-
         <action
             android:id="@+id/action_userHomeFragment_to_adOptionsActivity"
             app:destination="@id/adOptionsActivity" />
@@ -32,12 +29,18 @@
 
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_search"
         android:name="com.example.readease3.ui.search.search_fragment"
         tools:layout="@layout/search">
-    <action
-        android:id="@+id/action_searchFragment_to_adresult"
-        app:destination="@+id/adresult"/>
+        <action
+            android:id="@+id/action_searchFragment_to_adresult"
+            app:destination="@+id/adresult"/>
+        <action
+            android:id="@+id/action_searchFragment_to_old_review"
+            app:destination="@+id/adresult"/>
+        <action
+            android:id="@+id/action_searchFragment_to_new_review"
+            app:destination="@+id/adresult"/>
     </fragment>
 
 
@@ -56,6 +59,8 @@
         android:id="@+id/mainActivity"
         android:name="com.example.readease3.MainActivity"
         android:label="MainActivity" />
+
+
 
     <activity
         android:id="@+id/adOptionsActivity"
@@ -77,6 +82,7 @@
         android:id="@+id/borrow_add_activity"
         android:name="com.example.readease3.borrow_add"
         android:label="Selling Add Activity" />
+
     <activity
         android:id="@+id/eventsActivity"
         android:name="com.example.readease3.events_screen"

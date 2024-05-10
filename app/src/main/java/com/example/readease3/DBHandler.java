@@ -78,7 +78,6 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(createParticipateTableQuery);
 
 
-
         // Create the selling_ad table
         String createSellingAdTableQuery = "CREATE TABLE selling_ad (" +
                 "selling_ad_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -90,6 +89,18 @@ public class DBHandler extends SQLiteOpenHelper {
                 "FOREIGN KEY (selling_publisher) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE" +
                 ")";
         db.execSQL(createSellingAdTableQuery);
+
+        // Create the review table
+        String createReviewTableQuery = "CREATE TABLE review ("
+                + "review_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "reviewer INT NOT NULL,"
+                + "review TEXT,"
+                + "reviewed_book VARCHAR(155) NOT NULL,"
+                + "FOREIGN KEY (reviewer) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,"
+                + "FOREIGN KEY (reviewed_book) REFERENCES book(isbn) ON UPDATE CASCADE ON DELETE CASCADE"
+                + ")";
+        db.execSQL(createReviewTableQuery);
+
 
         // Insert initial books
         insertBook(db, "9786180149173", "Ψιλά Γράμματα", "LAUREN ASHER", "Description of the book", 445, "Αισθηματικα");
@@ -107,25 +118,28 @@ public class DBHandler extends SQLiteOpenHelper {
         // Insert records into events table
         insertEvents(db,82224,"Book mania","description1","2024-08-22 12:30:00", "Greece",40,1);
         insertEvents(db,81324,"Learn About books","description2","2024-08-13 15:30:00", "Greece",50,2);
+
+        // Insert records into review
+        insertReview(db, 1, "Best book ever written!","9786810146189");
     }
 
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Implement if needed
-        }
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Implement if needed
+    }
 
-        // Method to insert a book into the database
-        private void insertBook(SQLiteDatabase db, String isbn, String title, String author, String description, int pages, String category) {
-            ContentValues values = new ContentValues();
-            values.put("isbn", isbn);
-            values.put("title", title);
-            values.put("book_description", description);
-            values.put("book_author", author);
-            values.put("pages", pages);
-            values.put("category", category);
+    // Method to insert a book into the database
+    private void insertBook(SQLiteDatabase db, String isbn, String title, String author, String description, int pages, String category) {
+        ContentValues values = new ContentValues();
+        values.put("isbn", isbn);
+        values.put("title", title);
+        values.put("book_description", description);
+        values.put("book_author", author);
+        values.put("pages", pages);
+        values.put("category", category);
 
-            db.insert("book", null, values);
-        }
+        db.insert("book", null, values);
+    }
 
 
     // Method to insert a user into the user table
@@ -164,6 +178,17 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert("events", null, values);
     }
+
+    private void insertReview(SQLiteDatabase db, int reviewerId, String reviewText, String reviewedBook) {
+        ContentValues values = new ContentValues();
+        values.put("reviewer", reviewerId);
+        values.put("review", reviewText);
+        values.put("reviewed_book", reviewedBook);
+
+        db.insert("review", null, values);
+    }
+
+
 
     public List<Book> searchBooksByTitle(String title) {
         List<Book> books = new ArrayList<>();
@@ -211,6 +236,17 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // Return the list of books
         return books;
+    }
+
+    public boolean hasReviewForBook(int userId, String isbn) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM review WHERE reviewer = ? AND reviewed_book = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId), isbn});
+
+        boolean hasReview = cursor.getCount() > 0;
+
+        cursor.close();
+        return hasReview;
     }
 
     public List<events> returnEventsInfo() {

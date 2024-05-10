@@ -80,12 +80,13 @@
             app:layout_constraintVertical_bias="0.512" />
 
         <Button
-            android:id="@+id/b"
+            android:id="@+id/ebookbutton"
             android:layout_width="251dp"
             android:layout_height="52dp"
             android:background="@drawable/writer_round_button"
             android:text="ΑΝΑΡΤΗΣΗ E-BOOK"
             android:textColor="@color/black"
+            android:onClick="showEbookForm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
