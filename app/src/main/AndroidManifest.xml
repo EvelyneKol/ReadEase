@@ -20,6 +20,8 @@
         <activity android:name=".ad_result" />
         <activity android:name=".selling_add" />
         <activity android:name=".borrow_add" />
+        <activity android:name=".review" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

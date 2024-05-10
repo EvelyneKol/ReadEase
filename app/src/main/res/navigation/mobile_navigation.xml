@@ -36,11 +36,8 @@
             android:id="@+id/action_searchFragment_to_adresult"
             app:destination="@+id/adresult"/>
         <action
-            android:id="@+id/action_searchFragment_to_old_review"
-            app:destination="@+id/adresult"/>
-        <action
-            android:id="@+id/action_searchFragment_to_new_review"
-            app:destination="@+id/adresult"/>
+            android:id="@+id/action_searchFragment_to_review"
+            app:destination="@+id/review"/>
     </fragment>
 
 
@@ -72,6 +69,12 @@
         android:id="@+id/adresult"
         android:name="com.example.readease3.ad_result"
         android:label="Ad Result" />
+
+    <activity
+        android:id="@+id/review"
+        android:name="com.example.readease3.review"
+        android:label="Create New Review" />
+
 
     <activity
         android:id="@+id/selling_add_activity"

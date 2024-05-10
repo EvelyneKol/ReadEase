@@ -1,5 +1,6 @@
 package com.example.readease3.ui.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +14,13 @@ import androidx.navigation.Navigation;
 
 import com.example.readease3.DBHandler;
 import com.example.readease3.R;
+import com.example.readease3.borrow_add;
 import com.example.readease3.databinding.SearchBinding;
-
 import android.widget.SearchView;
 import com.example.readease3.Book;
 import java.util.List;
-import android.widget.Button;
+
+
 
 public class search_fragment extends Fragment {
 
@@ -26,17 +28,28 @@ public class search_fragment extends Fragment {
     private DBHandler dbHandler;
     private Button buttonBuy;
 
+    private Button reviewButton;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = SearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         buttonBuy = root.findViewById(R.id.buyButton);
+        reviewButton = root.findViewById(R.id.reviewButton);
 
         buttonBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Navigate to EbookFormActivity
                 Navigation.findNavController(v).navigate(R.id.action_searchFragment_to_adresult);
+            }
+        });
+
+        reviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to EbookFormActivity
+                Navigation.findNavController(v).navigate(R.id.action_searchFragment_to_review);
             }
         });
 
@@ -62,6 +75,8 @@ public class search_fragment extends Fragment {
         return root;
     }
 
+    private String searchedBookISBN; // Class variable to store the ISBN of the searched book
+
     private void searchBooks(String query) {
         // Perform search query in the database
         List<Book> books = dbHandler.searchBooksByTitle(query);
@@ -70,18 +85,18 @@ public class search_fragment extends Fragment {
         if (!books.isEmpty()) {
             // Display the first matching book details
             Book book = books.get(0);
-            String bookDetails = "Title: " + book.getTitle() + "\n" +
-                    "ISBN: " + book.getIsbn() + "\n" +
-                    "Pages: " + book.getPages();
+            searchedBookISBN = book.getIsbn(); // Store the ISBN of the searched book
 
             // Update UI with book details
+            String bookDetails = "Title: " + book.getTitle() + "\n" +
+                    "ISBN: " + searchedBookISBN + "\n" +  // Use searchedBookISBN here
+                    "Pages: " + book.getPages();
             binding.searchResultTextView.setText(bookDetails);
 
             // Adjust button visibility
             binding.buyButton.setVisibility(View.VISIBLE);
             binding.borrowButton.setVisibility(View.VISIBLE);
             binding.reviewButton.setVisibility(View.VISIBLE);
-
         } else {
             // No matching books found
             binding.searchResultTextView.setText("No matching books found.");
@@ -90,11 +105,8 @@ public class search_fragment extends Fragment {
             binding.buyButton.setVisibility(View.GONE);
             binding.borrowButton.setVisibility(View.GONE);
             binding.reviewButton.setVisibility(View.GONE);
-
         }
     }
-
-
 
     @Override
     public void onDestroyView() {

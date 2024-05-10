@@ -118,9 +118,6 @@ public class DBHandler extends SQLiteOpenHelper {
         // Insert records into events table
         insertEvents(db,82224,"Book mania","description1","2024-08-22 12:30:00", "Greece",40,1);
         insertEvents(db,81324,"Learn About books","description2","2024-08-13 15:30:00", "Greece",50,2);
-
-        // Insert records into review
-        insertReview(db, 1, "Best book ever written!","9786810146189");
     }
 
     @Override
@@ -179,15 +176,14 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert("events", null, values);
     }
 
-    private void insertReview(SQLiteDatabase db, int reviewerId, String reviewText, String reviewedBook) {
+    public void insertReview(int reviewerId, String reviewText, String reviewedBook) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("reviewer", reviewerId);
         values.put("review", reviewText);
         values.put("reviewed_book", reviewedBook);
-
         db.insert("review", null, values);
     }
-
 
 
     public List<Book> searchBooksByTitle(String title) {
@@ -236,17 +232,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // Return the list of books
         return books;
-    }
-
-    public boolean hasReviewForBook(int userId, String isbn) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM review WHERE reviewer = ? AND reviewed_book = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId), isbn});
-
-        boolean hasReview = cursor.getCount() > 0;
-
-        cursor.close();
-        return hasReview;
     }
 
     public List<events> returnEventsInfo() {
@@ -298,8 +283,6 @@ public class DBHandler extends SQLiteOpenHelper {
         // Return the list of events
         return eventsList;
     }
-
-
 
 
 }
