@@ -19,10 +19,7 @@ import com.example.readease3.databinding.UserHomeBinding;
 import com.example.readease3.R;
 
 public class user_home_fragment extends Fragment {
-
     private UserHomeBinding binding;
-
-    private Button buttonEbook;
     private Button adButton;
     private Button eventButton;
 
@@ -32,17 +29,8 @@ public class user_home_fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.user_home, container, false);
 
-        buttonEbook = rootView.findViewById(R.id.button3);
         adButton = rootView.findViewById(R.id.button1);
         eventButton = rootView.findViewById(R.id.button2);
-
-        buttonEbook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to EbookFormActivity
-                Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_ebookFormActivity);
-            }
-        });
 
         adButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +40,13 @@ public class user_home_fragment extends Fragment {
             }
         });
 
-
+        eventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to AdOptionsActivity
+                Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_eventsActivity);
+            }
+        });
 
         return rootView;
     }

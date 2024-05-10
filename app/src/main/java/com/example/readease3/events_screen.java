@@ -44,7 +44,7 @@ public class events_screen extends AppCompatActivity {
 
         if (!eventsList.isEmpty()) {
             // Display the first event details
-            events event = eventsList.get(0);
+            events event = eventsList.get(1);
             String eventDetails = "Start Date: " + event.getDateTime() + "\n" +
                     "Title: " + event.getTitle();
 

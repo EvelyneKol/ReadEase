@@ -23,13 +23,11 @@
         tools:layout="@layout/user_home" >
 
         <action
-            android:id="@+id/action_userHomeFragment_to_ebookFormActivity"
-            app:destination="@id/ebookFormActivity" />
-        <action
             android:id="@+id/action_userHomeFragment_to_adOptionsActivity"
             app:destination="@id/adOptionsActivity" />
-
-
+        <action
+            android:id="@+id/action_userHomeFragment_to_eventsActivity"
+            app:destination="@id/eventsActivity" />
     </fragment>
 
 
@@ -60,12 +58,6 @@
         android:label="MainActivity" />
 
     <activity
-        android:id="@+id/ebookFormActivity"
-        android:name="com.example.readease3.ebook_form"
-        android:label="EbookFormActivity"
-        tools:layout="@layout/activity_ebook_form" />
-
-    <activity
         android:id="@+id/adOptionsActivity"
         android:name="com.example.readease3.ad_options"
         android:label="Ad Options Activity" >
@@ -85,6 +77,11 @@
         android:id="@+id/borrow_add_activity"
         android:name="com.example.readease3.borrow_add"
         android:label="Selling Add Activity" />
+    <activity
+        android:id="@+id/eventsActivity"
+        android:name="com.example.readease3.events_screen"
+        android:label="EventsActivity"
+        tools:layout="@layout/events_screen" />
 
 
 </navigation>
