@@ -12,17 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadEase3"
         tools:targetApi="31">
-        <activity android:name=".events_screen"/>
-        <activity android:name=".ebook_form"/>
-        <activity android:name=".ad_options"/>
-        <activity android:name=".ad_result"/>
+        <activity
+            android:name=".login"
+            android:exported="false" />
+        <activity android:name=".ebook_form" />
+        <activity android:name=".ad_options" />
+        <activity android:name=".ad_result" />
+        <activity android:name=".selling_add" />
+        <activity android:name=".borrow_add" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

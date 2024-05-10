@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ReadEase</string>
     <string name="title_home">ReadEase</string>
-    <string name="title_search">ReadEase</string>
-    <string name="title_cart">ReadEase</string>
-    <string name="title_profile">ReadEase</string>
+    <string name="title_search">Search</string>
+    <string name="title_cart">Cart</string>
+    <string name="title_profile">My Profile</string>
 </resources>

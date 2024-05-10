@@ -52,13 +52,7 @@ public class user_home_fragment extends Fragment {
             }
         });
 
-        eventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to AdOptionsActivity
-                Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_eventsActivity);
-            }
-        });
+
 
         return rootView;
     }

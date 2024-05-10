@@ -43,24 +43,26 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/sellingbutton"
         android:layout_width="251dp"
         android:layout_height="52dp"
         android:layout_marginBottom="232dp"
         android:background="@drawable/round_button"
         android:text="ΠΩΛΗΣΗ"
+        android:onClick="goToSellingAdd"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/borrowbutton"
         android:layout_width="251dp"
         android:layout_height="52dp"
         android:layout_marginBottom="140dp"
         android:background="@drawable/round_button"
         android:text="ΔΑΝΕΙΣΜΟΣ"
+        android:onClick="goToBorrowAdd"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

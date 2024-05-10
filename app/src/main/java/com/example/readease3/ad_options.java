@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.content.Intent;
+import android.view.View;
+
 
 public class ad_options extends AppCompatActivity {
 
@@ -20,5 +23,17 @@ public class ad_options extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void goToSellingAdd(View view) {
+        // Create an Intent to start the SellingAddActivity
+        Intent intent = new Intent(this, selling_add.class);
+        startActivity(intent);
+    }
+
+    public void goToBorrowAdd(View view) {
+        // Create an Intent to start the SellingAddActivity
+        Intent intent = new Intent(this, borrow_add.class);
+        startActivity(intent);
     }
 }
