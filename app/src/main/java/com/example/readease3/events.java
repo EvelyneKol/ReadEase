@@ -4,16 +4,20 @@ public class events {
     private int eventId;
     private String title;
     private String description;
+    private int creator;
+    private String date;
+    private String startTime;
+    private String endTime;
     private String location;
     private int capacity;
-    private int creator;
-    private String dateTime;
 
-    public events(int eventId, String title, String description, String dateTime, String location, int capacity, int creator) {
+    public events(int eventId, String title, String description, String date,String startTime, String endTime, String location, int capacity, int creator) {
         this.eventId = eventId;
         this.title = title;
         this.description = description;
-        this.dateTime = dateTime;
+        this.date = date;
+        this.endTime=endTime;
+        this.startTime=startTime;
         this.location = location;
         this.capacity = capacity;
         this.creator = creator;
@@ -36,11 +40,24 @@ public class events {
     }
     public void setDescription(String description){ this.description = description; }
 
-    public String getDateTime() {
-        return dateTime;
+    public String getDate() {
+        return date;
     }
-    public void setDateTime(String dateTime){
-        this.dateTime = dateTime;
+    public void setDate(String date){
+        this.date = date;
+    }
+    public String getStartTime() {
+        return startTime;
+    }
+    public void setStartTime(String startTime){
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+    public void setEndTime(String endTime){
+        this.endTime = endTime;
     }
 
     public String getLocation() {
@@ -49,7 +66,6 @@ public class events {
     public void setLocation(String location){
         this.location = location;
     }
-
     public int getCapacity() {
         return capacity;
     }

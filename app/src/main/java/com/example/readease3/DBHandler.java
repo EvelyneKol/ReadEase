@@ -59,13 +59,16 @@ public class DBHandler extends SQLiteOpenHelper {
                 "event_id INTEGER PRIMARY KEY NOT NULL," +
                 "event_title TEXT NOT NULL," +
                 "event_description TEXT NOT NULL DEFAULT 'unknown'," +
-                "date_time DATETIME NOT NULL," +
+                "date DATE NOT NULL," +
+                "start_time TEXT NOT NULL," +
+                "end_time TEXT NOT NULL," +
                 "event_location TEXT NOT NULL," +
                 "capacity INTEGER NOT NULL," +
                 "writer_creator INTEGER," +
                 "CONSTRAINT CREATOR FOREIGN KEY (writer_creator) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE" +
                 ")";
         db.execSQL(createEventsTableQuery);
+
 
         // Create the participate table
         String createParticipateTableQuery = "CREATE TABLE participate (" +
@@ -116,8 +119,8 @@ public class DBHandler extends SQLiteOpenHelper {
         insertSellingAd(db, "9786810146189", 12, 3, "ΠΟΛΥ ΚΑΛΗ");
 
         // Insert records into events table
-        insertEvents(db,82224,"Book mania","description1","2024-08-22 12:30:00", "Greece",40,1);
-        insertEvents(db,81324,"Learn About books","description2","2024-08-13 15:30:00", "Greece",50,2);
+        insertEvents(db,82224,"Book mania","description1","2024-08-22", "Greece","df","sdf",40,1 );
+        insertEvents(db,81324,"Learn About books","description2","2024-08-22", "Greece","df","sdf",40,1 );
     }
 
     @Override
@@ -163,12 +166,14 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert("selling_ad", null, values);
     }
 
-    private void insertEvents(SQLiteDatabase db, int eventId, String title, String description, String dateTime, String location, int capacity, int creator) {
+    private void insertEvents(SQLiteDatabase db, int eventId, String title, String description, String date,String start_time,String end_time, String location, int capacity, int creator) {
         ContentValues values = new ContentValues();
         values.put("event_id", eventId);
         values.put("event_title", title);
         values.put("event_description", description);
-        values.put("date_time", dateTime);
+        values.put("date", date);
+        values.put("start_time", start_time);
+        values.put("end_time", end_time);
         values.put("event_location", location);
         values.put("capacity", capacity );
         values.put("writer_creator", creator );
@@ -250,24 +255,28 @@ public class DBHandler extends SQLiteOpenHelper {
                 int eventIdIndex = cursor.getColumnIndex("event_id");
                 int titleIndex = cursor.getColumnIndex("event_title");
                 int descriptionIndex = cursor.getColumnIndex("event_description");
-                int dateTimeIndex = cursor.getColumnIndex("date_time");
+                int dateIndex = cursor.getColumnIndex("date");
+                int starttimeIndex = cursor.getColumnIndex("start_time");
+                int endtimeIndex = cursor.getColumnIndex("end_time");
                 int locationIndex = cursor.getColumnIndex("event_location");
                 int capacityIndex = cursor.getColumnIndex("capacity");
                 int creatorIndex = cursor.getColumnIndex("writer_creator");
 
                 // Check if column indices are valid
                 if (eventIdIndex != -1 && titleIndex != -1 && descriptionIndex != -1 &&
-                        dateTimeIndex != -1 && locationIndex != -1 && capacityIndex != -1 && creatorIndex != -1) {
+                        dateIndex != -1 && starttimeIndex != -1 && endtimeIndex != -1 && locationIndex != -1 && capacityIndex != -1 && creatorIndex != -1) {
                     int eventId = cursor.getInt(eventIdIndex);
                     String title = cursor.getString(titleIndex);
                     String description = cursor.getString(descriptionIndex);
-                    String dateTime = cursor.getString(dateTimeIndex);
+                    String date = cursor.getString(dateIndex);
+                    String startTime = cursor.getString(starttimeIndex);
+                    String endTime = cursor.getString(endtimeIndex);
                     String location = cursor.getString(locationIndex);
                     int capacity = cursor.getInt(capacityIndex);
                     int creator = cursor.getInt(creatorIndex);
 
                     // Create an Event object for each row and add it to the list
-                    events event = new events(eventId, title, description, dateTime, location, capacity, creator);
+                    events event = new events(eventId, title, description, date,startTime,endTime, location, capacity, creator);
                     eventsList.add(event);
                 } else {
                     // Handle case where one or more columns are missing
