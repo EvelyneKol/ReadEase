@@ -55,8 +55,7 @@ public class events_screen extends AppCompatActivity {
         if (!eventsList.isEmpty()) {
             // Display the first event details
             events event1 = eventsList.get(1);
-            String eventDetails1 = event1.getStartTime() + "--" + event1.getEndTime() + "\n" +
-                    event1.getTitle();
+            String eventDetails1 = event1.getTitle() + "\n" + event1.getStartTime() + "--" + event1.getEndTime();
 
             // Parse the date string to extract the month and date
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -128,9 +127,12 @@ public class events_screen extends AppCompatActivity {
                                 // Start the participants_list activity
                                 Intent fillParticipantslist = new Intent(events_screen.this, participants_list.class);
                                 // Pass the event description as an extra with the intent
-                                fillParticipantslist.putExtra("event_description", event1.getDescription());
+                                fillParticipantslist.putExtra("event_title", event1.getTitle());
                                 fillParticipantslist.putExtra("inserted_number", insertedNumber);
-                                fillParticipantslist.putExtra("inserted_number", insertedNumber);
+                                fillParticipantslist.putExtra("start_time", event1.getStartTime());
+                                fillParticipantslist.putExtra("end_time", event1.getEndTime());
+                                fillParticipantslist.putExtra("description", event1.getDescription());
+                                fillParticipantslist.putExtra("location", event1.getLocation());
                                 startActivity(fillParticipantslist);
                             } else {
                                 // Start the not_enough_capacity activity
@@ -147,8 +149,7 @@ public class events_screen extends AppCompatActivity {
             });
 
             events event2 = eventsList.get(0);
-            String eventDetails2 = event2.getStartTime() + "--" + event2.getEndTime() + "\n" +
-                    event2.getTitle();
+            String eventDetails2 = event2.getTitle() + "\n" + event2.getStartTime() + "--" + event2.getEndTime();
             try {
                 Date date2 = inputFormat.parse(event2.getDate());
                 String eventMonth2 =dateFormat.format(date2) + "\n" +  monthFormat.format(date2) ;
@@ -186,6 +187,51 @@ public class events_screen extends AppCompatActivity {
                         // Clear the text of description1
                         binding.description2.setText("");
                         binding.description2.setText("Έχουν μείνει ακόμα: "+ event2.getCapacity() +" θέσεις, σας ευχαριστούμαι!");
+                    }
+                }
+            });
+
+            binding.participate2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Check if eventsList is not empty
+                    if (!eventsList.isEmpty()) {
+                        // Get the first event
+                        events event2 = eventsList.get(0);
+
+                        // Retrieve the number from the EditText field
+                        EditText editText = findViewById(R.id.numper2);
+                        String insertedNumberStr = editText.getText().toString();
+
+                        if (!insertedNumberStr.isEmpty()) { // Check if the EditText field is not empty
+                            // Parse the inserted number to an integer
+                            int insertedNumber = Integer.parseInt(insertedNumberStr);
+
+                            // Get the capacity from the event object
+                            int eventCapacity = event2.getCapacity();
+
+                            // Compare the inserted number with the capacity
+                            if (insertedNumber <= eventCapacity) {
+                                // Start the participants_list activity
+                                Intent fillParticipantslist = new Intent(events_screen.this, participants_list.class);
+                                // Pass the event description as an extra with the intent
+                                fillParticipantslist.putExtra("event_title", event2.getTitle());
+                                fillParticipantslist.putExtra("inserted_number", insertedNumber);
+                                fillParticipantslist.putExtra("start_time", event2.getStartTime());
+                                fillParticipantslist.putExtra("end_time", event2.getEndTime());
+                                fillParticipantslist.putExtra("description", event2.getDescription());
+                                fillParticipantslist.putExtra("location", event2.getLocation());
+                                startActivity(fillParticipantslist);
+                            } else {
+                                // Start the not_enough_capacity activity
+                                Intent notEnoughroom = new Intent(events_screen.this, not_enough_capacity.class);
+                                startActivity(notEnoughroom);
+                            }
+                        } else {
+                            // If the EditText field is empty
+                            // Show a message or perform any other action
+                            Toast.makeText(events_screen.this, "Please enter a number", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             });

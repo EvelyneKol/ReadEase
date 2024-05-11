@@ -21,6 +21,21 @@
         app:srcCompat="@drawable/edittext_border" />
 
     <TextView
+        android:id="@+id/textView10"
+        android:layout_width="116dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="92dp"
+        android:text="Τηλέφωνο:"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+        app:layout_constraintEnd_toStartOf="@+id/numbertext"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/textView6"
         android:layout_width="373dp"
         android:layout_height="56dp"
@@ -30,34 +45,37 @@
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView11"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.66" />
+        app:layout_constraintVertical_bias="0.613" />
 
     <TextView
-        android:id="@+id/textView7"
-        android:layout_width="230dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="88dp"
-        android:text="TextView"
+        android:id="@+id/description"
+        android:layout_width="333dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="64dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="357dp"
-        android:layout_height="196dp"
+        android:layout_width="332dp"
+        android:layout_height="194dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/button13"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="@+id/imageView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintVertical_bias="0.055">
 
         <LinearLayout
             android:id="@+id/editTextContainer"
@@ -69,49 +87,73 @@
 
     <Button
         android:id="@+id/button13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="133dp"
+        android:layout_height="44dp"
         android:layout_marginStart="156dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginBottom="16dp"
-        android:text="Button"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_button"
+        android:text="ΥΠΟΒΟΛΗ"
         app:layout_constraintBottom_toBottomOf="@+id/imageView11"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="81dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView11"
-        app:layout_constraintHorizontal_bias="0.067"
-        app:layout_constraintStart_toStartOf="@+id/imageView11"
-        app:layout_constraintTop_toTopOf="@+id/imageView11" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="231dp"
-        android:layout_height="52dp"
-        android:text="TextView"
+        android:id="@+id/title"
+        android:layout_width="334dp"
+        android:layout_height="35dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView11"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
-        app:layout_constraintHorizontal_bias="0.844"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="@+id/imageView11"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.036" />
 
-    <ImageView
-        android:id="@+id/imageView12"
+    <EditText
+        android:id="@+id/emailtext"
+        android:layout_width="245dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/edittext_border"
+        android:hint="  Email επικοινωνίας"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/numbertext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/numbertext"
+        android:layout_width="245dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="  Τηλέφωνο επικοινωνίας"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/button13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
         android:layout_width="116dp"
-        android:layout_height="135dp"
-        android:layout_marginBottom="440dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="144dp"
+        android:text="Email:"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-        app:layout_constraintEnd_toEndOf="@+id/imageView11"
-        app:layout_constraintHorizontal_bias="0.228"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/line" />
+        app:layout_constraintEnd_toStartOf="@+id/emailtext"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

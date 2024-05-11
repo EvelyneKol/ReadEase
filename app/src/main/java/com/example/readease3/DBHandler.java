@@ -119,8 +119,8 @@ public class DBHandler extends SQLiteOpenHelper {
         insertSellingAd(db, "9786810146189", 12, 3, "ΠΟΛΥ ΚΑΛΗ");
 
         // Insert records into events table
-        insertEvents(db,82224,"Book mania","description1","2024-08-22", "Greece","df","sdf",40,1 );
-        insertEvents(db,81324,"Learn About books","description2","2024-08-22", "Greece","df","sdf",40,1 );
+        insertEvents(db,82224,"'Βιβλιοφάγοι'","Μια πρώτη γνωριμία με τον δημιουργό του έργου 'Βιβλιοφάγοι'","2024-08-22", "15:30","17:00 PM","Παπανδρέου 20, Πάτρα",50,1 );
+        insertEvents(db,81324,"Βιβλιοδεσίες","Η Πρώτη μας συνάντηση στον Βιβλιοπωλείο 'Βιβλιοδεσίες'","2024-04-10", "10:00 PM","13:30 AM","Ανθείας 09, Πάτρα",100,1 );
     }
 
     @Override
