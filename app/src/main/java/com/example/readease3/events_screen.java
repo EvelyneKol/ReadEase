@@ -1,7 +1,10 @@
 package com.example.readease3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -22,12 +25,14 @@ public class events_screen extends AppCompatActivity {
     private DBHandler dbHandler;
     private EventsScreenBinding binding;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.events_screen);
         binding = EventsScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         // Initialize DBHandler
         dbHandler = new DBHandler(this);
@@ -40,10 +45,10 @@ public class events_screen extends AppCompatActivity {
         });
 
         // Search and display events
-        searchEvents();
+        Eventinfo();
     }
 
-    private void searchEvents() {
+    private void Eventinfo() {
         // Perform search query in the database
         List<events> eventsList = dbHandler.returnEventsInfo();
 
@@ -99,6 +104,48 @@ public class events_screen extends AppCompatActivity {
                 }
             });
 
+            binding.participate1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Check if eventsList is not empty
+                    if (!eventsList.isEmpty()) {
+                        // Get the first event
+                        events event1 = eventsList.get(1);
+
+                        // Retrieve the number from the EditText field
+                        EditText editText = findViewById(R.id.numper1);
+                        String insertedNumberStr = editText.getText().toString();
+
+                        if (!insertedNumberStr.isEmpty()) { // Check if the EditText field is not empty
+                            // Parse the inserted number to an integer
+                            int insertedNumber = Integer.parseInt(insertedNumberStr);
+
+                            // Get the capacity from the event object
+                            int eventCapacity = event1.getCapacity();
+
+                            // Compare the inserted number with the capacity
+                            if (insertedNumber <= eventCapacity) {
+                                // Start the participants_list activity
+                                Intent fillParticipantslist = new Intent(events_screen.this, participants_list.class);
+                                // Pass the event description as an extra with the intent
+                                fillParticipantslist.putExtra("event_description", event1.getDescription());
+                                fillParticipantslist.putExtra("inserted_number", insertedNumber);
+                                fillParticipantslist.putExtra("inserted_number", insertedNumber);
+                                startActivity(fillParticipantslist);
+                            } else {
+                                // Start the not_enough_capacity activity
+                                Intent notEnoughroom = new Intent(events_screen.this, not_enough_capacity.class);
+                                startActivity(notEnoughroom);
+                            }
+                        } else {
+                            // If the EditText field is empty
+                            // Show a message or perform any other action
+                            Toast.makeText(events_screen.this, "Please enter a number", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
+
             events event2 = eventsList.get(0);
             String eventDetails2 = event2.getStartTime() + "--" + event2.getEndTime() + "\n" +
                     event2.getTitle();
@@ -112,7 +159,6 @@ public class events_screen extends AppCompatActivity {
 
             } catch (ParseException e) {
                 e.printStackTrace();
-
             }
 
             binding.button.setOnClickListener(new View.OnClickListener() {
