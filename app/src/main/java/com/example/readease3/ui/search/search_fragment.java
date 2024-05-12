@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import com.example.readease3.review;
+import com.example.readease3.ad_result;
 
 import com.example.readease3.DBHandler;
 import com.example.readease3.R;
@@ -116,9 +117,22 @@ public class search_fragment extends Fragment {
                     startActivity(intent);
                 }
             });
+            buttonBuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Create an Intent to start the ad_result activity
+                    Intent intent = new Intent(requireContext(), ad_result.class);
+
+                    // Pass the ISBN of the searched book as an extra
+                    intent.putExtra("searched_book_isbn", searchedBookISBN);
+
+                    // Start the review activity
+                    startActivity(intent);
+                }
+            });
         }else {
             // No matching books found
-            binding.searchResultTextView.setText("No matching books found.");
+            binding.searchResultTextView.setText("Δεν βρέθηκαν βιβλία με αυτόν τον τίτλο.");
 
             // Hide buttons if no book is found
             binding.buyButton.setVisibility(View.GONE);

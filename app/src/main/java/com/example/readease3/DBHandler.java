@@ -117,6 +117,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // Insert records into the selling_ad table
         insertSellingAd(db, "9786180149173", 18, 1, "ΚΑΛΗ");
         insertSellingAd(db, "9786810146189", 12, 3, "ΠΟΛΥ ΚΑΛΗ");
+        insertSellingAd(db, "9786810146189", 9, 2, "ΚΑΛΗ");
 
         // Insert records into events table
         insertEvents(db,82224,"'Βιβλιοφάγοι'","Μια πρώτη γνωριμία με τον δημιουργό του έργου 'Βιβλιοφάγοι'","2024-08-22", "15:30","17:00 PM","Παπανδρέου 20, Πάτρα",50,1 );
@@ -293,5 +294,73 @@ public class DBHandler extends SQLiteOpenHelper {
         return eventsList;
     }
 
+
+    public List<sellingAd> getSellingAdByIsbn(String isbn) {
+        List<sellingAd> sellingAds = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Define the query to search for selling ads by ISBN
+        String query = "SELECT * FROM selling_ad WHERE selling_ad_isbn = ?";
+
+        // Execute the query with the ISBN parameter
+        Cursor cursor = db.rawQuery(query, new String[]{isbn});
+
+        // Iterate through the cursor to retrieve selling ads
+        if (cursor.moveToFirst()) {
+            do {
+                int sellingAdIdIndex = cursor.getColumnIndex("selling_ad_id");
+                int sellingPriceIndex = cursor.getColumnIndex("selling_price");
+                int sellingPublisherIndex = cursor.getColumnIndex("selling_publisher");
+                int sellingStatusIndex = cursor.getColumnIndex("selling_status");
+
+                // Check if column indices are valid
+                if (sellingAdIdIndex != -1 && sellingPriceIndex != -1 &&
+                        sellingPublisherIndex != -1 && sellingStatusIndex != -1) {
+                    // Retrieve data from the cursor and create a SellingAd object
+                    int sellingAdId = cursor.getInt(sellingAdIdIndex);
+                    float sellingPrice = cursor.getFloat(sellingPriceIndex);
+                    int sellingPublisher = cursor.getInt(sellingPublisherIndex);
+                    String sellingStatus = cursor.getString(sellingStatusIndex);
+
+                    // Create SellingAd object and add it to the list
+                    sellingAd sellingAd = new sellingAd(sellingAdId, isbn, sellingPrice, sellingPublisher, sellingStatus);
+                    sellingAds.add(sellingAd);
+                }
+            } while (cursor.moveToNext());
+        }
+
+        // Close the cursor and database
+        cursor.close();
+        db.close();
+
+        // Return the list of selling ads
+        return sellingAds;
+    }
+
+
+    // Method to retrieve user name by user ID
+    public String getUserNameById(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String userName = null;
+
+        // Define the query
+        String query = "SELECT name FROM user WHERE user_id = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
+
+        // Check if the cursor has data and the column index is valid
+        if (cursor.moveToFirst()) {
+            int nameIndex = cursor.getColumnIndex("name");
+            if (nameIndex >= 0) {
+                // Retrieve user name from the cursor
+                userName = cursor.getString(nameIndex);
+            }
+        }
+
+        // Close cursor and database
+        cursor.close();
+        db.close();
+
+        return userName;
+    }
 
 }
