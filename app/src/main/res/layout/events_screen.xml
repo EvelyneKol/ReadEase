@@ -254,7 +254,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button15"
+        app:layout_constraintBottom_toBottomOf="@+id/participate2"
         app:layout_constraintEnd_toEndOf="@+id/imageView8"
         app:layout_constraintHorizontal_bias="0.336"
         app:layout_constraintStart_toStartOf="@+id/imageView8"

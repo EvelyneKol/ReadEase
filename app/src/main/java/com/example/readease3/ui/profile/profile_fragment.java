@@ -4,17 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.example.readease3.R;
 import com.example.readease3.databinding.ProfileBinding;
 
 public class profile_fragment extends Fragment {
 
     private ProfileBinding binding;
+    private Button coupons;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -23,6 +27,15 @@ public class profile_fragment extends Fragment {
 
         binding = ProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        coupons = root.findViewById(R.id.button4);
+
+        coupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to AdOptionsActivity
+                Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_personalbank);
+            }
+        });
 
         final TextView textView = binding.textNotifications;
         profile_ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
