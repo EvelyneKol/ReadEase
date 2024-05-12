@@ -65,10 +65,20 @@
         android:label="Ad Options Activity" >
     </activity>
 
+
     <activity
         android:id="@+id/adresult"
         android:name="com.example.readease3.ad_result"
-        android:label="Ad Result" />
+        android:label="Ad Result" >
+
+
+    </activity>
+
+    <activity
+        android:id="@+id/ad_details"
+        android:name="com.example.readease3.ad_details"
+        android:label="Ad Details" />
+
 
     <activity
         android:id="@+id/review"
@@ -91,6 +101,9 @@
         android:name="com.example.readease3.events_screen"
         android:label="EventsActivity"
         tools:layout="@layout/events_screen" />
+
+
+
 
 
 </navigation>
