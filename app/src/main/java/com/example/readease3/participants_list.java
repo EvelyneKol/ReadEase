@@ -14,13 +14,20 @@ public class participants_list extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.participants_list);
-
         // Retrieve the event description from the intent extras
-        String eventDescription = getIntent().getStringExtra("event_description");
+        String eventTitle = getIntent().getStringExtra("event_title");
+        String eventdes = getIntent().getStringExtra("description");
+        String eventStart = getIntent().getStringExtra("start_time");
+        String eventEnd = getIntent().getStringExtra("end_time");
+        String eventLocation = getIntent().getStringExtra("location");
+        String de_script = eventdes +". Η εκδήλωση ξεκινά "+ eventStart + " και τελειώνει " +eventEnd +". Θα μας βείτε στην τοποθεσία "+ eventLocation ;
 
         // Find textView7 and set its text with the event description
-        TextView textView7 = findViewById(R.id.textView7);
-        textView7.setText(eventDescription);
+        TextView title = findViewById(R.id.title);
+        title.setText(eventTitle);
+
+        TextView description = findViewById(R.id.description);
+        description.setText(de_script);
 
         // Find the LinearLayout inside the ScrollView
         LinearLayout editTextContainer = findViewById(R.id.editTextContainer);
@@ -35,7 +42,7 @@ public class participants_list extends AppCompatActivity {
         for (int i = 0; i < insertedNumber; i++) {
             EditText editText = new EditText(this);
             editText.setId(ViewCompat.generateViewId()); // Generate unique ID for EditText
-            editText.setHint("  Όνομα " + (i + 1)+ "ου συμμετέχοντα!");
+            editText.setHint("  Όνομα " + (i + 1)+ "ου συμμετέχοντα !");
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
