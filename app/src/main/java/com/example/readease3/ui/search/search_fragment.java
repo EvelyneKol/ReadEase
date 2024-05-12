@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import com.example.readease3.review;
 
 import com.example.readease3.DBHandler;
 import com.example.readease3.R;
@@ -18,6 +19,9 @@ import com.example.readease3.borrow_add;
 import com.example.readease3.databinding.SearchBinding;
 import android.widget.SearchView;
 import com.example.readease3.Book;
+import com.example.readease3.events_screen;
+import com.example.readease3.participants_list;
+
 import java.util.List;
 
 
@@ -50,6 +54,7 @@ public class search_fragment extends Fragment {
             public void onClick(View v) {
                 // Navigate to EbookFormActivity
                 Navigation.findNavController(v).navigate(R.id.action_searchFragment_to_review);
+
             }
         });
 
@@ -97,7 +102,21 @@ public class search_fragment extends Fragment {
             binding.buyButton.setVisibility(View.VISIBLE);
             binding.borrowButton.setVisibility(View.VISIBLE);
             binding.reviewButton.setVisibility(View.VISIBLE);
-        } else {
+
+            reviewButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Create an Intent to start the review activity
+                    Intent intent = new Intent(requireContext(), review.class);
+
+                    // Pass the ISBN of the searched book as an extra
+                    intent.putExtra("searched_book_isbn", searchedBookISBN);
+
+                    // Start the review activity
+                    startActivity(intent);
+                }
+            });
+        }else {
             // No matching books found
             binding.searchResultTextView.setText("No matching books found.");
 
