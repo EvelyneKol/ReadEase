@@ -104,6 +104,31 @@ public class DBHandler extends SQLiteOpenHelper {
                 + ")";
         db.execSQL(createReviewTableQuery);
 
+        //quiz table
+        String createQuizTableQuery = "CREATE TABLE quiz (" +
+                "quiz_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "title TEXT NOT NULL" +
+                ");";
+        db.execSQL(createQuizTableQuery);
+
+        //questions table
+        String createQuestionsTableQuery = "CREATE TABLE questions (" +
+                "question_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "quiz_id INTEGER NOT NULL," +
+                "question_text TEXT NOT NULL," +
+                "FOREIGN KEY (quiz_id) REFERENCES quiz(quiz_id) ON DELETE CASCADE" +
+                ");";
+        db.execSQL(createQuestionsTableQuery);
+
+        //options table
+        String createOptionsTableQuery = "CREATE TABLE options (" +
+                "option_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "question_id INTEGER NOT NULL," +
+                "option_text TEXT NOT NULL," +
+                "is_correct INTEGER NOT NULL, " + // 0 for false, 1 for true
+                "FOREIGN KEY (question_id) REFERENCES questions(question_id) ON DELETE CASCADE" +
+                ");";
+        db.execSQL(createOptionsTableQuery);
 
 
 
@@ -288,7 +313,6 @@ public class DBHandler extends SQLiteOpenHelper {
                 }
             } while (cursor.moveToNext());
         }
-
         // Close the cursor and database
         cursor.close();
         db.close();
