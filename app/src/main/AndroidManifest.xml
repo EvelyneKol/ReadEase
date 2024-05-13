@@ -30,6 +30,8 @@
         <activity android:name=".selling_add" />
         <activity android:name=".borrow_add" />
         <activity android:name=".review" />
+        <activity android:name=".events_screen"/>
+        <activity android:name=".ebook_form"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

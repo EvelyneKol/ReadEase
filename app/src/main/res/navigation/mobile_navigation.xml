@@ -5,20 +5,26 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
+    <!--
     <fragment
-        android:id="@+id/activity_login"
-        android:label="Login Activity"
-        tools:layout="@layout/activity_login" >
+        android:id="@+id/writer_home"
+        tools:layout="@layout/writer_home" >
+    </fragment>-->
 
+    <fragment
+        android:id="@+id/navigation_writer_home"
+        android:name="com.example.readease3.ui.writer.writer"
+        tools:layout="@layout/fragment_writer">
         <action
-            android:id="@+id/action_login_to_user_home"
-            app:destination="@id/navigation_home" />
+            android:id="@+id/action_writer_home_to_ebook"
+            app:destination="@id/ebookform" />
     </fragment>
+
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.readease3.ui.home.user_home_fragment"
-        tools:layout="@layout/user_home" >
+        tools:layout="@layout/user_home">
         <action
             android:id="@+id/action_userHomeFragment_to_adOptionsActivity"
             app:destination="@id/adOptionsActivity" />
@@ -37,7 +43,11 @@
             app:destination="@+id/adresult"/>
         <action
             android:id="@+id/action_searchFragment_to_review"
-            app:destination="@+id/review"/>
+            app:destination="@id/review">
+            <argument
+                android:name="isbn"
+                app:argType="string" />
+        </action>
     </fragment>
 
 
@@ -51,12 +61,28 @@
         android:id="@+id/navigation_notifications"
         android:name="com.example.readease3.ui.profile.profile_fragment"
         tools:layout="@layout/profile">
+        <action
+            android:id="@+id/action_profileFragment_to_personalbank"
+            app:destination="@+id/couponsActivity"/>
     </fragment>
 
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.readease3.MainActivity"
         android:label="MainActivity" />
+
+    <activity
+        android:id="@+id/activity_login"
+        android:name="com.example.readease3.login"
+        android:label="login"
+        tools:layout="@layout/activity_login" />
+
+    <!--
+    <activity
+        android:id="@+id/writer_home"
+        android:name="com.example.readease3.writer_home"
+        android:label="Writer Home Activity" />
+        -->
 
 
 
@@ -81,21 +107,22 @@
         android:label="Ad Details" />
 
 
-    <activity
+     <activity
         android:id="@+id/review"
         android:name="com.example.readease3.review"
         android:label="Create New Review" />
-
 
     <activity
         android:id="@+id/selling_add_activity"
         android:name="com.example.readease3.selling_add"
         android:label="Selling Add Activity" />
 
+
     <activity
         android:id="@+id/borrow_add_activity"
         android:name="com.example.readease3.borrow_add"
         android:label="Selling Add Activity" />
+
 
     <activity
         android:id="@+id/eventsActivity"
@@ -103,8 +130,16 @@
         android:label="EventsActivity"
         tools:layout="@layout/events_screen" />
 
+    <activity
+        android:id="@+id/couponsActivity"
+        android:name="com.example.readease3.personal_bank"
+        android:label="CouponsActivity"
+        tools:layout="@layout/personal_bank" />
 
-
+    <activity
+        android:id="@+id/ebookform"
+        android:name="com.example.readease3.ebook_form"
+        android:label="Ebook" />
 
 
 </navigation>
