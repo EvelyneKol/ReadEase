@@ -51,9 +51,6 @@
         android:id="@+id/navigation_notifications"
         android:name="com.example.readease3.ui.profile.profile_fragment"
         tools:layout="@layout/profile">
-        <action
-            android:id="@+id/action_profileFragment_to_personalbank"
-            app:destination="@+id/couponsActivity"/>
     </fragment>
 
     <activity
@@ -105,11 +102,6 @@
         android:name="com.example.readease3.events_screen"
         android:label="EventsActivity"
         tools:layout="@layout/events_screen" />
-    <activity
-        android:id="@+id/couponsActivity"
-        android:name="com.example.readease3.personal_bank"
-        android:label="CouponsActivity"
-        tools:layout="@layout/personal_bank" />
 
 
 

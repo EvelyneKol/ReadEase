@@ -18,7 +18,7 @@ import com.example.readease3.databinding.ProfileBinding;
 public class profile_fragment extends Fragment {
 
     private ProfileBinding binding;
-    private Button coupons;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -27,16 +27,6 @@ public class profile_fragment extends Fragment {
 
         binding = ProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        coupons = root.findViewById(R.id.button4);
-
-        coupons.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to AdOptionsActivity
-                Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_personalbank);
-            }
-        });
-
         final TextView textView = binding.textNotifications;
         profile_ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;

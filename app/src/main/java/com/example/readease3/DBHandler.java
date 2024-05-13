@@ -104,16 +104,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + ")";
         db.execSQL(createReviewTableQuery);
 
-        String createTablecouponQuery = "CREATE TABLE coupons (" +
-                "id_coupon INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "type TEXT CHECK(type IN ('10% Έκπτωση σε αγορά Ebook', '50% Έκπτωση σε αγορά βιβλίου', 'Δωρεάν μεταφορικά'))," +
-                "name TEXT NOT NULL," +
-                "expired_date TEXT NOT NULL," +
-                "used TEXT CHECK(used IN ('ΝΑΙ', 'ΟΧΙ'))," +
-                "PRIMARY KEY (id_coupon)," +
-                "FOREIGN KEY (user) REFERENCES user(name) ON UPDATE CASCADE ON DELETE CASCADE" +
-                ")";
-        db.execSQL(createTablecouponQuery);
+
 
 
         // Insert initial books
@@ -134,9 +125,6 @@ public class DBHandler extends SQLiteOpenHelper {
         insertEvents(db,82224,"'Βιβλιοφάγοι'","Μια πρώτη γνωριμία με τον δημιουργό του έργου 'Βιβλιοφάγοι'","2024-08-22", "15:30","17:00 PM","Παπανδρέου 20, Πάτρα",50,1 );
         insertEvents(db,81324,"Βιβλιοδεσίες","Η Πρώτη μας συνάντηση στον Βιβλιοπωλείο 'Βιβλιοδεσίες'","2024-04-10", "10:00 PM","13:30 AM","Ανθείας 09, Πάτρα",100,1 );
 
-        insertCoupons(db,"10% Έκπτωση σε αγορά Ebook","John Doe","2024-02-10","ΟΧΙ");
-        insertCoupons(db,"50% Έκπτωση σε αγορά βιβλίου","John Doe","2024-03-10","ΟΧΙ");
-        insertCoupons(db,"Δωρεάν μεταφορικά","John Doe","2024-02-10","ΟΧΙ");
     }
 
     @Override
@@ -204,16 +192,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("review", reviewText);
         values.put("reviewed_book", reviewedBook);
         db.insert("review", null, values);
-    }
-
-    private void insertCoupons(SQLiteDatabase db, String type, String user, String expire, String used) {
-        ContentValues values = new ContentValues();
-        values.put("type", type);
-        values.put("name", user);
-        values.put("expired_date", expire);
-        values.put("used", used);
-
-        db.insert("coupons", null, values);
     }
 
 
@@ -319,46 +297,6 @@ public class DBHandler extends SQLiteOpenHelper {
         return eventsList;
     }
 
-    public List<coupons> returnCoupons() {
-        List<coupons> couponsList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        // Define the query to search for events
-        String query = "SELECT type,name,expired_date,used FROM coupons WHERE name = 'John Doe'";
-
-        // Execute the query
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                int typeIndex = cursor.getColumnIndex("type");
-                int usersIndex = cursor.getColumnIndex("name");
-                int expiredIndex = cursor.getColumnIndex("expired_date");
-                int usedIndex = cursor.getColumnIndex("used");
-                // Check if column indices are valid
-                if (typeIndex != -1 && usersIndex != -1 && expiredIndex != -1 &&
-                        usedIndex != -1) {
-                    String user = cursor.getString(usersIndex);
-                    String coupontype = cursor.getString(typeIndex);
-                    String expiredate = cursor.getString(expiredIndex);
-                    String used = cursor.getString(usedIndex);
-
-                    // Create an Event object for each row and add it to the list
-                    coupons coupon = new coupons(user, coupontype, expiredate, used);
-                    couponsList.add(coupon);
-                } else {
-                    // Handle case where one or more columns are missing
-                    // Log a warning or take appropriate action
-                }
-            } while (cursor.moveToNext());
-        }
-
-        // Close the cursor and database
-        cursor.close();
-        db.close();
-
-        return couponsList;
-    }
 
 
     public List<sellingAd> getSellingAdByIsbn(String isbn) {
@@ -428,30 +366,5 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return userName;
     }
-
-    public int getUserPointsById(int userId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        int points = 0; // Default value if user is not found or points are not set
-
-        // Define the query
-        String query = "SELECT points FROM user WHERE user_id = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
-
-        // Check if the cursor has data and the column index is valid
-        if (cursor.moveToFirst()) {
-            int pointsIndex = cursor.getColumnIndex("points");
-            if (pointsIndex >= 0) {
-                // Retrieve user points from the cursor
-                points = cursor.getInt(pointsIndex);
-            }
-        }
-
-        // Close cursor and database
-        cursor.close();
-        db.close();
-
-        return points;
-    }
-
 
 }
