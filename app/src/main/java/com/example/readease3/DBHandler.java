@@ -257,6 +257,45 @@ public class DBHandler extends SQLiteOpenHelper {
                 "Parseltongue");
     }
 
+    // method to insert quiz 2 to the db (star wars quiz)
+    public void insertStarWarsQuiz(SQLiteDatabase db) {
+        ContentValues quizValues = new ContentValues();
+        quizValues.put("title", "Star Wars");
+        long quizId = db.insert("quiz", null, quizValues);
+
+        // Insert questions and their respective options
+        insertQuestionWithOptions(db, quizId,
+                "Ποιος δημιούργησε τον C-3PO;",
+                new String[]{"Obi-Wan Kenobi", "Anakin Skywalker", "Luke Skywalker", "Yoda"},
+                "Anakin Skywalker");
+
+        insertQuestionWithOptions(db, quizId,
+                "Τι είδος πλάσμα είναι ο Chewbacca;",
+                new String[]{"Ewok", "Wookiee", "Jawa", "Sith"},
+                "Wookiee");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποια φράση έχει αναφερθεί σε κάθε ταινία της αρχικής τριλογίας Star Wars;",
+                new String[]{"I have a bad feeling about this.", "May the Force be with you.", "It’s a trap!", "No, I am your father."},
+                "I have a bad feeling about this.");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποιος είναι ο αληθινός γονέας της Princess Leia και του Luke Skywalker;",
+                new String[]{"Han Solo και Princess Leia", "Anakin Skywalker και Padmé Amidala", "Obi-Wan Kenobi και Duchess Satine", "Emperor Palpatine και Anakin Skywalker"},
+                "Anakin Skywalker και Padmé Amidala");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποιο ήταν το πρωτότυπο όνομα του Darth Vader πριν γίνει Sith Lord;",
+                new String[]{"Anakin Skywalker", "Ben Kenobi", "Mace Windu", "Qui-Gon Jinn"},
+                "Anakin Skywalker");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποια είναι η πρωτεύουσα της Νέας Δημοκρατίας στο Star Wars;",
+                new String[]{"Naboo", "Coruscant", "Hoth", "Alderaan"},
+                "Coruscant");
+    }
+
+
     // Helper method to insert a question with its options
     private void insertQuestionWithOptions(SQLiteDatabase db, long quizId, String questionText, String[] options, String correctAnswer) {
         ContentValues questionValues = new ContentValues();
