@@ -312,6 +312,19 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
+    public List<String> getAllQuizTitles() {
+        List<String> titles = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT title FROM quiz", null);
+        if (cursor.moveToFirst()) {
+            do {
+                titles.add(cursor.getString(0)); // Assuming title is the first column
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return titles;
+    }
 
 
     public List<Book> searchBooksByTitle(String title) {
