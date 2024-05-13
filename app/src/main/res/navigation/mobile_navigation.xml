@@ -64,6 +64,10 @@
         <action
             android:id="@+id/action_profileFragment_to_personalbank"
             app:destination="@+id/couponsActivity"/>
+
+        <action
+            android:id="@+id/action_profile_to_quiz"
+            app:destination="@id/quizactivity"/>
     </fragment>
 
     <activity
@@ -92,6 +96,10 @@
         android:label="Ad Options Activity" >
     </activity>
 
+    <activity
+        android:id="@+id/quizactivity"
+        android:label="Quiz" >
+    </activity>
 
     <activity
         android:id="@+id/adresult"
