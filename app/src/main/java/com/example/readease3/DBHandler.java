@@ -104,6 +104,31 @@ public class DBHandler extends SQLiteOpenHelper {
                 + ")";
         db.execSQL(createReviewTableQuery);
 
+        //quiz table
+        String createQuizTableQuery = "CREATE TABLE quiz (" +
+                "quiz_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "title TEXT NOT NULL" +
+                ");";
+        db.execSQL(createQuizTableQuery);
+
+        //questions table
+        String createQuestionsTableQuery = "CREATE TABLE questions (" +
+                "question_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "quiz_id INTEGER NOT NULL," +
+                "question_text TEXT NOT NULL," +
+                "FOREIGN KEY (quiz_id) REFERENCES quiz(quiz_id) ON DELETE CASCADE" +
+                ");";
+        db.execSQL(createQuestionsTableQuery);
+
+        //options table
+        String createOptionsTableQuery = "CREATE TABLE options (" +
+                "option_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "question_id INTEGER NOT NULL," +
+                "option_text TEXT NOT NULL," +
+                "is_correct INTEGER NOT NULL, " + // 0 for false, 1 for true
+                "FOREIGN KEY (question_id) REFERENCES questions(question_id) ON DELETE CASCADE" +
+                ");";
+        db.execSQL(createOptionsTableQuery);
 
 
 
@@ -194,6 +219,113 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("review", reviewText);
         values.put("reviewed_book", reviewedBook);
         db.insert("review", null, values);
+    }
+
+    // method to insert quiz no1 to the db (harry potter quiz)
+    public void insertHarryPotterQuiz(SQLiteDatabase db) {
+        ContentValues quizValues = new ContentValues();
+        quizValues.put("title", "Harry Potter");
+        long quizId = db.insert("quiz", null, quizValues);
+
+        // Questions and Options
+        insertQuestionWithOptions(db, quizId,
+                "Σε ποιο σπίτι ανήκει ο Harry Potter στο Χόγκουαρτς;",
+                new String[]{"Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"},
+                "Gryffindor");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποιος είναι ο καλύτερος φίλος του Harry Potter;",
+                new String[]{"Draco Malfoy", "Neville Longbottom", "Ron Weasley", "Cedric Diggory"},
+                "Ron Weasley");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποιο μαγικό ραβδί χρησιμοποιεί ο Harry στη μάχη του στα θαλάμια των μυστικών;",
+                new String[]{"Το δικό του ραβδί", "Το ραβδί του Dumbledore", "Το ραβδί του Snape", "Το ραβδί του Voldemort"},
+                "Το δικό του ραβδί");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποια ουσία χρησιμοποιεί ο Harry για να σώσει τον Δούδουρα από τις αράχνες στον Κύλικα του Φωτός;",
+                new String[]{"Felix Felicis", "Polyjuice Potion", "Wolfsbane Potion", "Veritaserum"},
+                "Felix Felicis");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποιος ήταν ο πραγματικός κληρονόμος του Slytherin;",
+                new String[]{"Tom Riddle", "Severus Snape", "Albus Dumbledore", "Salazar Slytherin"},
+                "Tom Riddle");
+
+        insertQuestionWithOptions(db, quizId,
+                "Σε ποια γλώσσα μπορεί να μιλήσει ο Harry, που συνδέεται με την καταγωγή του Voldemort;",
+                new String[]{"Mermish", "Gobbledegook", "Parseltongue", "Elvish"},
+                "Parseltongue");
+    }
+
+    // method to insert quiz 2 to the db (star wars quiz)
+    public void insertStarWarsQuiz(SQLiteDatabase db) {
+        ContentValues quizValues = new ContentValues();
+        quizValues.put("title", "Star Wars");
+        long quizId = db.insert("quiz", null, quizValues);
+
+        // Insert questions and their respective options
+        insertQuestionWithOptions(db, quizId,
+                "Ποιος δημιούργησε τον C-3PO;",
+                new String[]{"Obi-Wan Kenobi", "Anakin Skywalker", "Luke Skywalker", "Yoda"},
+                "Anakin Skywalker");
+
+        insertQuestionWithOptions(db, quizId,
+                "Τι είδος πλάσμα είναι ο Chewbacca;",
+                new String[]{"Ewok", "Wookiee", "Jawa", "Sith"},
+                "Wookiee");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποια φράση έχει αναφερθεί σε κάθε ταινία της αρχικής τριλογίας Star Wars;",
+                new String[]{"I have a bad feeling about this.", "May the Force be with you.", "It’s a trap!", "No, I am your father."},
+                "I have a bad feeling about this.");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποιος είναι ο αληθινός γονέας της Princess Leia και του Luke Skywalker;",
+                new String[]{"Han Solo και Princess Leia", "Anakin Skywalker και Padmé Amidala", "Obi-Wan Kenobi και Duchess Satine", "Emperor Palpatine και Anakin Skywalker"},
+                "Anakin Skywalker και Padmé Amidala");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποιο ήταν το πρωτότυπο όνομα του Darth Vader πριν γίνει Sith Lord;",
+                new String[]{"Anakin Skywalker", "Ben Kenobi", "Mace Windu", "Qui-Gon Jinn"},
+                "Anakin Skywalker");
+
+        insertQuestionWithOptions(db, quizId,
+                "Ποια είναι η πρωτεύουσα της Νέας Δημοκρατίας στο Star Wars;",
+                new String[]{"Naboo", "Coruscant", "Hoth", "Alderaan"},
+                "Coruscant");
+    }
+
+
+    // Helper method to insert a question with its options
+    private void insertQuestionWithOptions(SQLiteDatabase db, long quizId, String questionText, String[] options, String correctAnswer) {
+        ContentValues questionValues = new ContentValues();
+        questionValues.put("quiz_id", quizId);
+        questionValues.put("question_text", questionText);
+        long questionId = db.insert("questions", null, questionValues);
+
+        for (String option : options) {
+            ContentValues optionValues = new ContentValues();
+            optionValues.put("question_id", questionId);
+            optionValues.put("option_text", option);
+            optionValues.put("is_correct", option.equals(correctAnswer) ? 1 : 0);
+            db.insert("options", null, optionValues);
+        }
+    }
+
+    public List<String> getAllQuizTitles() {
+        List<String> titles = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT title FROM quiz", null);
+        if (cursor.moveToFirst()) {
+            do {
+                titles.add(cursor.getString(0)); // Assuming title is the first column
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return titles;
     }
 
 
@@ -290,7 +422,6 @@ public class DBHandler extends SQLiteOpenHelper {
                 }
             } while (cursor.moveToNext());
         }
-
         // Close the cursor and database
         cursor.close();
         db.close();
