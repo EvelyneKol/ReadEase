@@ -71,6 +71,7 @@ public class ad_result extends AppCompatActivity {
                 // Pass the ad ID to the ad_details activity
                 Intent intent = new Intent(ad_result.this, ad_details.class);
                 intent.putExtra("ad_id", ad.getSellingAdId());
+
                 startActivity(intent);
 
 

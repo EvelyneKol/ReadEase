@@ -108,8 +108,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
         // Insert initial books
-        insertBook(db, "9786180149173", "Ψιλά Γράμματα", "LAUREN ASHER", "Description of the book", 445, "Αισθηματικα");
-        insertBook(db, "9786810146189", "Το τρίτο κορίτσι", "Agatha Christie", "Description of the book", 277, "Αστυνομικα");
+        insertBook(db, "9786180149173", "Ψιλά Γράμματα", "LAUREN ASHER", "Εκείνος είναι κληρονόμος μιας εταιρείας που κατασκευάζει… παραμύθια. Εκείνη καλείται να δουλέψει για το πιο απαιτητικό αφεντικό που γνώρισε ποτέ. Αν θέλουν και το δικό τους παραμύθι να έχει ευτυχισμένο τέλος, τότε πρέπει να προσέξουν λίγο περισσότερο τα… ψιλά γράμματα! Ο Ρόουαν Κέιν και τα δύο αδέλφια του κληρονομούν από τον παππού τους μια τεράστια εταιρεία και μια αμύθητη περιουσία. Για να περάσουν όλα αυτά και επίσημα στα χέρια του, ο Ρόουαν πρέπει να αποδείξει ότι είναι ικανός να ανανεώσει την Ντρίμλαντ, το θεματικό πάρκο της εταιρείας. Στην πραγματικότητα, δε θέλει να έχει καμία σχέση μ ’ αυτά, αλλά, από σεβασμό στη μνήμη του παππού του, αποφασίζει να δουλέψει σκληρά και είναι αποφασισμένος να τα καταφέρει. Η Ζάρα είναι απλώς μία από το πλήθος των υπαλλήλων του Ρόουαν Κέιν. Όταν όμως, μεθυσμένη, στέλνει μια επικριτική πρόταση για το πάρκο, τρέμει ότι θα απολυθεί. Αντ’ αυτού, εκείνος της προσφέρει τη δουλειά των ονείρων της. Αλλά υπάρχει μια παγίδα: ο Ρόουαν είναι το πιο απαιτητικό και το πιο σκληρό αφεντικό που υπάρχει. Η καρδιά της Ζάρα δε δίνει καμία σημασία σ’ αυτό. Ήρθε η ώρα να μάθει ο δισεκατομμυριούχος ότι τα χρήματα δεν μπορούν να διορθώσουν ή να αγοράσουν τα πάντα. Και ειδικά τους ανθρώπους! Το πρώτο βιβλίο της σειράς μπεστ σέλερ, όπου πρωταγωνιστούν οι τρεις δισεκατομμυριούχοι αδελφοί της Ντρίμλαντ και οι γυναίκες που θα τους κάνουν να γονατίσουν.", 445, "Αισθηματικα");
+        insertBook(db, "9786810146189", "Το τρίτο κορίτσι", "Agatha Christie", "«Eh bien, λοιπόν, είστε τρελή ή φαίνεστε τρελή ή νομίζετε πως είστε τρελή και πιθανόν να είστε τρελή».\n" +
+                "Τρεις νέες γυναίκες μοιράζονται ένα διαμέρισμα στο Λονδίνο. Η πρώτη είναι μία ψυχρή αλλά αποτελεσματική ιδιαιτέρα γραμματέας, η δεύτερη είναι καλλιτέχνις και η τρίτη διακόπτει τον Πουαρό την ώρα που παίρνει το πρωινό του –μπριός και ζεστή σοκολάτα–δηλώνοντας ότι είναι δολοφόνος και εξαφανίζεται αμέσως.\n" +
+                "Ο χαρισματικός ντετέκτιβ μαθαίνει σιγά σιγά τις φήμες που σχετίζονται με το μυστηριώδες τρίτο κορίτσι, με την οικογένειά της αλλά και με την εξαφάνισή του. Ωστόσο, χρειάζονται αδιάσειστα αποδεικτικά στοιχεία προτού ο Πουαρό αποφανθεί αν είναι ένοχη, αθώα ή απλώς παράφρων.", 277, "Αστυνομικα");
 
         // Insert some random values into the user table
         insertUser(db, "John Doe", "123", "USER", "john@example.com", 123456789, "New York", 100);
@@ -365,6 +367,51 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
 
         return userName;
+    }
+    public AdDetails getAdDetailsByAdId(int adId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        AdDetails adDetails = null;
+
+        // Define the query to retrieve ad details based on ad_id
+        String query = "SELECT selling_ad.selling_ad_isbn, book.title, book.book_description, book.pages, selling_ad.selling_price, selling_ad.selling_publisher " +
+                "FROM selling_ad " +
+                "INNER JOIN book ON selling_ad.selling_ad_isbn = book.isbn " +
+                "WHERE selling_ad.selling_ad_id = ?";
+
+        // Execute the query with the ad_id parameter
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(adId)});
+
+        // Check if the cursor has data
+        if (cursor.moveToFirst()) {
+            // Retrieve column indices
+            int titleIndex = cursor.getColumnIndex("title");
+            int descriptionIndex = cursor.getColumnIndex("book_description");
+            int pagesIndex = cursor.getColumnIndex("pages");
+            int priceIndex = cursor.getColumnIndex("selling_price");
+            int publisherIndex = cursor.getColumnIndex("selling_publisher");
+
+            // Check if column indices are valid
+            if (titleIndex != -1 && descriptionIndex != -1 && pagesIndex != -1  && priceIndex != -1 && publisherIndex != -1) {
+                // Retrieve data from the cursor
+                String title = cursor.getString(titleIndex);
+                String description = cursor.getString(descriptionIndex);
+                int pages = cursor.getInt(pagesIndex);
+                float price = cursor.getFloat(priceIndex);
+                int publisherId = cursor.getInt(publisherIndex);
+
+                // Retrieve publisher's name using user ID
+                String publisherName = getUserNameById(publisherId);
+
+                // Create an AdDetails object with the retrieved information
+                adDetails = new AdDetails(title, description, pages, price, publisherName);
+            }
+        }
+
+        // Close cursor and database
+        cursor.close();
+        db.close();
+
+        return adDetails;
     }
 
 }
