@@ -112,7 +112,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //quiz table
         String createQuizTableQuery = "CREATE TABLE quiz (" +
-                "quiz_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "quiz_id TEXT PRIMARY KEY," +
                 "title TEXT NOT NULL" +
                 ");";
         db.execSQL(createQuizTableQuery);
@@ -339,7 +339,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-   /* public ArrayList<String> getQuizTitles() {
+   public ArrayList<String> getQuizTitles() {
         ArrayList<String> titles = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -354,7 +354,7 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return titles;
-    }*/
+    }
 
     public List<Quiz> getQuizList() { // Removed titlePattern parameter
         List<Quiz> quizzes = new ArrayList<>();
@@ -371,7 +371,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 if (idIndex != -1 && titleIndex != -1) {
                     int id = cursor.getInt(idIndex);
                     String title = cursor.getString(titleIndex);
-                    quizzes.add(new Quiz(id, title));
+                    quizzes.add(new Quiz(title));
                 }
             }
         } catch (Exception e) {
@@ -386,9 +386,6 @@ public class DBHandler extends SQLiteOpenHelper {
         return quizzes;
 
     }
-
-
-
 
     public List<Book> searchBooksByTitle(String title) {
         List<Book> books = new ArrayList<>();
