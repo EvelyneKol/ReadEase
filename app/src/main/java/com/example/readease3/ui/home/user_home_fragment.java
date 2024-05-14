@@ -23,6 +23,8 @@ public class user_home_fragment extends Fragment {
     private Button adButton;
     private Button eventButton;
 
+    private Button audioBookButton;
+
     @Nullable
     @Override
 
@@ -31,7 +33,7 @@ public class user_home_fragment extends Fragment {
 
         adButton = rootView.findViewById(R.id.button1);
         eventButton = rootView.findViewById(R.id.button2);
-
+        audioBookButton = rootView.findViewById(R.id.button4);
         adButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +49,13 @@ public class user_home_fragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_eventsActivity);
             }
         });
-
+        audioBookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to AdOptionsActivity
+                Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_audiobook);
+            }
+        });
         return rootView;
     }
 

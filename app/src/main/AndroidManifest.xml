@@ -21,16 +21,14 @@
         <activity
             android:name=".participants_list"
             android:exported="false" />
-        <activity
-            android:name=".login"
-            android:exported="false" />
+
+        <activity android:name=".audio_book"/>
         <activity android:name=".ad_options" />
         <activity android:name=".events_screen" />
         <activity android:name=".ad_result" />
         <activity android:name=".selling_add" />
         <activity android:name=".borrow_add" />
         <activity android:name=".review" />
-        <activity android:name=".events_screen"/>
         <activity android:name=".available_quiz" />
         <activity android:name=".ebook_form"/>
         <activity
