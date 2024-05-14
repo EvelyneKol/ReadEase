@@ -22,24 +22,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="379dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="532dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="236dp"
-        android:background="@drawable/round_field"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.0"
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="174dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="94dp"
+        android:layout_marginEnd="94dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#000000"
+        android:text="ΥΠΟΒΟΛΗ"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/imageView3"
+        app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@id/description_field"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="154dp"
-        android:layout_height="24dp"
+        android:layout_width="152dp"
+        android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="230dp"
@@ -50,23 +53,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/from"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="154dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="244dp"
+        android:layout_width="152dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="2dp"
         android:layout_marginBottom="275dp"
         android:background="@drawable/round_field"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@id/from"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.995"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/from"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/location_box"
@@ -79,7 +80,7 @@
         android:hint="Τοποθεσία ..."
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintStart_toStartOf="@+id/location"
         app:layout_constraintTop_toBottomOf="@id/radio_good"
         app:layout_constraintVertical_bias="0.0">
@@ -103,10 +104,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="@id/imageView3"
         app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.536" />
+        app:layout_constraintVertical_bias="0.629" />
 
     <TextView
         android:id="@+id/availability"
@@ -119,10 +120,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="@id/imageView3"
         app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.58" />
+        app:layout_constraintVertical_bias="0.658" />
 
     <TextView
         android:id="@+id/to"
@@ -130,15 +131,26 @@
         android:layout_height="29dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text='Έως'
+        android:text='  Έως'
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintHorizontal_bias="0.957"
         app:layout_constraintStart_toStartOf="@id/from"
         app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.605" />
+        app:layout_constraintVertical_bias="0.685" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="75dp"
+        android:layout_height="53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.799"
+        app:srcCompat="@drawable/calendar" />
 
     <TextView
         android:id="@+id/from"
@@ -151,10 +163,11 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="@id/imageView3"
         app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.606" />
+        app:layout_constraintVertical_bias="0.689" />
+
 
     <TextView
         android:id="@+id/title"
@@ -169,11 +182,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021" />
-
+        app:layout_constraintVertical_bias="0.096" />
 
     <TextView
         android:id="@+id/isbn"
@@ -186,10 +198,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="@id/imageView3"
         app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.196" />
+        app:layout_constraintVertical_bias="0.277" />
 
     <com.google.android.material.textfield.TextInputLayout
 
@@ -223,7 +235,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/imageView3"
             app:layout_constraintTop_toBottomOf="@+id/isbn"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -232,6 +244,7 @@
 
 
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/book_title"
@@ -245,10 +258,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.008"
+        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="@id/imageView3"
         app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintVertical_bias="0.382" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/book_title_field"
@@ -261,7 +274,7 @@
         android:hint="Τίτλος Βιβλίου"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/book_title"
         app:layout_constraintVertical_bias="0.0">
@@ -286,10 +299,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.012"
+        app:layout_constraintHorizontal_bias="0.018"
         app:layout_constraintStart_toStartOf="@id/imageView3"
         app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.319" />
+        app:layout_constraintVertical_bias="0.466" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/page_number"
@@ -302,7 +315,6 @@
         android:hint="Αριθμός Σελίδων"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/pages"
         app:layout_constraintVertical_bias="0.0">
@@ -327,26 +339,25 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.012"
+        app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintStart_toStartOf="@id/imageView3"
         app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.42" />
+        app:layout_constraintVertical_bias="0.544" />
 
     <RadioButton
         android:id="@+id/radio_bad"
         android:layout_width="80dp"
         android:layout_height="45dp"
-        android:layout_marginEnd="32dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="91dp"
         android:text="ΚΑΚΗ"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/condition"
         app:layout_constraintVertical_bias="0.0" />
-
 
     <RadioButton
         android:id="@+id/radio_good"
@@ -357,7 +368,7 @@
         android:text="ΚΑΛΗ"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toStartOf="@+id/radio_almost_good"
-        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toEndOf="@+id/radio_bad"
         app:layout_constraintTop_toBottomOf="@+id/condition"
         app:layout_constraintVertical_bias="0.0" />
@@ -371,27 +382,44 @@
         android:text="ΑΡΚΕΤΑ ΚΑΛΗ"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.877"
+        app:layout_constraintHorizontal_bias="0.859"
         app:layout_constraintStart_toStartOf="@+id/radio_bad"
         app:layout_constraintTop_toBottomOf="@+id/condition"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/check"
-        android:layout_width="167dp"
-        android:layout_height="43dp"
+        android:layout_width="98dp"
+        android:layout_height="34dp"
         android:layout_gravity="center"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="564dp"
-        android:layout_marginEnd="121dp"
         android:background="@drawable/black_button"
-        android:text="ΥΠΟΒΟΛΗ"
-        android:textSize="19dp"
+        android:text="ΕΛΕΓΧΟΣ"
+        android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.305" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description_field"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="389dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="774dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="204dp"
+        android:hint="Πρόσθεσε μια περιγραφή..."
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.535"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.734" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@drawable/round_field" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
