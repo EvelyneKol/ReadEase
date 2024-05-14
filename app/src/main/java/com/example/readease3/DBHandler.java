@@ -213,6 +213,20 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    public void updateReview(int reviewId, String updatedReviewText) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("review", updatedReviewText);
+        db.update("review", values, "review_id = ?", new String[]{String.valueOf(reviewId)});
+        db.close();
+    }
+
+
+    public Cursor getAllReviews() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM review", null);
+    }
+
     // method to insert quiz no1 to the db (harry potter quiz)
     public void insertHarryPotterQuiz(SQLiteDatabase db) {
         ContentValues quizValues = new ContentValues();
