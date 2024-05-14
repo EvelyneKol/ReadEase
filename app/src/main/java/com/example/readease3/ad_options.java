@@ -36,4 +36,9 @@ public class ad_options extends AppCompatActivity {
         Intent intent = new Intent(this, borrow_add.class);
         startActivity(intent);
     }
+    public void gotoQuiz(View view) {
+        // Create an Intent to start the SellingAddActivity
+        Intent intent = new Intent(this, available_quiz.class);
+        startActivity(intent);
+    }
 }

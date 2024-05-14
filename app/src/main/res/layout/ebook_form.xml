@@ -27,8 +27,8 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="126dp"
-        android:layout_height="378dp"
+        android:layout_width="124dp"
+        android:layout_height="359dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
@@ -36,7 +36,7 @@
         android:src="@drawable/upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextName"
         app:layout_constraintVertical_bias="0.0" />

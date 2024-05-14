@@ -20,7 +20,7 @@ public class profile_fragment extends Fragment {
 
     private ProfileBinding binding;
 
-    private Button QuizButton;
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,15 +30,6 @@ public class profile_fragment extends Fragment {
         View root = binding.getRoot();
         final TextView textView = binding.textNotifications;
         profile_ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-        QuizButton= rootView.findViewById(R.id.button5);
-        QuizButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to AdOptionsActivity
-                Navigation.findNavController(v).navigate(R.id.action_profile_to_quiz);
-            }
-        });
 
         return root;
     }

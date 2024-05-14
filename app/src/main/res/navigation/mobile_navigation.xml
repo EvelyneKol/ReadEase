@@ -11,6 +11,15 @@
         tools:layout="@layout/writer_home" >
     </fragment>-->
 
+    <fragment
+        android:id="@+id/navigation_writer_home"
+        android:name="com.example.readease3.ui.writer.writer"
+        tools:layout="@layout/fragment_writer">
+        <action
+            android:id="@+id/action_writer_home_to_ebook"
+            app:destination="@id/ebookform" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_home"
@@ -22,9 +31,6 @@
         <action
             android:id="@+id/action_userHomeFragment_to_eventsActivity"
             app:destination="@id/eventsActivity" />
-        <action
-            android:id="@+id/action_userHomeFragment_to_audiobook"
-            app:destination="@id/audio_book" />
     </fragment>
 
 
@@ -69,7 +75,11 @@
         android:name="com.example.readease3.MainActivity"
         android:label="MainActivity" />
 
-
+    <activity
+        android:id="@+id/activity_login"
+        android:name="com.example.readease3.login"
+        android:label="login"
+        tools:layout="@layout/activity_login" />
 
     <!--
     <activity
@@ -105,7 +115,7 @@
         android:label="Ad Details" />
 
 
-    <activity
+     <activity
         android:id="@+id/review"
         android:name="com.example.readease3.review"
         android:label="Create New Review" />
@@ -129,14 +139,10 @@
         tools:layout="@layout/events_screen" />
 
 
-
     <activity
         android:id="@+id/ebookform"
         android:name="com.example.readease3.ebook_form"
         android:label="Ebook" />
 
-    <activity
-        android:id="@+id/audio_book"
-        android:name="com.example.readease3.audio_book"
-        android:label="Audio Book" />
+
 </navigation>
