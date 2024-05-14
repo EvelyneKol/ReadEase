@@ -138,11 +138,6 @@
         android:label="EventsActivity"
         tools:layout="@layout/events_screen" />
 
-    <activity
-        android:id="@+id/couponsActivity"
-        android:name="com.example.readease3.personal_bank"
-        android:label="CouponsActivity"
-        tools:layout="@layout/personal_bank" />
 
     <activity
         android:id="@+id/ebookform"
