@@ -212,14 +212,6 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert("events", null, values);
     }
 
-    public void insertReview(int reviewerId, String reviewText, String reviewedBook) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("reviewer", reviewerId);
-        values.put("review", reviewText);
-        values.put("reviewed_book", reviewedBook);
-        db.insert("review", null, values);
-    }
 
     // method to insert quiz no1 to the db (harry potter quiz)
     public void insertHarryPotterQuiz(SQLiteDatabase db) {
@@ -295,6 +287,15 @@ public class DBHandler extends SQLiteOpenHelper {
                 "Ποια είναι η πρωτεύουσα της Νέας Δημοκρατίας στο Star Wars;",
                 new String[]{"Naboo", "Coruscant", "Hoth", "Alderaan"},
                 "Coruscant");
+    }
+
+    public void insertReview(int reviewerId, String reviewText, String reviewedBook) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("reviewer", reviewerId);
+        values.put("review", reviewText);
+        values.put("reviewed_book", reviewedBook);
+        db.insert("review", null, values);
     }
 
 
