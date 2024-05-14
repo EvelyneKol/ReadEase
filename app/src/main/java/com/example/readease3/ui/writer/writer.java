@@ -1,7 +1,5 @@
 package com.example.readease3.ui.writer;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.example.readease3.R;
-import com.example.readease3.databinding.UserHomeBinding;
 
 public class writer extends Fragment {
 
@@ -28,7 +25,7 @@ public class writer extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_writer, container, false);
+        View rootView = inflater.inflate(R.layout.writer, container, false);
 
         // Initialize ebookButton
         ebookButton = rootView.findViewById(R.id.ebookbutton);

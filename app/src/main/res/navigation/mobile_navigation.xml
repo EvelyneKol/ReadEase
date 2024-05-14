@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/navigation_writer_home"
         android:name="com.example.readease3.ui.writer.writer"
-        tools:layout="@layout/fragment_writer">
+        tools:layout="@layout/writer">
         <action
             android:id="@+id/action_writer_home_to_ebook"
             app:destination="@id/ebookform" />
