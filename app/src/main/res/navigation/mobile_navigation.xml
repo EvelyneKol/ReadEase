@@ -129,4 +129,10 @@
         android:id="@+id/audio_book"
         android:name="com.example.readease3.audio_book"
         android:label="Audio Book" />
+
+    <activity
+        android:id="@+id/couponsActivity"
+        android:name="com.example.readease3.personal_bank"
+        android:label="Coupons"
+        tools:layout="@layout/personal_bank"/>
 </navigation>

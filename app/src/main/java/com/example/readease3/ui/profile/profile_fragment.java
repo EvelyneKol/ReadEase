@@ -20,14 +20,24 @@ public class profile_fragment extends Fragment {
 
     private ProfileBinding binding;
 
-
-
+    private Button coupons;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.user_home, container, false);
         profile_ViewModel profile_ViewModel = new ViewModelProvider(this).get(profile_ViewModel.class);
         binding = ProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        coupons = root.findViewById(R.id.button4);
+
+        coupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to AdOptionsActivity
+                Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_personalbank);
+            }
+        });
+
         final TextView textView = binding.textNotifications;
         profile_ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
