@@ -6,6 +6,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import android.annotation.SuppressLint;
+import android.util.Log;
+
+
 public class DBHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "database.db";
     private static final int DATABASE_VERSION = 1;
@@ -315,19 +321,55 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    public List<String> getAllQuizTitles() {
-        List<String> titles = new ArrayList<>();
+   /* public ArrayList<String> getQuizTitles() {
+        ArrayList<String> titles = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT title FROM quiz", null);
+
+        String query = "SELECT * FROM quiz";
+        Cursor cursor = db.rawQuery(query, null); // Execute the query
+
         if (cursor.moveToFirst()) {
             do {
-                titles.add(cursor.getString(0)); // Assuming title is the first column
+                titles.add(cursor.getString(cursor.getColumnIndexOrThrow("title")));
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return titles;
+    }*/
+
+    public List<Quiz> getQuizList() { // Removed titlePattern parameter
+        List<Quiz> quizzes = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT id, title FROM quiz"; // Removed WHERE clause
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery(query, null); // No parameters for rawQuery
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex("id");
+                int titleIndex = cursor.getColumnIndex("title");
+
+                if (idIndex != -1 && titleIndex != -1) {
+                    int id = cursor.getInt(idIndex);
+                    String title = cursor.getString(titleIndex);
+                    quizzes.add(new Quiz(id, title));
+                }
+            }
+        } catch (Exception e) {
+            Log.e("DBHandler", "Error while trying to get quizzes from database", e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return quizzes;
+
     }
+
+
 
 
     public List<Book> searchBooksByTitle(String title) {
