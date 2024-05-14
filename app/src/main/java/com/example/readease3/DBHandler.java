@@ -219,7 +219,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void updateReview(int reviewId, String updatedReviewText) {
+    public void updateReview(int reviewId, int i, String updatedReviewText) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("review", updatedReviewText);
@@ -231,6 +231,17 @@ public class DBHandler extends SQLiteOpenHelper {
     public Cursor getAllReviews() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM review", null);
+    }
+
+    public long insertReview(int reviewerId, String reviewText, String reviewedBook) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("reviewer", reviewerId);
+        values.put("review", reviewText);
+        values.put("reviewed_book", reviewedBook);
+        long insertedId = db.insert("review", null, values);
+        db.close();
+        return insertedId; // Return the ID of the inserted review
     }
 
     // method to insert quiz no1 to the db (harry potter quiz)
@@ -309,14 +320,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 "Coruscant");
     }
 
-    public void insertReview(int reviewerId, String reviewText, String reviewedBook) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("reviewer", reviewerId);
-        values.put("review", reviewText);
-        values.put("reviewed_book", reviewedBook);
-        db.insert("review", null, values);
-    }
+
 
 
     // Helper method to insert a question with its options

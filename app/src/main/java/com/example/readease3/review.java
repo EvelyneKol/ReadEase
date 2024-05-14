@@ -19,8 +19,8 @@ import java.util.List;
 public class review extends AppCompatActivity {
 
     private EditText reviewEditText;
-    private String searchedBookISBN;// Declare variable to store ISBN
-    private int currentReviewId; // Declare variable to store ISBN
+    private String searchedBookISBN; // Declare variable to store ISBN
+    private int currentReviewId = -1; // Initialize currentReviewId with -1, indicating no review has been submitted yet
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,9 @@ public class review extends AppCompatActivity {
         // Find views
         reviewEditText = findViewById(R.id.editText);
         Button submitButton = findViewById(R.id.submit1);
-        Button editButton = findViewById(R.id.button9);
+        Button editButton = findViewById(R.id.button9); // ΕΠΕΞΕΡΓΑΣΙΑ button
 
+        // OnClickListener for ΥΠΟΒΟΛΗ button
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,13 +45,10 @@ public class review extends AppCompatActivity {
                 if (!reviewText.isEmpty()) {
                     // Use the retrieved ISBN in the insertReview method
                     DBHandler dbHandler = new DBHandler(review.this);
-                    dbHandler.insertReview(1, reviewText, searchedBookISBN); // Pass actual ISBN
-
-                    // Show toast message
+                    long insertedReviewId = dbHandler.insertReview(1, reviewText, searchedBookISBN); // Store the inserted review ID
+                    currentReviewId = (int) insertedReviewId; // Store the review ID
                     Toast.makeText(review.this, "Review submitted successfully", Toast.LENGTH_SHORT).show();
-
-                    // Enable the 'button9' and disable the 'submit1' button
-                    Button editButton = findViewById(R.id.button9);
+                    // Enable the edit button and disable the submit button
                     editButton.setEnabled(true);
                     submitButton.setEnabled(false);
                 } else {
@@ -64,13 +62,17 @@ public class review extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Ensure there's a review to update
-                if (currentReviewId != 0) {
-                    // Retrieve the updated review text
-                    String updatedReviewText = reviewEditText.getText().toString().trim();
-                    // Update the review in the database
+                if (currentReviewId != -1) {
+                    // Proceed with updating the review
+                    // You can use currentReviewId here to update the corresponding review in the database
                     DBHandler dbHandler = new DBHandler(review.this);
-                    dbHandler.updateReview(currentReviewId, updatedReviewText);
-                    Toast.makeText(review.this, "Review updated successfully", Toast.LENGTH_SHORT).show();
+                    String updatedReviewText = reviewEditText.getText().toString().trim();
+                    if (!updatedReviewText.isEmpty()) {
+                        dbHandler.updateReview(currentReviewId, 1, updatedReviewText);
+                        Toast.makeText(review.this, "Review updated successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(review.this, "Please enter the updated review", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(review.this, "No review to update", Toast.LENGTH_SHORT).show();
                 }
@@ -85,3 +87,4 @@ public class review extends AppCompatActivity {
         });
     }
 }
+
