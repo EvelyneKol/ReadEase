@@ -5,21 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
-    <!--
-    <fragment
-        android:id="@+id/writer_home"
-        tools:layout="@layout/writer_home" >
-    </fragment>-->
-
-    <fragment
-        android:id="@+id/navigation_writer_home"
-        android:name="com.example.readease3.ui.writer.writer"
-        tools:layout="@layout/fragment_writer">
-        <action
-            android:id="@+id/action_writer_home_to_ebook"
-            app:destination="@id/ebookform" />
-    </fragment>
-
 
     <fragment
         android:id="@+id/navigation_home"
@@ -31,8 +16,20 @@
         <action
             android:id="@+id/action_userHomeFragment_to_eventsActivity"
             app:destination="@id/eventsActivity" />
+        <action
+            android:id="@+id/action_userHomeFragment_to_audiobook"
+            app:destination="@id/audio_book" />
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_writer_home"
+        android:name="com.example.readease3.ui.writer.writer"
+        tools:layout="@layout/fragment_writer">
+        <action
+            android:id="@+id/action_writer_home_to_ebook"
+            app:destination="@id/ebookform" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
@@ -64,29 +61,12 @@
         <action
             android:id="@+id/action_profileFragment_to_personalbank"
             app:destination="@+id/couponsActivity"/>
-
-        <action
-            android:id="@+id/action_profile_to_quiz"
-            app:destination="@id/quizactivity"/>
     </fragment>
 
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.readease3.MainActivity"
         android:label="MainActivity" />
-
-    <activity
-        android:id="@+id/activity_login"
-        android:name="com.example.readease3.login"
-        android:label="login"
-        tools:layout="@layout/activity_login" />
-
-    <!--
-    <activity
-        android:id="@+id/writer_home"
-        android:name="com.example.readease3.writer_home"
-        android:label="Writer Home Activity" />
-        -->
 
 
 
@@ -96,10 +76,6 @@
         android:label="Ad Options Activity" >
     </activity>
 
-    <activity
-        android:id="@+id/quizactivity"
-        android:label="Quiz" >
-    </activity>
 
     <activity
         android:id="@+id/adresult"
@@ -115,7 +91,7 @@
         android:label="Ad Details" />
 
 
-     <activity
+    <activity
         android:id="@+id/review"
         android:name="com.example.readease3.review"
         android:label="Create New Review" />
@@ -131,6 +107,11 @@
         android:name="com.example.readease3.borrow_add"
         android:label="Selling Add Activity" />
 
+    <activity
+        android:id="@+id/quizActivity"
+        android:name="com.example.readease3.available_quiz"
+        android:label="QUIZ  Activity" />
+
 
     <activity
         android:id="@+id/eventsActivity"
@@ -144,5 +125,8 @@
         android:name="com.example.readease3.ebook_form"
         android:label="Ebook" />
 
-
+    <activity
+        android:id="@+id/audio_book"
+        android:name="com.example.readease3.audio_book"
+        android:label="Audio Book" />
 </navigation>
