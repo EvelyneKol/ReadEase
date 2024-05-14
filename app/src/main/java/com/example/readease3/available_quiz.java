@@ -62,4 +62,3 @@ public class available_quiz extends AppCompatActivity {
         }
     }
 }
-
