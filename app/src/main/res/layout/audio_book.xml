@@ -279,10 +279,8 @@
         android:layout_marginBottom="432dp"
         android:background="@drawable/round_field"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@id/to"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/from"
         app:layout_constraintVertical_bias="0.333" />
 
     <Button
