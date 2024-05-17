@@ -74,6 +74,7 @@ public class ebook_form extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 Toast.makeText(ebook_form.this, "Επιτυχής υποβολή αρχείου", Toast.LENGTH_SHORT).show();
+                clearFormFields();
             }
         });
 
@@ -81,6 +82,14 @@ public class ebook_form extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    private void clearFormFields() {
+        editTextName.getText().clear();
+        editTextPrice.getText().clear();
+        editTextDescription.getText().clear();
+        // Add additional EditText fields to clear if needed
+    }
+
 
     private void showNestedPopupDialog() {
         // Create an AlertDialog for the nested dialog
@@ -93,6 +102,7 @@ public class ebook_form extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Handle Bars button click
                 Toast.makeText(ebook_form.this, "Επιτυχής υποβολή αρχείου και στατιστικών", Toast.LENGTH_SHORT).show();
+                clearFormFields();
             }
         });
 
@@ -102,6 +112,7 @@ public class ebook_form extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Handle Pita button click
                 Toast.makeText(ebook_form.this, "Επιτυχής υποβολή αρχείου και στατιστικών", Toast.LENGTH_SHORT).show();
+                clearFormFields();
             }
         });
 
