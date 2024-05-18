@@ -1,0 +1,9 @@
+<!-- res/drawable/textview_border.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#D3D3D3"/> <!-- Yellow background color -->
+    <stroke android:color="#000000" android:width="4dp"/>
+    <corners android:topLeftRadius="15dp"
+        android:topRightRadius="15dp"
+        android:bottomLeftRadius="15dp"
+        android:bottomRightRadius="15dp"/><!-- Black border with 2dp width -->
+</shape>

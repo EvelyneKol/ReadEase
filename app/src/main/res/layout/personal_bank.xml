@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729">
+        app:layout_constraintVertical_bias="0.741">
 
         <LinearLayout
             android:id="@+id/textViewContainer"
@@ -29,16 +29,18 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="218dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="144dp"
+        android:layout_width="220dp"
+        android:layout_height="69dp"
         android:text=""
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.951" />
 
     <Button
         android:id="@+id/button16"
@@ -71,7 +73,7 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <Button
-        android:id="@+id/button17"
+        android:id="@+id/redeempoints"
         android:layout_width="209dp"
         android:layout_height="58dp"
         android:layout_marginEnd="100dp"
@@ -90,17 +92,17 @@
         android:id="@+id/textView9"
         android:layout_width="258dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="52dp"
         android:text="Τα κουπόνια μου"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button16"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".not_enough_capacity"
-    android:background="#EDEDED">
+    tools:context=".not_enough_points" android:background="#EDEDED">
 
     <ImageView
         android:id="@+id/imageView7"
@@ -24,7 +23,7 @@
         android:id="@+id/textView5"
         android:layout_width="317dp"
         android:layout_height="152dp"
-        android:text="Μας συγχωρείται αλλά ο αριθμός ατόμων που επιλέξατε υπερβαίνει το επιτρεπτό όριο.Πακαλούμε επιλέξτε έναν έγκυρο αριθμών ατόμων!"
+        android:text="Μας συγχωρείται αλλά ο αριθμός πόντων που επιλέξατε δεν ανήκει στα επιτρεπτά όρια.Πακαλούμε επιλέξτε ένα έγκυρο ποσό πόντων !"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"

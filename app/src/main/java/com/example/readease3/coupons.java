@@ -1,27 +1,26 @@
 package com.example.readease3;
 public class coupons {
     private String user;
-    private String coupontype;
+    private String type;
     private String expiredate;
     private String used;
 
-    public coupons(String user, String coupontype, String expiredate, String used) {
+    public coupons(String user, String type, String expiredate, String used) {
         this.user = user;
-        this.coupontype = coupontype;
+        this.type = type;
         this.expiredate = expiredate;
         this.used = used;
     }
-
     public String getUser() {
         return user;
     }
     public void setUser(String user){this.user = user;}
 
     public String getCoupontype() {
-        return coupontype;
+        return type;
     }
-    public void setCoupontype(String coupontype){
-        this.coupontype = coupontype;
+    public void setCoupontype(String type){
+        this.type = type;
     }
 
     public String getExpiredate() {

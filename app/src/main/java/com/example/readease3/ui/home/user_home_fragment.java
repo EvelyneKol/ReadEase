@@ -22,7 +22,6 @@ public class user_home_fragment extends Fragment {
     private UserHomeBinding binding;
     private Button adButton;
     private Button eventButton;
-
     private Button audioBookButton;
 
     @Nullable

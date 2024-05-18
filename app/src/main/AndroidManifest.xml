@@ -14,6 +14,15 @@
         android:theme="@style/Theme.ReadEase3"
         tools:targetApi="31">
         <activity
+            android:name=".select_coupons"
+            android:exported="false" />
+        <activity
+            android:name=".not_enough_points"
+            android:exported="false" />
+        <activity
+            android:name=".redeem_points"
+            android:exported="false" />
+        <activity
             android:name=".personal_bank"
             android:exported="false" />
         <activity
