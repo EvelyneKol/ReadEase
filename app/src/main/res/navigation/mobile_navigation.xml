@@ -112,6 +112,10 @@
         android:name="com.example.readease3.available_quiz"
         android:label="QUIZ  Activity" />
 
+    <activity
+        android:id="@+id/playQuiz"
+        android:name="com.example.readease3.play_quiz"
+        android:label="PLAY QUIZ" />
 
     <activity
         android:id="@+id/eventsActivity"

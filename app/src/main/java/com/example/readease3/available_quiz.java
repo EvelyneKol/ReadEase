@@ -1,6 +1,8 @@
 package com.example.readease3;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -8,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
+import android.view.View;
 public class available_quiz extends AppCompatActivity {
 
     @Override
@@ -27,5 +29,10 @@ public class available_quiz extends AppCompatActivity {
         // Assign quiz names to TextViews
         TextView quiz1 = findViewById(R.id.quiz1);
         quiz1.setText("Πόσο καλά ξέρεις τον 'Harry Potter'?");
+
+    }
+    public void playQuiz(View view) {
+        Intent intent = new Intent(this, play_quiz.class);
+        startActivity(intent);
     }
 }
