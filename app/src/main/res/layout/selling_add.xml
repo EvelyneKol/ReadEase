@@ -5,321 +5,243 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/background_new"
     tools:context=".selling_add">
-
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="430dp"
-        android:layout_height="773dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:background="@drawable/selling_add_backround"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="174dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="94dp"
-        android:layout_marginEnd="94dp"
-        android:backgroundTint="#000000"
-        android:text="ΥΠΟΒΟΛΗ"
-        android:textSize="17dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.842"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/value_field"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="335dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="37dp"
-        android:text='Αγγελία Πώλησης'
+        android:layout_width="214dp"
+        android:layout_height="48dp"
+        android:text="Αγγελία Πώλησης!"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/imageView3"
-        app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.793"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057" />
+        app:layout_constraintVertical_bias="0.121" />
 
     <TextView
         android:id="@+id/isbn"
-        android:layout_width="146dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text='ISBN'
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISBN"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/imageView3"
-        app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toStartOf="@id/imageView3"
-        app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.22000003" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.221" />
 
     <com.google.android.material.textfield.TextInputLayout
-
         android:id="@+id/isbn_field"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="379dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="489dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:hint="ISBN"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/isbn"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.257">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/round_field" />
-
-
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
-        android:id="@+id/check"
-        android:layout_width="98dp"
-        android:layout_height="34dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="283dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginTop="-11dp"
-        android:background="@drawable/black_button"
-        android:text="ΕΛΕΓΧΟΣ"
-        android:textSize="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/isbn_field" />
-
     <TextView
         android:id="@+id/book_title"
-        android:layout_width="146dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text='Τίτλος Βιβλίου'
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Τίτλος Βιβλίου"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/imageView3"
-        app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="@id/imageView3"
-        app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.361" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.386" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/book_title_field"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="379dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="398dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:hint="Τίτλος Βιβλίου"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.161"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/book_title"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.429">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="29dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/round_field"
             android:baselineAligned="false" />
-
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/pages"
-        android:layout_width="146dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="-29dp"
-        android:layout_marginEnd="8dp"
-        android:text='Αριθμός Σελίδων'
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Αριθμός Σελίδων"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/imageView3"
-        app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@id/imageView3"
-        app:layout_constraintTop_toTopOf="@id/imageView3"
-        app:layout_constraintVertical_bias="0.507" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.511" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/page_number"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="379dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="253dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:hint="Αριθμός Σελίδων"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/pages"
-        app:layout_constraintVertical_bias="0.214">
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.563">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="133dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="-239dp"
-            android:layout_marginTop="-63dp"
-            android:layout_marginEnd="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/round_field" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/value"
-        android:layout_width="146dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="-400dp"
-        android:layout_marginEnd="220dp"
-        android:layout_marginBottom="-190dp"
-        android:text='Τιμή Πώλησης'
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Τιμή Πώλησης"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/pages"
-        app:layout_constraintVertical_bias="0.712" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.632" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/value_field"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="379dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="184dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:hint="Τιμή Πώλησης"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/value"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.696">
 
-
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_field" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/condition"
-        android:layout_width="146dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="-700dp"
-        android:layout_marginEnd="8dp"
-        android:text='Κατάσταση Βιβλίου'
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Κατάσταση Βιβλίου"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/imageView3"
-        app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/textInputEditText"
-        app:layout_constraintVertical_bias="0.803" />
-
-    <RadioButton
-        android:id="@+id/radio_bad"
-        android:layout_width="80dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="97dp"
-        android:text="ΚΑΚΗ"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.069"
-        app:layout_constraintStart_toStartOf="@id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/condition"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <RadioButton
-        android:id="@+id/radio_good"
-        android:layout_width="83dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="91dp"
-        android:text="ΚΑΛΗ"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toStartOf="@+id/radio_almost_good"
-        app:layout_constraintHorizontal_bias="0.613"
-        app:layout_constraintStart_toEndOf="@+id/radio_bad"
-        app:layout_constraintTop_toBottomOf="@+id/condition"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <RadioButton
-        android:id="@+id/radio_almost_good"
-        android:layout_width="136dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="-450dp"
-        android:layout_marginBottom="91dp"
-        android:text="ΑΡΚΕΤΑ ΚΑΛΗ"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.768"
-        app:layout_constraintStart_toEndOf="@+id/radio_bad"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText"
-        app:layout_constraintVertical_bias="0.913" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
-        android:layout_width="match_parent"
-        android:layout_height="39dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/round_field"
-        android:baselineAligned="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/page_number" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.774" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="101dp"
-        android:layout_height="35dp"
-        android:background="@drawable/round_field"
-        android:baselineAligned="false"
-        app:layout_constraintBottom_toTopOf="@+id/value"
-        app:layout_constraintTop_toTopOf="@+id/pages"
-        tools:layout_editor_absoluteX="22dp" />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824">
+
+        <RadioButton
+            android:id="@+id/radio_bad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ΚΑΚΗ" />
+
+        <RadioButton
+            android:id="@+id/radio_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ΚΑΛΗ" />
+
+        <RadioButton
+            android:id="@+id/radio_almost_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ΑΡΚΕΤΑ ΚΑΛΗ" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ΕΛΕΓΧΟΣ"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.326" />
+
+
+    <Button
+        android:id="@+id/create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ΥΠΟΒΟΛΗ"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="98dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093"
+        app:srcCompat="@drawable/bookpic1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
