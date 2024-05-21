@@ -52,11 +52,11 @@
         app:layout_constraintVertical_bias="0.257">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/isbn_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_field" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <TextView
         android:id="@+id/book_title"
@@ -86,10 +86,11 @@
         app:layout_constraintVertical_bias="0.429">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/book_title_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_field"
-            android:baselineAligned="false" />
+            android:enabled="false" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -120,9 +121,11 @@
         app:layout_constraintVertical_bias="0.563">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/page_number_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_field" />
+            android:background="@drawable/round_field"
+            android:enabled="false" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -154,9 +157,11 @@
         app:layout_constraintVertical_bias="0.696">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/value_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_field" />
+            android:background="@drawable/round_field"
+            android:enabled="false" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -171,19 +176,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.774" />
+        app:layout_constraintVertical_bias="0.798" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824">
+        app:layout_constraintVertical_bias="0.863">
 
         <RadioButton
             android:id="@+id/radio_bad"
@@ -217,6 +223,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.326" />
 
+    <Button
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ΠΡΟΤΕΙΝΟΜΕΝΕΣ ΤΙΜΕΣ"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.767" />
 
     <Button
         android:id="@+id/create"
@@ -224,6 +242,7 @@
         android:layout_height="wrap_content"
         android:text="ΥΠΟΒΟΛΗ"
         android:textColor="@color/black"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -242,6 +261,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.093"
         app:srcCompat="@drawable/bookpic1" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

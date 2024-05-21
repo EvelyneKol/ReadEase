@@ -45,7 +45,7 @@ public class search_fragment extends Fragment {
         buttonBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to EbookFormActivity
+                // Navigate to adresult
                 Navigation.findNavController(v).navigate(R.id.action_searchFragment_to_adresult);
             }
         });
