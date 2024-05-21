@@ -80,6 +80,7 @@
         app:layout_constraintHorizontal_bias="0.116"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:onClick="gotoQuiz"
         app:layout_constraintVertical_bias="0.229" />
 
     <Button
