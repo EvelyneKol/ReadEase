@@ -32,7 +32,7 @@ public class search_fragment extends Fragment {
     private SearchBinding binding;
     private DBHandler dbHandler;
     private Button buttonBuy;
-
+    private Button buttonBorrow;
     private Button reviewButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,11 +41,18 @@ public class search_fragment extends Fragment {
 
         buttonBuy = root.findViewById(R.id.buyButton);
         reviewButton = root.findViewById(R.id.reviewButton);
-
+        buttonBorrow = root.findViewById(R.id.borrowButton);
         buttonBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Navigate to adresult
+                Navigation.findNavController(v).navigate(R.id.action_searchFragment_to_adresult);
+            }
+        });
+        buttonBorrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to EbookFormActivity
                 Navigation.findNavController(v).navigate(R.id.action_searchFragment_to_adresult);
             }
         });
@@ -117,19 +124,22 @@ public class search_fragment extends Fragment {
                     startActivity(intent);
                 }
             });
-            buttonBuy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Create an Intent to start the ad_result activity
-                    Intent intent = new Intent(requireContext(), ad_result.class);
-
-                    // Pass the ISBN of the searched book as an extra
-                    intent.putExtra("searched_book_isbn", searchedBookISBN);
-
-                    // Start the review activity
-                    startActivity(intent);
-                }
+            buttonBuy.setOnClickListener(v -> {
+                Intent intent = new Intent(getActivity(), ad_result.class);
+                intent.putExtra("action", "buy");
+                intent.putExtra("searched_book_isbn", searchedBookISBN); // pass the ISBN as well
+                startActivity(intent);
             });
+
+
+            buttonBorrow.setOnClickListener(v -> {
+                Intent intent = new Intent(getActivity(), ad_result.class);
+                intent.putExtra("action", "borrow");
+                intent.putExtra("searched_book_isbn", searchedBookISBN); // pass the ISBN as well
+                startActivity(intent);
+            });
+
+
         }else {
             // No matching books found
             binding.searchResultTextView.setText("Δεν βρέθηκαν βιβλία με αυτόν τον τίτλο.");
@@ -147,3 +157,4 @@ public class search_fragment extends Fragment {
         binding = null;
     }
 }
+

@@ -97,6 +97,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 ")";
         db.execSQL(createSellingAdTableQuery);
 
+
         // Create the review table
         String createReviewTableQuery = "CREATE TABLE review ("
                 + "review_id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -144,7 +145,16 @@ public class DBHandler extends SQLiteOpenHelper {
                 ")";
         db.execSQL(createTablecouponQuery);
 
-
+        // Create the borrow_ad table
+        String createBorrowAdTableQuery = "CREATE TABLE borrow_ad (" +
+                "borrow_ad_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "borrow_ad_isbn TEXT NOT NULL," +
+                "borrow_publisher INTEGER," +
+                "borrow_status TEXT CHECK(borrow_status IN ('ΚΑΚΗ', 'ΜΕΤΡΙΑ', 'ΚΑΛΗ', 'ΠΟΛΥ ΚΑΛΗ'))," +
+                "FOREIGN KEY (borrow_ad_isbn) REFERENCES book(isbn) ON UPDATE CASCADE ON DELETE CASCADE," +
+                "FOREIGN KEY (borrow_publisher) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE" +
+                ")";
+        db.execSQL(createBorrowAdTableQuery);
 
         // Insert initial books
         insertBook(db, "9786180149173", "Ψιλά Γράμματα", "LAUREN ASHER", "Εκείνος είναι κληρονόμος μιας εταιρείας που κατασκευάζει… παραμύθια. Εκείνη καλείται να δουλέψει για το πιο απαιτητικό αφεντικό που γνώρισε ποτέ. Αν θέλουν και το δικό τους παραμύθι να έχει ευτυχισμένο τέλος, τότε πρέπει να προσέξουν λίγο περισσότερο τα… ψιλά γράμματα! Ο Ρόουαν Κέιν και τα δύο αδέλφια του κληρονομούν από τον παππού τους μια τεράστια εταιρεία και μια αμύθητη περιουσία. Για να περάσουν όλα αυτά και επίσημα στα χέρια του, ο Ρόουαν πρέπει να αποδείξει ότι είναι ικανός να ανανεώσει την Ντρίμλαντ, το θεματικό πάρκο της εταιρείας. Στην πραγματικότητα, δε θέλει να έχει καμία σχέση μ ’ αυτά, αλλά, από σεβασμό στη μνήμη του παππού του, αποφασίζει να δουλέψει σκληρά και είναι αποφασισμένος να τα καταφέρει. Η Ζάρα είναι απλώς μία από το πλήθος των υπαλλήλων του Ρόουαν Κέιν. Όταν όμως, μεθυσμένη, στέλνει μια επικριτική πρόταση για το πάρκο, τρέμει ότι θα απολυθεί. Αντ’ αυτού, εκείνος της προσφέρει τη δουλειά των ονείρων της. Αλλά υπάρχει μια παγίδα: ο Ρόουαν είναι το πιο απαιτητικό και το πιο σκληρό αφεντικό που υπάρχει. Η καρδιά της Ζάρα δε δίνει καμία σημασία σ’ αυτό. Ήρθε η ώρα να μάθει ο δισεκατομμυριούχος ότι τα χρήματα δεν μπορούν να διορθώσουν ή να αγοράσουν τα πάντα. Και ειδικά τους ανθρώπους! Το πρώτο βιβλίο της σειράς μπεστ σέλερ, όπου πρωταγωνιστούν οι τρεις δισεκατομμυριούχοι αδελφοί της Ντρίμλαντ και οι γυναίκες που θα τους κάνουν να γονατίσουν.", 445, "Αισθηματικα");
@@ -154,14 +164,18 @@ public class DBHandler extends SQLiteOpenHelper {
         insertBook(db, "9786180128055", "Έγκλημα στο Οριάν Εξπρές", "Agatha Christie", "Ο δολοφόνος βρίσκεται εδώ, μαζί μας. . .Είναι στο τρένο αυτή τη στιγμή. . .Λίγο μετά τα μεσάνυχτα, το φημισμένο Οριάν Εξπρές ακινητοποιείται από μια χιονοθύελλα στη μέση του πουθενά. Το πρωί, ο εκατομμυριούχος Σάμιουελ Έντουαρντ Ράτσετ βρίσκεται μαχαιρωμένος στο κρεβάτι του. Η πόρτα του κουπέ του είναι κλειδωμένη από μέσα.Ο δολοφόνος του είναι ένας από τους συνταξιδιώτες του. . .Ο Ηρακλής Πουαρό, παγιδευμένος κι αυτός στο τραίνο, επιχειρεί να λύσει το μυστήριο. Ανάμεσα στους επιβάτες υπάρχουν πολλοί άνθρωποι που είχαν λόγους να μισούν τον Ράτσετ. Ποιος απ' όλους είναι ο δολοφόνος; Άραγε σχεδιάζει να χτυπήσει ξανά;Ένα ταξίδι με το πιο πολυτελές τρένο του κόσμου εξελίσσεται σ' ένα αγωνιώδες μυστήριο -και σ' ένα από τα πιο δημοφιλή έργα της Άγκαθα Κρίστι, που διαβάστηκε από εκατομμύρια αναγνώστες και μεταφέρθηκε επανειλημμένα στον κινηματογράφο και στην τηλεόραση", 277, "Αστυνομικα");
 
         // Insert some random values into the user table
-        insertUser(db, "John Doe", "123", "USER", "john@example.com", 123456789, "New York", 100);
-        insertUser(db, "Jane Smith", "456", "WRITER", "jane@example.com", 987654321, "Los Angeles", 150);
-        insertUser(db, "Alice Johnson", "789", "USER", "alice@example.com", 555555555, "Chicago", 200);
+        insertUser(db, "John Doe", "123", "USER", "john@example.com", 123456789, "Πατρα", 100);
+        insertUser(db, "Jane Smith", "456", "WRITER", "jane@example.com", 987654321, "Πατρα", 150);
+        insertUser(db, "Alice Johnson", "789", "USER", "alice@example.com", 555555555, "Πατρα", 200);
 
         // Insert records into the selling_ad table
         insertSellingAd(db, "9786180149173", 18, 1, "ΚΑΛΗ");
         insertSellingAd(db, "9786810146189", 12, 3, "ΠΟΛΥ ΚΑΛΗ");
         insertSellingAd(db, "9786810146189", 9, 2, "ΚΑΛΗ");
+        // Insert records into the borrow_ad table
+        insertBorrowAd(db, "9786180149173", 1,  "ΚΑΛΗ");
+        insertBorrowAd(db, "9786810146189", 3,  "ΠΟΛΥ ΚΑΛΗ");
+        insertBorrowAd(db, "9786810146189", 2, "ΚΑΛΗ");
 
         // Insert records into events table
         insertEvents(db,82224,"'Βιβλιοφάγοι'","Μια πρώτη γνωριμία με τον δημιουργό του έργου 'Βιβλιοφάγοι'","2024-08-22", "15:30","17:00 PM","Παπανδρέου 20, Πάτρα",50,1 );
@@ -214,6 +228,16 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("selling_status", status);
 
         db.insert("selling_ad", null, values);
+    }
+
+    // Method to insert a selling ad into the selling_ad table
+    private void insertBorrowAd(SQLiteDatabase db, String isbn, int publisher, String status) {
+        ContentValues values = new ContentValues();
+        values.put("borrow_ad_isbn", isbn);
+        values.put("borrow_publisher", publisher);
+        values.put("borrow_status", status);
+
+        db.insert("borrow_ad", null, values);
     }
 
     private void insertEvents(SQLiteDatabase db, int eventId, String title, String description, String date,String start_time,String end_time, String location, int capacity, int creator) {
@@ -555,6 +579,49 @@ public class DBHandler extends SQLiteOpenHelper {
         // Return the list of selling ads
         return sellingAds;
     }
+    public List<BorrowAd> getBorrowAdByIsbn(String isbn) {
+        List<BorrowAd> borrowAds = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Define the query to search for borrow ads by ISBN and join with the user table to get the user_location
+        String query = "SELECT borrow_ad.borrow_ad_id, borrow_ad.borrow_publisher, borrow_ad.borrow_status, user.user_location " +
+                "FROM borrow_ad " +
+                "JOIN user ON borrow_ad.borrow_publisher = user.user_id " +
+                "WHERE borrow_ad.borrow_ad_isbn = ?";
+
+        // Execute the query with the ISBN parameter
+        Cursor cursor = db.rawQuery(query, new String[]{isbn});
+
+        // Iterate through the cursor to retrieve borrow ads
+        if (cursor.moveToFirst()) {
+            do {
+                int borrowAdIdIndex = cursor.getColumnIndex("borrow_ad_id");
+                int borrowPublisherIndex = cursor.getColumnIndex("borrow_publisher");
+                int borrowStatusIndex = cursor.getColumnIndex("borrow_status");
+                int borrowLocationIndex = cursor.getColumnIndex("user_location");
+                // Check if column indices are valid
+                if (borrowAdIdIndex != -1 && borrowPublisherIndex != -1 && borrowStatusIndex != -1 && borrowLocationIndex != -1) {
+                    // Retrieve data from the cursor and create a BorrowAd object
+                    int borrowAdId = cursor.getInt(borrowAdIdIndex);
+                    int borrowPublisher = cursor.getInt(borrowPublisherIndex);
+                    String borrowStatus = cursor.getString(borrowStatusIndex);
+                    String borrowLocation = cursor.getString(borrowLocationIndex);
+
+                    // Create BorrowAd object and add it to the list
+                    BorrowAd borrowAd = new BorrowAd(borrowAdId, isbn, borrowPublisher, borrowStatus, borrowLocation);
+                    borrowAds.add(borrowAd);
+                }
+            } while (cursor.moveToNext());
+        }
+
+        // Close the cursor and database
+        cursor.close();
+        db.close();
+
+        // Return the list of borrow ads
+        return borrowAds;
+    }
+
 
 
     // Method to retrieve user name by user ID
@@ -626,6 +693,63 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return adDetails;
     }
+    public adDetailsBorrow getAdDetailsBorrow(int adId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        adDetailsBorrow adDetailsBorrow = null;
+
+        // Define the query to retrieve ad details from borrow_ad, book, and user tables
+        String query = "SELECT borrow_ad.borrow_ad_id, borrow_ad.borrow_ad_isbn, borrow_ad.borrow_publisher, " +
+                "borrow_ad.borrow_status, book.title, book.book_description, book.pages, " +
+                "user.user_location " +
+                "FROM borrow_ad " +
+                "INNER JOIN book ON borrow_ad.borrow_ad_isbn = book.isbn " +
+                "INNER JOIN user ON borrow_ad.borrow_publisher = user.user_id " +
+                "WHERE borrow_ad.borrow_ad_id = ?";
+
+        // Execute the query with the ad_id parameter
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(adId)});
+
+        // Check if the cursor has data
+        if (cursor.moveToFirst()) {
+            // Retrieve column indices
+            int borrowAdIdIndex = cursor.getColumnIndex("borrow_ad_id");
+            int borrowAdIsbnIndex = cursor.getColumnIndex("borrow_ad_isbn");
+            int borrowPublisherIndex = cursor.getColumnIndex("borrow_publisher");
+            int borrowStatusIndex = cursor.getColumnIndex("borrow_status");
+            int titleIndex = cursor.getColumnIndex("title");
+            int descriptionIndex = cursor.getColumnIndex("book_description");
+            int pagesIndex = cursor.getColumnIndex("pages");
+            int locationIndex = cursor.getColumnIndex("user_location");
+
+            // Check if column indices are valid
+            if (borrowAdIdIndex != -1 && borrowAdIsbnIndex != -1 && borrowPublisherIndex != -1 &&
+                    borrowStatusIndex != -1 && titleIndex != -1 && descriptionIndex != -1 &&
+                    pagesIndex != -1 && locationIndex != -1) {
+
+                // Retrieve data from the cursor
+                int borrowAdId = cursor.getInt(borrowAdIdIndex);
+                String borrowAdIsbn = cursor.getString(borrowAdIsbnIndex);
+                int borrowPublisher = cursor.getInt(borrowPublisherIndex);
+                String borrowStatus = cursor.getString(borrowStatusIndex);
+                String title = cursor.getString(titleIndex);
+                String description = cursor.getString(descriptionIndex);
+                int pages = cursor.getInt(pagesIndex);
+                String location = cursor.getString(locationIndex);
+                // Retrieve publisher's name using user ID
+                String publisherName = getUserNameById(borrowPublisher);
+                // Create BorrowAd object with the retrieved information
+                adDetailsBorrow= new adDetailsBorrow(borrowAdId, borrowAdIsbn, publisherName,borrowStatus, location, title, description, pages);
+            }
+        }
+
+        // Close cursor and database
+        cursor.close();
+        db.close();
+
+        return  adDetailsBorrow;
+    }
+
+
 
     public List<coupons> returnCoupons() {
         List<coupons> couponsList = new ArrayList<>();
