@@ -52,6 +52,7 @@
         app:layout_constraintVertical_bias="0.257">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/isbn_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_field" />
@@ -70,7 +71,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371" />
+        app:layout_constraintVertical_bias="0.379" />
 
     <TextView
         android:id="@+id/place"
@@ -85,22 +86,23 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633" />
+        app:layout_constraintVertical_bias="0.663" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/placetext"
+        android:id="@+id/location"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Τοποθεσία"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694">
+        app:layout_constraintVertical_bias="0.723">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/location_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_field" />
@@ -118,7 +120,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.464" />
+        app:layout_constraintVertical_bias="0.482" />
 
     <TextView
         android:id="@+id/condition"
@@ -132,7 +134,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559" />
+        app:layout_constraintVertical_bias="0.59" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/page_number"
@@ -145,25 +147,27 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.512">
+        app:layout_constraintVertical_bias="0.531">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/page_number_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_field" />
+            android:background="@drawable/round_field"
+            android:enabled="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
-        android:id="@+id/select"
+        android:id="@+id/radioGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.604">
+        app:layout_constraintVertical_bias="0.634">
 
         <RadioButton
             android:id="@+id/radio_bad"
@@ -195,13 +199,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412">
+        app:layout_constraintVertical_bias="0.42">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/book_title_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_field"
-            android:baselineAligned="false" />
+            android:enabled="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -216,7 +221,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.326" />
+        app:layout_constraintVertical_bias="0.334" />
 
 
     <Button
@@ -230,7 +235,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.911" />
+        app:layout_constraintVertical_bias="0.971" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -255,10 +260,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.767" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/end_date_input"
@@ -268,10 +273,10 @@
         android:hint="Ημερομηνία"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.694"
+        app:layout_constraintHorizontal_bias="0.715"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.792">
+        app:layout_constraintVertical_bias="0.838">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -289,10 +294,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.767" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/start_date_input"
@@ -302,10 +307,10 @@
         android:hint="Ημερομηνία"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.792">
+        app:layout_constraintVertical_bias="0.838">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -319,10 +324,10 @@
         android:layout_height="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.961"
+        app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.787"
+        app:layout_constraintVertical_bias="0.829"
         app:srcCompat="@drawable/calendar" />
 
 
