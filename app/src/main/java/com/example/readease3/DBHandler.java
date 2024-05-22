@@ -171,7 +171,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // Insert records into the selling_ad table
         insertSellingAd(db, "9786180149173", 18, 1, "ΚΑΛΗ");
         insertSellingAd(db, "9786810146189", 12, 3, "ΠΟΛΥ ΚΑΛΗ");
-        insertSellingAd(db, "9786810146189", 9, 2, "ΚΑΛΗ");
+        insertSellingAd(db, "9786810146189", 10, 2, "ΚΑΛΗ");
         // Insert records into the borrow_ad table
         insertBorrowAd(db, "9786180149173", 1,  "ΚΑΛΗ");
         insertBorrowAd(db, "9786810146189", 3,  "ΠΟΛΥ ΚΑΛΗ");
