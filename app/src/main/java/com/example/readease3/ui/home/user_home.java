@@ -1,6 +1,5 @@
 package com.example.readease3.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +10,11 @@ import androidx.navigation.Navigation;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+
 import com.example.readease3.R;
-import com.example.readease3.create_add;
 import com.example.readease3.databinding.UserHomeBinding;
 
-import com.example.readease3.R;
-
-public class user_home_fragment extends Fragment {
+public class user_home extends Fragment {
     private UserHomeBinding binding;
     private Button adButton;
     private Button eventButton;
