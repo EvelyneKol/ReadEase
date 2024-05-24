@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="teal_700">#ff00897b</color>
+    <color name="selectedButtonColor">#FF000000</color> <!-- Το χρώμα που θα έχει το επιλεγμένο κουμπί -->
+    <color name="unselectedButtonColor">#8E8E8E</color> <!-- Το χρώμα που θα έχει το μη επιλεγμένο κουμπί -->
+
+
 </resources>
