@@ -10,9 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 
+import com.example.readease3.Cart;
 import com.example.readease3.R;
+import com.example.readease3.cartManager;
 import com.example.readease3.databinding.CartBinding;
+
+import java.util.List;
 
 public class cart extends Fragment {
 
@@ -39,8 +44,22 @@ public class cart extends Fragment {
             }
         });
 
+        // Λαμβάνουμε τα στοιχεία του καλαθιού από τον CartManager
+        List<Cart> cartItems = cartManager.getInstance().getCartItems();
+
+        // Εμφάνιση δεδομένων από το καλάθι στο layout
+        if (!cartItems.isEmpty()) {
+            Cart firstCartItem = cartItems.get(0); // Προσπέλαση του πρώτου στοιχείου του καλαθιού
+            TextView textViewTitle = root.findViewById(R.id.textViewTitle);
+            TextView textViewPrice = root.findViewById(R.id.textViewPrice);
+
+            textViewTitle.setText(firstCartItem.getTitle());
+            textViewPrice.setText(String.valueOf(firstCartItem.getSellingPrice()));
+        }
+
         return root;
     }
+
 
     @Override
     public void onDestroyView() {

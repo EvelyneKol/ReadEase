@@ -37,6 +37,18 @@ public class ad_details extends AppCompatActivity {
 
         // Display ad details
         displayAdDetails(adId);
+
+        // Find the "Προσθήκη στο καλάθι" button
+        Button addToCartButton = findViewById(R.id.addToCartButton);
+
+        // Set OnClickListener for the button
+        addToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Αποθηκεύουμε τα στοιχεία στο καλάθι όταν πατηθεί το κουμπί
+                addToCart(adId);
+            }
+        });
     }
 
     private void displayAdDetails(int adId) {
@@ -61,4 +73,15 @@ public class ad_details extends AppCompatActivity {
 
 
     }
+    private void addToCart(int adId) {
+        // Λαμβάνουμε τα στοιχεία της αγγελίας από τη βάση δεδομένων
+        sellingAd adDetails = dbHandler.getAdDetailsByAdId(adId);
+
+        // Δημιουργούμε ένα νέο αντικείμενο cart με τα στοιχεία της αγγελίας
+        Cart newCartItem = new Cart(adDetails.getSellingAdId(), adDetails.getTitle(), adDetails.getSellingPrice());
+
+        // Προσθέτουμε το αντικείμενο στον CartManager
+        cartManager.getInstance().addToCart(newCartItem);
+    }
+
 }

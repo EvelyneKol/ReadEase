@@ -52,36 +52,42 @@ public class ad_result extends AppCompatActivity {
         // Retrieve selling ads with seller's name
         List<sellingAd> sellingAds = dbHandler.getSellingAdByIsbn(isbn);
 
-        // Create a container layout for each ad and its button
-        for (sellingAd ad : sellingAds) {
-            // Create a new linear layout for each ad and its button
-            LinearLayout adContainerLayout = new LinearLayout(this);
-            adContainerLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            adContainerLayout.setOrientation(LinearLayout.VERTICAL);
+        if (sellingAds.isEmpty()) {
+            // If there are no selling ads for this ISBN, display a message
+            TextView messageTextView = new TextView(this);
+            messageTextView.setText("Δεν υπάρχουν αγγελίες για αυτό το βιβλίο");
+            mainLayout.addView(messageTextView);
+        } else {
+            // Create a container layout for each ad and its button
+            for (sellingAd ad : sellingAds) {
+                // Create a new linear layout for each ad and its button
+                LinearLayout adContainerLayout = new LinearLayout(this);
+                adContainerLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                adContainerLayout.setOrientation(LinearLayout.VERTICAL);
 
-            // Create a text view for the ad
-            TextView adTextView = new TextView(this);
-            adTextView.setText("Name: " + dbHandler.getUserNameById(ad.getSellingPublisher()) + "\n" + "Condition: " + ad.getSellingStatus() + "\n" + "Price: " + ad.getSellingPrice());
-            adContainerLayout.addView(adTextView);
+                // Create a text view for the ad
+                TextView adTextView = new TextView(this);
+                adTextView.setText("Name: " + dbHandler.getUserNameById(ad.getSellingPublisher()) + "\n" + "Condition: " + ad.getSellingStatus() + "\n" + "Price: " + ad.getSellingPrice());
+                adContainerLayout.addView(adTextView);
 
-            // Create a button for the ad
-            Button adButton = new Button(this);
-            adButton.setText("Δες αγγελία");
-            // Set a click listener for the button
-            adButton.setOnClickListener(v -> {
-                // Pass the ad ID to the ad_details activity
-                Intent intent = new Intent(ad_result.this, ad_details.class);
-                intent.putExtra("ad_id", ad.getSellingAdId());
+                // Create a button for the ad
+                Button adButton = new Button(this);
+                adButton.setText("Δες αγγελία");
+                // Set a click listener for the button
+                adButton.setOnClickListener(v -> {
+                    // Pass the ad ID to the ad_details activity
+                    Intent intent = new Intent(ad_result.this, ad_details.class);
+                    intent.putExtra("ad_id", ad.getSellingAdId());
+                    startActivity(intent);
+                });
+                adContainerLayout.addView(adButton);
 
-                startActivity(intent);
-            });
-            adContainerLayout.addView(adButton);
-
-            // Add the container layout to the main layout
-            mainLayout.addView(adContainerLayout);
+                // Add the container layout to the main layout
+                mainLayout.addView(adContainerLayout);
+            }
         }
     }
 
@@ -90,38 +96,45 @@ public class ad_result extends AppCompatActivity {
         LinearLayout mainLayout = findViewById(R.id.mainLayout);
 
         // Retrieve Borrow ads with seller's name
-        List<BorrowAd> BorrowAds = dbHandler.getBorrowAdByIsbn(isbn);
+        List<BorrowAd> borrowAds = dbHandler.getBorrowAdByIsbn(isbn);
 
-        // Create a container layout for each ad and its button
-        for (BorrowAd ad : BorrowAds) {
-            // Create a new linear layout for each ad and its button
-            LinearLayout adContainerLayout = new LinearLayout(this);
-            adContainerLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            adContainerLayout.setOrientation(LinearLayout.VERTICAL);
+        if (borrowAds.isEmpty()) {
+            // If there are no borrow ads for this ISBN, display a message
+            TextView messageTextView = new TextView(this);
+            messageTextView.setText("Δεν υπάρχουν αγγελίες για αυτό το βιβλίο");
+            mainLayout.addView(messageTextView);
+        } else {
+            // Create a container layout for each ad and its button
+            for (BorrowAd ad : borrowAds) {
+                // Create a new linear layout for each ad and its button
+                LinearLayout adContainerLayout = new LinearLayout(this);
+                adContainerLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                adContainerLayout.setOrientation(LinearLayout.VERTICAL);
 
-            // Create a text view for the ad
-            TextView adTextView = new TextView(this);
-            adTextView.setText("Name: " + dbHandler.getUserNameById(ad.getBorrowPublisher()) + "\n" + "Condition: " + ad.getBorrowStatus() + "\n" + "Location: " + ad.getBorrowLocation());
-            adContainerLayout.addView(adTextView);
+                // Create a text view for the ad
+                TextView adTextView = new TextView(this);
+                adTextView.setText("Name: " + dbHandler.getUserNameById(ad.getBorrowPublisher()) + "\n" + "Condition: " + ad.getBorrowStatus() + "\n" + "Location: " + ad.getBorrowLocation());
+                adContainerLayout.addView(adTextView);
 
-            // Create a button for the ad
-            Button adButton = new Button(this);
-            adButton.setText("Δες αγγελία");
-            // Set a click listener for the button
-            adButton.setOnClickListener(v -> {
-                // Pass the ad ID to the ad_details_borrow activity
-                Intent intent = new Intent(ad_result.this, ad_details_borrow.class);
-                intent.putExtra("ad_id", ad.getBorrowAdId());
+                // Create a button for the ad
+                Button adButton = new Button(this);
+                adButton.setText("Δες αγγελία");
+                // Set a click listener for the button
+                adButton.setOnClickListener(v -> {
+                    // Pass the ad ID to the ad_details_borrow activity
+                    Intent intent = new Intent(ad_result.this, ad_details_borrow.class);
+                    intent.putExtra("ad_id", ad.getBorrowAdId());
+                    startActivity(intent);
+                });
+                adContainerLayout.addView(adButton);
 
-                startActivity(intent);
-            });
-            adContainerLayout.addView(adButton);
-
-            // Add the container layout to the main layout
-            mainLayout.addView(adContainerLayout);
+                // Add the container layout to the main layout
+                mainLayout.addView(adContainerLayout);
+            }
         }
     }
+
 }
