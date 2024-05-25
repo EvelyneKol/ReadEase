@@ -92,7 +92,7 @@
         android:id="@+id/textView9"
         android:layout_width="258dp"
         android:layout_height="41dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="10dp"
         android:text="Τα κουπόνια μου"
         android:textAlignment="center"
         android:textColor="@color/black"
