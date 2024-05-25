@@ -91,6 +91,12 @@ public class personal_bank extends AppCompatActivity {
         binding.textView7.setText(String.valueOf(points)); // Convert int to String
     }
 
+    public void gotoQuiz(View view) {
+        // Create an Intent to start the SellingAddActivity
+        Intent intent = new Intent(this, available_quiz.class);
+        startActivity(intent);
+    }
+
     private void viewRedeemsteps() {
         binding.redeempoints.setOnClickListener(new View.OnClickListener() {
             @Override
