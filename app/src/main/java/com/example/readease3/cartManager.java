@@ -30,12 +30,30 @@ public class cartManager {
         return cartItems;
     }
 
-    public float calculateTotalPrice() {
-        float totalPrice = 0;
+    public float getTotalPrice() {
+        float total = 0;
         for (Cart item : cartItems) {
-            totalPrice += item.getSellingPrice();
+            total += item.getSellingPrice();
         }
-        return totalPrice;
+        return total;
+    }
+    public void clearCart() {
+        cartItems.clear();
+    }
+
+    public void purchaseItems(DBHandler dbHandler, float totalPrice) {
+        List<Cart> cartItems = getCartItems();
+
+        for (Cart item : cartItems) {
+            // Save purchase in purchase table with price
+            dbHandler.insertPurchase(1, "Book", item.getSellingAdId(), totalPrice);
+
+            // Delete item from selling_ad table
+            dbHandler.deleteSellingAd(item.getSellingAdId());
+        }
+
+        // Clear cart after purchase
+        clearCart();
     }
 }
 

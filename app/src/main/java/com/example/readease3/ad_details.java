@@ -22,7 +22,6 @@ public class ad_details extends AppCompatActivity {
 
     private DBHandler dbHandler;
 
-    private AdDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

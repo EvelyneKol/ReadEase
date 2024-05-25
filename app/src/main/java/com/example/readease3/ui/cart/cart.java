@@ -4,17 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
 
 import com.example.readease3.Cart;
-import com.example.readease3.R;
+import com.example.readease3.DBHandler;
 import com.example.readease3.cartManager;
+import com.example.readease3.R;
 import com.example.readease3.databinding.CartBinding;
 
 import java.util.List;
@@ -22,6 +26,10 @@ import java.util.List;
 public class cart extends Fragment {
 
     private CartBinding binding;
+
+    private DBHandler dbHandler;
+    private cartManager cartManager;
+    private Button purchaseButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,22 +52,44 @@ public class cart extends Fragment {
             }
         });
 
-        // Λαμβάνουμε τα στοιχεία του καλαθιού από τον CartManager
+        dbHandler = new DBHandler(getContext());
+        cartManager = cartManager.getInstance();
+        purchaseButton = root.findViewById(R.id.button7);
+
+        purchaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the total price from totalPriceTextView
+                TextView totalPriceTextView = root.findViewById(R.id.totalPriceTextView);
+                float totalPrice = Float.parseFloat(totalPriceTextView.getText().toString().replace("Συνολικό ποσό: ", ""));
+
+                // Purchase items in the cart
+                cartManager.purchaseItems(dbHandler, totalPrice);
+
+                // Show success message
+                Toast.makeText(getContext(), "Επιτυχής αγορά! Το καλάθι αδειάστηκε.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Εμφάνιση δεδομένων από το CartManager
+        LinearLayout cartItemsLayout = root.findViewById(R.id.cartItemsLayout);
+        TextView totalPriceTextView = root.findViewById(R.id.totalPriceTextView);
+        TextView startPrice = root.findViewById(R.id.startprice);
         List<Cart> cartItems = cartManager.getInstance().getCartItems();
+        float totalPrice = cartManager.getInstance().getTotalPrice();
 
-        // Εμφάνιση δεδομένων από το καλάθι στο layout
-        if (!cartItems.isEmpty()) {
-            Cart firstCartItem = cartItems.get(0); // Προσπέλαση του πρώτου στοιχείου του καλαθιού
-            TextView textViewTitle = root.findViewById(R.id.textViewTitle);
-            TextView textViewPrice = root.findViewById(R.id.textViewPrice);
-
-            textViewTitle.setText(firstCartItem.getTitle());
-            textViewPrice.setText(String.valueOf(firstCartItem.getSellingPrice()));
+        // Προσθήκη των τίτλων των αγγελιών στο layout
+        for (Cart item : cartItems) {
+            TextView textViewTitle = new TextView(getContext());
+            textViewTitle.setText(item.getTitle());
+            cartItemsLayout.addView(textViewTitle);
         }
 
+        // Εμφάνιση του συνολικού ποσού
+        totalPriceTextView.setText("Συνολικό ποσό: " + totalPrice);
+        startPrice.setText("Αρχική Τιμή: " + totalPrice);
         return root;
     }
-
 
     @Override
     public void onDestroyView() {

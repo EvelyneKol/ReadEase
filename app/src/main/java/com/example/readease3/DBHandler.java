@@ -97,7 +97,16 @@ public class DBHandler extends SQLiteOpenHelper {
                 ")";
         db.execSQL(createSellingAdTableQuery);
 
-
+       // Δημιουργία του πίνακα purchase
+        String createPurchaseTableQuery = "CREATE TABLE purchase (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "buyer_id INTEGER NOT NULL," +
+                "type_purchase TEXT NOT NULL," +
+                "item_id INTEGER NOT NULL," +
+                "price REAL," +
+                "FOREIGN KEY (item_id) REFERENCES selling_ad(selling_ad_id) ON UPDATE CASCADE ON DELETE CASCADE" +
+                ")";
+        db.execSQL(createPurchaseTableQuery);
         // Create the review table
         String createReviewTableQuery = "CREATE TABLE review ("
                 + "review_id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -191,6 +200,26 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Implement if needed
     }
+    // Method to insert a purchase
+    public void insertPurchase(int buyerId, String typePurchase, int itemId, float price) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("buyer_id", buyerId);
+        values.put("type_purchase", typePurchase);
+        values.put("item_id", itemId);
+        values.put("price", price);
+        db.insert("purchase", null, values);
+        db.close();
+    }
+
+
+    // Method to delete a selling ad
+    public void deleteSellingAd(int sellingAdId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("selling_ad", "selling_ad_id = ?", new String[]{String.valueOf(sellingAdId)});
+        db.close();
+    }
+
 
     // Method to insert a book into the database
     private void insertBook(SQLiteDatabase db, String isbn, String title, String author, String description, int pages, String category) {
