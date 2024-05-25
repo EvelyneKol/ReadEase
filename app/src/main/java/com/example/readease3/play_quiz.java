@@ -151,7 +151,8 @@ public class play_quiz extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(this, "You got " + correctAnswers + " out of " + questions.size() + " correct!", Toast.LENGTH_SHORT).show();
+        int totalScore = correctAnswers * 2; // 2 points for each correct answer
+        Toast.makeText(this, "Κέρδισες " + totalScore + "πόντους! (" + correctAnswers + "σωστές απαντήσεις)", Toast.LENGTH_SHORT).show();
     }
 
     private static class QuestionViewHolder {
