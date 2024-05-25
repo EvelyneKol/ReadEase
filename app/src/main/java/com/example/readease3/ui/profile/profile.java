@@ -16,7 +16,7 @@ import androidx.navigation.Navigation;
 import com.example.readease3.R;
 import com.example.readease3.databinding.ProfileBinding;
 
-public class profile_fragment extends Fragment {
+public class profile extends Fragment {
 
     private ProfileBinding binding;
 
@@ -30,6 +30,15 @@ public class profile_fragment extends Fragment {
 
         coupons = root.findViewById(R.id.button4);
 
+        viewcouponsΑndpoints();
+
+        final TextView textView = binding.textNotifications;
+        profile_ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        return root;
+    }
+
+    private void viewcouponsΑndpoints() {
         coupons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,11 +46,6 @@ public class profile_fragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_personalbank);
             }
         });
-
-        final TextView textView = binding.textNotifications;
-        profile_ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-        return root;
     }
 
     @Override

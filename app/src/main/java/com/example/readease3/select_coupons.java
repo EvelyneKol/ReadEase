@@ -106,7 +106,6 @@ public class select_coupons extends AppCompatActivity {
         });
     }
 
-
     private void setNewcoupon(String type) {
         // Example usage
         String userName = "John Doe";

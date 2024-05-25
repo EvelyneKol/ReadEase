@@ -11,31 +11,11 @@ public class coupons {
         this.expiredate = expiredate;
         this.used = used;
     }
-    public String getUser() {
-        return user;
-    }
-    public void setUser(String user){this.user = user;}
 
     public String getCoupontype() {
         return type;
     }
-    public void setCoupontype(String type){
-        this.type = type;
-    }
 
-    public String getExpiredate() {
-        return expiredate;
-    }
-    public void setExpiredate(String expiredate){
-        this.expiredate = expiredate;
-    }
-
-    public String getUsed() {
-        return used;
-    }
-    public void setUsed(String used){
-        this.used = used;
-    }
 
 
 }

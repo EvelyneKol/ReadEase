@@ -62,7 +62,7 @@ public class redeem_points extends AppCompatActivity {
                 if (!TextUtils.isEmpty(insertedNumberStr)) {
                     insertedNumber = Integer.parseInt(insertedNumberStr);
                     // Now you can use the insertedNumber variable
-                    if (insertedNumber >= 50 && insertedNumber <=points) {
+                    if (checkRedeempoints(insertedNumber, points) == 1) {
                         viewNewcoupons();
                     } else {
                         notEnoughpoints();
@@ -93,5 +93,12 @@ public class redeem_points extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         // Save the current points
         outState.putInt("points", points);
+    }
+    private int checkRedeempoints(int insertnum, int pointsnum) {
+        if (insertnum >= 50 && insertnum <=pointsnum) {
+            return 1;
+        } else {
+            return 0; // or some other value or logic as needed
+        }
     }
 }
