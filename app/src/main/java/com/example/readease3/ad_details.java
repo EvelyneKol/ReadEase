@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -82,6 +83,10 @@ public class ad_details extends AppCompatActivity {
 
         // Προσθέτουμε το αντικείμενο στον CartManager
         cartManager.getInstance().addToCart(newCartItem);
+
+        // Εμφάνιση Toast μηνύματος
+        Toast.makeText(this, "Το βιβλίο προστέθηκε στο καλάθι", Toast.LENGTH_SHORT).show();
     }
+
 
 }
