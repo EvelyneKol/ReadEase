@@ -37,13 +37,8 @@ public class user_home extends Fragment {
             }
         });
 
-        eventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to AdOptionsActivity
-                Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_eventsActivity);
-            }
-        });
+        showEvents();
+
         audioBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +47,16 @@ public class user_home extends Fragment {
             }
         });
         return rootView;
+    }
+
+    private void showEvents() {
+        eventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to AdOptionsActivity
+                Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_eventsActivity);
+            }
+        });
     }
 
     @Override

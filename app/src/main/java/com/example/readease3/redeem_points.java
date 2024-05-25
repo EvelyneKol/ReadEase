@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -80,10 +81,11 @@ public class redeem_points extends AppCompatActivity {
     }
 
     private void notEnoughpoints() {
-        Intent notEnoughpoints = new Intent(redeem_points.this, not_enough_points.class);
-        // Pass the current points as an extra with the intent
-        notEnoughpoints.putExtra("points", points);
-        startActivity(notEnoughpoints);
+        new AlertDialog.Builder(this)
+                .setTitle("Μη επαρκείς πόντοι")
+                .setMessage("Μας συγχωρείται αλλά ο αριθμός πόντων που επιλέξατε δεν ανήκει στα επιτρεπτά όρια.Πακαλούμε επιλέξτε ένα έγκυρο ποσό πόντων !")
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
     }
 
     @Override

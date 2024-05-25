@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -24,7 +25,17 @@ import java.util.Locale;
 public class events_screen extends AppCompatActivity {
     private DBHandler dbHandler;
     private EventsScreenBinding binding;
+    private String event1_getTitle;
+    private String event1_getStartTime ;
+    private String event1_getEndTime ;
+    private String event1_getDescription ;
+    private String event1_getLocation ;
 
+    private String event2_getTitle;
+    private String event2_getStartTime ;
+    private String event2_getEndTime ;
+    private String event2_getDescription ;
+    private String event2_getLocation ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +56,10 @@ public class events_screen extends AppCompatActivity {
         });
 
         // Search and display events
-        Eventinfo();
+        getEventinfo();
     }
 
-    private void Eventinfo() {
+    private void getEventinfo() {
         // Perform search query in the database
         List<events> eventsList = dbHandler.returnEventsInfo();
 
@@ -117,32 +128,26 @@ public class events_screen extends AppCompatActivity {
 
                         if (!insertedNumberStr.isEmpty()) { // Check if the EditText field is not empty
                             // Parse the inserted number to an integer
-                            int insertedNumber = Integer.parseInt(insertedNumberStr);
+                            int insertedNumber1 = Integer.parseInt(insertedNumberStr);
 
                             // Get the capacity from the event object
                             int eventCapacity = event1.getCapacity();
+                            event1_getTitle =event1.getTitle();
+                            event1_getStartTime =event1.getStartTime();
+                            event1_getEndTime =event1.getEndTime();
+                            event1_getDescription =event1.getDescription();
+                            event1_getLocation =event1.getLocation();
 
                             // Compare the inserted number with the capacity
-                            if (insertedNumber <= eventCapacity) {
-                                // Start the participants_list activity
-                                Intent fillParticipantslist = new Intent(events_screen.this, participants_list.class);
-                                // Pass the event description as an extra with the intent
-                                fillParticipantslist.putExtra("event_title", event1.getTitle());
-                                fillParticipantslist.putExtra("inserted_number", insertedNumber);
-                                fillParticipantslist.putExtra("start_time", event1.getStartTime());
-                                fillParticipantslist.putExtra("end_time", event1.getEndTime());
-                                fillParticipantslist.putExtra("description", event1.getDescription());
-                                fillParticipantslist.putExtra("location", event1.getLocation());
-                                startActivity(fillParticipantslist);
+                            if (checkCapacity(insertedNumber1, eventCapacity) == 1) {
+                                fillParticipantslist(1,insertedNumber1);
                             } else {
-                                // Start the not_enough_capacity activity
-                                Intent notEnoughroom = new Intent(events_screen.this, not_enough_capacity.class);
-                                startActivity(notEnoughroom);
+                                notEnoughroom();
                             }
                         } else {
                             // If the EditText field is empty
                             // Show a message or perform any other action
-                            Toast.makeText(events_screen.this, "Please enter a number", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(events_screen.this, "Παρακαλώ εισάγεται κάποιον αριθμό!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -205,32 +210,26 @@ public class events_screen extends AppCompatActivity {
 
                         if (!insertedNumberStr.isEmpty()) { // Check if the EditText field is not empty
                             // Parse the inserted number to an integer
-                            int insertedNumber = Integer.parseInt(insertedNumberStr);
+                            int insertedNumber2 = Integer.parseInt(insertedNumberStr);
 
                             // Get the capacity from the event object
                             int eventCapacity = event2.getCapacity();
+                            event2_getTitle =event2.getTitle();
+                            event2_getStartTime =event2.getStartTime();
+                            event2_getEndTime =event2.getEndTime();
+                            event2_getDescription =event2.getDescription();
+                            event2_getLocation =event2.getLocation();
 
                             // Compare the inserted number with the capacity
-                            if (insertedNumber <= eventCapacity) {
-                                // Start the participants_list activity
-                                Intent fillParticipantslist = new Intent(events_screen.this, participants_list.class);
-                                // Pass the event description as an extra with the intent
-                                fillParticipantslist.putExtra("event_title", event2.getTitle());
-                                fillParticipantslist.putExtra("inserted_number", insertedNumber);
-                                fillParticipantslist.putExtra("start_time", event2.getStartTime());
-                                fillParticipantslist.putExtra("end_time", event2.getEndTime());
-                                fillParticipantslist.putExtra("description", event2.getDescription());
-                                fillParticipantslist.putExtra("location", event2.getLocation());
-                                startActivity(fillParticipantslist);
+                            if (checkCapacity(insertedNumber2, eventCapacity) == 1) {
+                                fillParticipantslist(2,insertedNumber2);
                             } else {
-                                // Start the not_enough_capacity activity
-                                Intent notEnoughroom = new Intent(events_screen.this, not_enough_capacity.class);
-                                startActivity(notEnoughroom);
+                                notEnoughroom();
                             }
                         } else {
                             // If the EditText field is empty
                             // Show a message or perform any other action
-                            Toast.makeText(events_screen.this, "Please enter a number", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(events_screen.this, "Παρακαλώ εισάγεται κάποιον αριθμό!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -241,4 +240,49 @@ public class events_screen extends AppCompatActivity {
             binding.noevents.setText("No events found");
         }
     }
+    private void notEnoughroom() {
+        new AlertDialog.Builder(this)
+                .setTitle("Μη επαρκείς χωρητικότητα")
+                .setMessage("Μας συγχωρείται αλλά ο αριθμός ατόμων που επιλέξατε υπερβαίνει το επιτρεπτό όριο.Πακαλούμε επιλέξτε έναν έγκυρο αριθμών ατόμων!")
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
+
+    private void fillParticipantslist(int eventNum, int number) {
+        if(eventNum==1){
+            // Start the participants_list activity
+            Intent fillParticipantslist = new Intent(events_screen.this, participants_list.class);
+            // Pass the event description as an extra with the intent
+            fillParticipantslist.putExtra("event_title", event1_getTitle);
+            fillParticipantslist.putExtra("inserted_number", number);
+            fillParticipantslist.putExtra("start_time", event1_getStartTime);
+            fillParticipantslist.putExtra("end_time", event1_getEndTime);
+            fillParticipantslist.putExtra("description", event1_getDescription);
+            fillParticipantslist.putExtra("location", event1_getLocation);
+            startActivity(fillParticipantslist);
+        }
+        if(eventNum==2){
+            // Start the participants_list activity
+            Intent fillParticipantslist = new Intent(events_screen.this, participants_list.class);
+            // Pass the event description as an extra with the intent
+            fillParticipantslist.putExtra("event_title", event2_getTitle);
+            fillParticipantslist.putExtra("inserted_number", number);
+            fillParticipantslist.putExtra("start_time", event2_getStartTime);
+            fillParticipantslist.putExtra("end_time", event2_getEndTime );
+            fillParticipantslist.putExtra("description", event2_getDescription);
+            fillParticipantslist.putExtra("location", event2_getLocation);
+            startActivity(fillParticipantslist);
+        }
+
+    }
+
+    private int checkCapacity(int people, int capacity) {
+        if (people <= capacity) {
+            return 1;
+        } else {
+            return 0; // or some other value or logic as needed
+        }
+    }
+
+
 }
