@@ -152,7 +152,7 @@ public class play_quiz extends AppCompatActivity {
         }
 
         int totalScore = correctAnswers * 2; // 2 points for each correct answer
-        Toast.makeText(this, "Κέρδισες " + totalScore + "πόντους! (" + correctAnswers + "σωστές απαντήσεις)", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Κέρδισες " + totalScore + " πόντους! (" + correctAnswers + " σωστές απαντήσεις)", Toast.LENGTH_SHORT).show();
     }
 
     private static class QuestionViewHolder {
