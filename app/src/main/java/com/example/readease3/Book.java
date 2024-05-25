@@ -18,6 +18,7 @@ public class Book {
         this.category = category;
     }
 
+
     // Getters and setters (you can generate them automatically in most IDEs)
     public String getIsbn() {
         return isbn;

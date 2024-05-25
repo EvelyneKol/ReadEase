@@ -1,5 +1,6 @@
 package com.example.readease3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,25 +8,26 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
+import com.example.readease3.databinding.AdDetailsBinding;
+import com.example.readease3.ui.cart.cart;
+
 
 public class ad_details extends AppCompatActivity {
 
     private DBHandler dbHandler;
+
+    private AdDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.ad_details);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         // Initialize DBHandler
         dbHandler = new DBHandler(this);
@@ -38,7 +40,7 @@ public class ad_details extends AppCompatActivity {
     }
 
     private void displayAdDetails(int adId) {
-        // Find TextViews in the layout
+        // Find TextViews and Button in the layout
         TextView descriptionTextView = findViewById(R.id.descriptionTextView);
         TextView pagesTextView = findViewById(R.id.pagesTextView);
         TextView titleTextView = findViewById(R.id.titleTextView);
@@ -46,16 +48,16 @@ public class ad_details extends AppCompatActivity {
         TextView publisherTextView = findViewById(R.id.publisherTextView);
         Button addToCartButton = findViewById(R.id.addToCartButton);
 
-
         // Retrieve ad details based on ad_id
-        AdDetails adDetails = dbHandler.getAdDetailsByAdId(adId);
+        sellingAd adDetails = dbHandler.getAdDetailsByAdId(adId);
 
         // Display ad details in TextViews
         descriptionTextView.setText("Περίληψη: " + adDetails.getDescription());
         pagesTextView.setText("Σελίδες Βιβλίου: " + adDetails.getPages());
         titleTextView.setText("Τίτλος Βιβλίου: " + adDetails.getTitle());
-        priceTextView.setText("Τιμή: " + adDetails.getPrice());
+        priceTextView.setText("Τιμή: " + adDetails.getSellingPrice());
         publisherTextView.setText("Αγγελία από " + adDetails.getPublisherName());
+
 
 
     }

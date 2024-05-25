@@ -542,8 +542,11 @@ public class DBHandler extends SQLiteOpenHelper {
         List<sellingAd> sellingAds = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // Define the query to search for selling ads by ISBN
-        String query = "SELECT * FROM selling_ad WHERE selling_ad_isbn = ?";
+        // Define the query to search for selling ads by ISBN and join with the book table
+        String query = "SELECT sa.*, b.title, b.book_author, b.book_description, b.pages, b.category " +
+                "FROM selling_ad sa " +
+                "JOIN book b ON sa.selling_ad_isbn = b.isbn " +
+                "WHERE sa.selling_ad_isbn = ?";
 
         // Execute the query with the ISBN parameter
         Cursor cursor = db.rawQuery(query, new String[]{isbn});
@@ -555,18 +558,31 @@ public class DBHandler extends SQLiteOpenHelper {
                 int sellingPriceIndex = cursor.getColumnIndex("selling_price");
                 int sellingPublisherIndex = cursor.getColumnIndex("selling_publisher");
                 int sellingStatusIndex = cursor.getColumnIndex("selling_status");
+                int titleIndex = cursor.getColumnIndex("title");
+                int authorIndex = cursor.getColumnIndex("book_author");
+                int descriptionIndex = cursor.getColumnIndex("book_description");
+                int pagesIndex = cursor.getColumnIndex("pages");
+                int categoryIndex = cursor.getColumnIndex("category");
 
                 // Check if column indices are valid
                 if (sellingAdIdIndex != -1 && sellingPriceIndex != -1 &&
-                        sellingPublisherIndex != -1 && sellingStatusIndex != -1) {
+                        sellingPublisherIndex != -1 && sellingStatusIndex != -1 &&
+                        titleIndex != -1 && authorIndex != -1 &&
+                        descriptionIndex != -1 && pagesIndex != -1 &&
+                        categoryIndex != -1) {
                     // Retrieve data from the cursor and create a SellingAd object
                     int sellingAdId = cursor.getInt(sellingAdIdIndex);
                     float sellingPrice = cursor.getFloat(sellingPriceIndex);
                     int sellingPublisher = cursor.getInt(sellingPublisherIndex);
                     String sellingStatus = cursor.getString(sellingStatusIndex);
+                    String title = cursor.getString(titleIndex);
+                    String author = cursor.getString(authorIndex);
+                    String description = cursor.getString(descriptionIndex);
+                    int pages = cursor.getInt(pagesIndex);
+                    String category = cursor.getString(categoryIndex);
 
                     // Create SellingAd object and add it to the list
-                    sellingAd sellingAd = new sellingAd(sellingAdId, isbn, sellingPrice, sellingPublisher, sellingStatus);
+                    sellingAd sellingAd = new sellingAd(isbn, title, author, description, pages, category, sellingAdId, sellingPrice, sellingPublisher, sellingStatus, null);
                     sellingAds.add(sellingAd);
                 }
             } while (cursor.moveToNext());
@@ -579,6 +595,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // Return the list of selling ads
         return sellingAds;
     }
+
     public List<BorrowAd> getBorrowAdByIsbn(String isbn) {
         List<BorrowAd> borrowAds = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -648,9 +665,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return userName;
     }
-    public AdDetails getAdDetailsByAdId(int adId) {
+    public sellingAd getAdDetailsByAdId(int adId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        AdDetails adDetails = null;
+        sellingAd adDetails = null;
 
         // Define the query to retrieve ad details based on ad_id
         String query = "SELECT selling_ad.selling_ad_isbn, book.title, book.book_description, book.pages, selling_ad.selling_price, selling_ad.selling_publisher " +
@@ -679,12 +696,17 @@ public class DBHandler extends SQLiteOpenHelper {
                 float price = cursor.getFloat(priceIndex);
                 int publisherId = cursor.getInt(publisherIndex);
 
+
                 // Retrieve publisher's name using user ID
                 String publisherName = getUserNameById(publisherId);
 
-                // Create an AdDetails object with the retrieved information
-                adDetails = new AdDetails(title, description, pages, price, publisherName);
+
+                // Create a SellingAd object with the retrieved information
+                adDetails = new sellingAd(null, title, null, description, pages, null, adId, price, publisherId, null, publisherName);
+
+
             }
+
         }
 
         // Close cursor and database
@@ -693,6 +715,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return adDetails;
     }
+
     public adDetailsBorrow getAdDetailsBorrow(int adId) {
         SQLiteDatabase db = this.getReadableDatabase();
         adDetailsBorrow adDetailsBorrow = null;
