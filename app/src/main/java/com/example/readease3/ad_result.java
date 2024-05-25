@@ -39,13 +39,13 @@ public class ad_result extends AppCompatActivity {
 
         // Display ads based on the action
         if ("buy".equals(action)) {
-            displaySellingAdsWithSeller(searchedBookISBN);
+            displaySellingAds(searchedBookISBN);
         } else if ("borrow".equals(action)) {
             displayBorrowAds(searchedBookISBN);
         }
     }
 
-    private void displaySellingAdsWithSeller(String isbn) {
+    private void displaySellingAds(String isbn) {
         // Find the main LinearLayout container
         LinearLayout mainLayout = findViewById(R.id.mainLayout);
 

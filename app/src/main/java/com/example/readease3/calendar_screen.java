@@ -2,17 +2,14 @@ package com.example.readease3;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.readease3.R;
-
 import java.util.Calendar;
 
-public class calendar extends AppCompatActivity {
+public class calendar_screen extends AppCompatActivity {
 
     private TextView startDateTextView;
     private TextView endDateTextView;
@@ -20,7 +17,7 @@ public class calendar extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calendar);
+        setContentView(R.layout.calendar_screen);
 
         startDateTextView = findViewById(R.id.startDateTextView);
         endDateTextView = findViewById(R.id.endDateTextView);
