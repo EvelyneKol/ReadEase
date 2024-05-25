@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/cart"
-        android:name="com.example.readease3.ui.cart.cart_fragment"
+        android:name="com.example.readease3.ui.cart.cart"
         tools:layout="@layout/cart" />
 
     <fragment

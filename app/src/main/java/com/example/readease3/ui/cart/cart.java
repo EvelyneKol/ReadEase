@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import android.widget.EditText;
+import android.widget.Switch;
 
+import com.example.readease3.R;
 import com.example.readease3.databinding.CartBinding;
 
-public class cart_fragment extends Fragment {
+public class cart extends Fragment {
 
     private CartBinding binding;
 
@@ -22,6 +25,19 @@ public class cart_fragment extends Fragment {
 
         binding = CartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        // Find the Switch and EditText in the binding
+        Switch switch1 = binding.getRoot().findViewById(R.id.switch1);
+        EditText codeEditText = binding.getRoot().findViewById(R.id.codeEditText);
+
+        // Set up the Switch listener
+        switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                codeEditText.setVisibility(View.VISIBLE);
+            } else {
+                codeEditText.setVisibility(View.GONE);
+            }
+        });
 
         return root;
     }
