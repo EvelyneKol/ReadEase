@@ -42,11 +42,12 @@ public class ad_details_borrow extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Εκκίνηση της νέας δραστηριότητας "CalendarActivity" όταν το κουμπί πατηθεί
-                Intent intent = new Intent(ad_details_borrow.this, calendar.class);
+                Intent intent = new Intent(ad_details_borrow.this, calendar_screen.class);
                 startActivity(intent);
             }
         });
     }
+
 
     private void displayAdDetails(int adId) {
         // Find TextViews in the layout

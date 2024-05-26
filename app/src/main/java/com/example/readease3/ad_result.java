@@ -91,15 +91,15 @@ public class ad_result extends AppCompatActivity {
         }
     }
 
-    private void displayBorrowAds(String isbn) {
+    private void displayBorrowAds (String isbn) {
         // Find the main LinearLayout container
         LinearLayout mainLayout = findViewById(R.id.mainLayout);
 
-        // Retrieve Borrow ads with seller's name
+        // Retrieve selling ads with seller's name
         List<BorrowAd> borrowAds = dbHandler.getBorrowAdByIsbn(isbn);
 
         if (borrowAds.isEmpty()) {
-            // If there are no borrow ads for this ISBN, display a message
+            // If there are no selling ads for this ISBN, display a message
             TextView messageTextView = new TextView(this);
             messageTextView.setText("Δεν υπάρχουν αγγελίες για αυτό το βιβλίο");
             mainLayout.addView(messageTextView);
@@ -124,7 +124,7 @@ public class ad_result extends AppCompatActivity {
                 adButton.setText("Δες αγγελία");
                 // Set a click listener for the button
                 adButton.setOnClickListener(v -> {
-                    // Pass the ad ID to the ad_details_borrow activity
+                    // Pass the ad ID to the ad_details activity
                     Intent intent = new Intent(ad_result.this, ad_details_borrow.class);
                     intent.putExtra("ad_id", ad.getBorrowAdId());
                     startActivity(intent);
