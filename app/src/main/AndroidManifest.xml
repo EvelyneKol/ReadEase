@@ -29,9 +29,7 @@
         <activity
             android:name=".select_coupons"
             android:exported="false" />
-        <activity
-            android:name=".not_enough_points"
-            android:exported="false" />
+
         <activity
             android:name=".redeem_points"
             android:exported="false" />
@@ -42,9 +40,7 @@
             android:name=".ad_details"
             android:exported="false" />
 
-        <activity
-            android:name=".not_enough_capacity"
-            android:exported="false" />
+
         <activity
             android:name=".participants_list"
             android:exported="false" />
