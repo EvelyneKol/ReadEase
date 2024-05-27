@@ -47,6 +47,14 @@ public class DBHandler extends SQLiteOpenHelper {
                 ")";
         db.execSQL(createUserTableQuery);
 
+        // Create the wallet table
+        String createWalletTableQuery = "CREATE TABLE wallet (" +
+                "user_id INTEGER PRIMARY KEY," +
+                "money REAL NOT NULL DEFAULT 0.0," +
+                "FOREIGN KEY (user_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE" +
+                ")";
+        db.execSQL(createWalletTableQuery);
+
 
         // Create the ebook table
         String createEbookTableQuery = "CREATE TABLE ebook (" +
@@ -172,11 +180,14 @@ public class DBHandler extends SQLiteOpenHelper {
                 "Ο χαρισματικός ντετέκτιβ μαθαίνει σιγά σιγά τις φήμες που σχετίζονται με το μυστηριώδες τρίτο κορίτσι, με την οικογένειά της αλλά και με την εξαφάνισή του. Ωστόσο, χρειάζονται αδιάσειστα αποδεικτικά στοιχεία προτού ο Πουαρό αποφανθεί αν είναι ένοχη, αθώα ή απλώς παράφρων.", 277, "Αστυνομικα");
         insertBook(db, "9786180128055", "Έγκλημα στο Οριάν Εξπρές", "Agatha Christie", "Ο δολοφόνος βρίσκεται εδώ, μαζί μας. . .Είναι στο τρένο αυτή τη στιγμή. . .Λίγο μετά τα μεσάνυχτα, το φημισμένο Οριάν Εξπρές ακινητοποιείται από μια χιονοθύελλα στη μέση του πουθενά. Το πρωί, ο εκατομμυριούχος Σάμιουελ Έντουαρντ Ράτσετ βρίσκεται μαχαιρωμένος στο κρεβάτι του. Η πόρτα του κουπέ του είναι κλειδωμένη από μέσα.Ο δολοφόνος του είναι ένας από τους συνταξιδιώτες του. . .Ο Ηρακλής Πουαρό, παγιδευμένος κι αυτός στο τραίνο, επιχειρεί να λύσει το μυστήριο. Ανάμεσα στους επιβάτες υπάρχουν πολλοί άνθρωποι που είχαν λόγους να μισούν τον Ράτσετ. Ποιος απ' όλους είναι ο δολοφόνος; Άραγε σχεδιάζει να χτυπήσει ξανά;Ένα ταξίδι με το πιο πολυτελές τρένο του κόσμου εξελίσσεται σ' ένα αγωνιώδες μυστήριο -και σ' ένα από τα πιο δημοφιλή έργα της Άγκαθα Κρίστι, που διαβάστηκε από εκατομμύρια αναγνώστες και μεταφέρθηκε επανειλημμένα στον κινηματογράφο και στην τηλεόραση", 277, "Αστυνομικα");
 
-        // Insert some random values into the user table
+        // Insert some values into the user table
         insertUser(db, "John Doe", "123", "USER", "john@example.com", 123456789, "Πατρα", 100);
         insertUser(db, "Jane Smith", "456", "WRITER", "jane@example.com", 987654321, "Πατρα", 150);
         insertUser(db, "Alice Johnson", "789", "USER", "alice@example.com", 555555555, "Πατρα", 200);
-
+        // Insert some  values into the wallet table
+        insertWallet(db, 1, 50.0); // John Doe with initial balance 50.0
+        insertWallet(db, 2, 75.0); //  Jane Smith with initial balance 75.0
+        insertWallet(db, 3, 100.0); //  Alice Johnson with initial balance 100.0
         // Insert records into the selling_ad table
         insertSellingAd(db, "9786180149173", 18, 1, "ΚΑΛΗ");
         insertSellingAd(db, "9786810146189", 12, 3, "ΠΟΛΥ ΚΑΛΗ");
@@ -210,6 +221,12 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("price", price);
         db.insert("purchase", null, values);
         db.close();
+    }
+    public void insertWallet(SQLiteDatabase db, int userId, double money) {
+        ContentValues values = new ContentValues();
+        values.put("user_id", userId);
+        values.put("money", money);
+        db.insert("wallet", null, values);
     }
 
 
@@ -463,6 +480,40 @@ public class DBHandler extends SQLiteOpenHelper {
         return quizzes;
 
     }
+
+
+
+    public void addUserPoints(int userId, int pointsToAdd) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Update points using SQL command to avoid race condition
+        String sql = "UPDATE user SET points = points + ? WHERE user_id = ?";
+        db.execSQL(sql, new Object[]{pointsToAdd, userId});
+
+        db.close();
+    }
+
+    public float getUserWalletBalance(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT money FROM wallet WHERE user_id = ?", new String[]{String.valueOf(userId)});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            float balance = cursor.getFloat(0);
+            cursor.close();
+            return balance;
+        }
+
+        return 0;
+    }
+
+    public void updateUserWalletBalance(int userId, float newBalance) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("money", newBalance);
+        db.update("wallet", values, "user_id = ?", new String[]{String.valueOf(userId)});
+    }
+
+
 
     public List<Book> searchBooksByTitle(String title) {
         List<Book> books = new ArrayList<>();

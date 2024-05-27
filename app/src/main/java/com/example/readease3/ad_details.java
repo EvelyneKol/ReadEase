@@ -78,7 +78,7 @@ public class ad_details extends AppCompatActivity {
         sellingAd adDetails = dbHandler.getAdDetailsByAdId(adId);
 
         // Δημιουργούμε ένα νέο αντικείμενο cart με τα στοιχεία της αγγελίας
-        Cart newCartItem = new Cart(adDetails.getSellingAdId(), adDetails.getTitle(), adDetails.getSellingPrice());
+        Cart newCartItem = new Cart(adDetails.getSellingAdId(), adDetails.getTitle(), adDetails.getSellingPrice(), adDetails.getSellingPublisher());
 
         // Προσθέτουμε το αντικείμενο στον CartManager
         cartManager.getInstance().addToCart(newCartItem);

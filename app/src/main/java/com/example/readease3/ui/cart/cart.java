@@ -63,13 +63,21 @@ public class cart extends Fragment {
                 TextView totalPriceTextView = root.findViewById(R.id.totalPriceTextView);
                 float totalPrice = Float.parseFloat(totalPriceTextView.getText().toString().replace("Συνολικό ποσό: ", ""));
 
-                // Purchase items in the cart
-                cartManager.purchaseItems(dbHandler, totalPrice);
+                int userId = 1; // Example buyer ID
 
-                // Show success message
-                Toast.makeText(getContext(), "Επιτυχής αγορά! Το καλάθι αδειάστηκε.", Toast.LENGTH_SHORT).show();
+                try {
+                    // Attempt to purchase items in the cart
+                    cartManager.purchaseItems(dbHandler, totalPrice, userId);
+
+                    // Show success message
+                    Toast.makeText(getContext(), "Επιτυχής αγορά!", Toast.LENGTH_SHORT).show();
+                } catch (RuntimeException e) {
+                    // Show insufficient funds message
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
 
         // Εμφάνιση δεδομένων από το CartManager
         LinearLayout cartItemsLayout = root.findViewById(R.id.cartItemsLayout);

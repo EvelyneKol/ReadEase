@@ -37,23 +37,42 @@ public class cartManager {
         }
         return total;
     }
+
     public void clearCart() {
         cartItems.clear();
     }
 
-    public void purchaseItems(DBHandler dbHandler, float totalPrice) {
-        List<Cart> cartItems = getCartItems();
+    public void purchaseItems(DBHandler dbHandler, float totalPrice, int buyerId) {
+        float walletBalance = dbHandler.getUserWalletBalance(buyerId);
+        int pointsToAdd = (int) (totalPrice / 10) * 10;// 10 πόντοι για κάθε 10 ευρώ
 
-        for (Cart item : cartItems) {
-            // Save purchase in purchase table with price
-            dbHandler.insertPurchase(1, "Book", item.getSellingAdId(), totalPrice);
+        if (walletBalance >= totalPrice) {
+            // Update buyer's wallet balance
+            float newBalance = walletBalance - totalPrice;
+            dbHandler.updateUserWalletBalance(buyerId, newBalance);
 
-            // Delete item from selling_ad table
-            dbHandler.deleteSellingAd(item.getSellingAdId());
+            // Add points to buyer's points balance
+            dbHandler.addUserPoints(buyerId, pointsToAdd);
+
+            // Distribute the funds to sellers
+            for (Cart item : cartItems) {
+                int publisherId = item.getSellingPublisher();
+                float itemPrice = item.getSellingPrice();
+                float sellerWalletBalance = dbHandler.getUserWalletBalance(publisherId);
+                dbHandler.updateUserWalletBalance(publisherId, sellerWalletBalance + itemPrice);
+
+                // Save purchase in purchase table with price
+                dbHandler.insertPurchase(buyerId, "Book", item.getSellingAdId(), itemPrice);
+
+                // Delete item from selling_ad table
+                dbHandler.deleteSellingAd(item.getSellingAdId());
+            }
+
+            // Clear cart after purchase
+            clearCart();
+        } else {
+            throw new RuntimeException("Το υπόλοιπο δεν επαρκεί για την αγορά.");
         }
-
-        // Clear cart after purchase
-        clearCart();
     }
-}
 
+}
