@@ -13,9 +13,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import androidx.appcompat.app.AlertDialog;
 import android.content.Intent;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -41,44 +44,43 @@ public class selling_add extends AppCompatActivity {
             return insets;
         });
 
-            isbnEditText = findViewById(R.id.isbn_edit_text);
-            bookTitleEditText = findViewById(R.id.book_title_edit_text);
-            pageNumberEditText = findViewById(R.id.page_number_edit_text);
-            valueEditText = findViewById(R.id.value_edit_text);
-            radioGroup = findViewById(R.id.radioGroup);
-            checkButton = findViewById(R.id.check);
-            createButton = findViewById(R.id.create);
-            priceButton = findViewById(R.id.price);
-            checkButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String isbn = isbnEditText.getText().toString();
-                    checkIsbn(isbn);
-                }
-            });
-        priceButton.setOnClickListener(new View.OnClickListener() {
+        isbnEditText = findViewById(R.id.isbn_edit_text);
+        bookTitleEditText = findViewById(R.id.book_title_edit_text);
+        pageNumberEditText = findViewById(R.id.page_number_edit_text);
+        valueEditText = findViewById(R.id.value_edit_text);
+        radioGroup = findViewById(R.id.radioGroup);
+        checkButton = findViewById(R.id.check);
+        createButton = findViewById(R.id.create);
+        priceButton = findViewById(R.id.price);
+        checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String isbn = isbnEditText.getText().toString();
-                if (!isbn.isEmpty()) {
-                    // Εδώ γίνεται έλεγχος αν το ISBN υπάρχει στον πίνακα selling_ad
-                    // Εάν υπάρχει, εκκινείται η νέα δραστηριότητα, αλλιώς εμφανίζεται ένα παράθυρο με μήνυμα
-                    boolean isbnExists = checkIsbnExistsInSellingAd(isbn);
-                    if (isbnExists) {
-                        Intent intent = new Intent(selling_add.this, ads_and_mean_price.class);
-                        intent.putExtra("ISBN", isbn);
-                        startActivity(intent);
-                    } else {
-                        showNoAdsMessage();
-                    }
-                } else {
-                    // Αν το ISBN είναι κενό, εμφανίζει μήνυμα
-                    new AlertDialog.Builder(selling_add.this)
-                            .setTitle("Πληροφορία")
-                            .setMessage("Παρακαλώ εισάγετε ISBN πριν συνεχίσετε.")
-                            .setPositiveButton(android.R.string.ok, null)
-                            .show();
-                }
+                checkIsbn(isbn);
+            }
+        });
+
+        priceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAdsAndMeanPrice();
+            }
+        });
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String isbn = isbnEditText.getText().toString();
+                float price = Float.parseFloat(valueEditText.getText().toString());
+                String status = getStatusFromRadioButton();
+                int publisher = 1; // Ορίζουμε τον εκδότη ως 1
+
+                // Εισαγωγή νέας αγγελίας στη βάση δεδομένων
+                SQLiteOpenHelper dbHelper = new DBHandler(selling_add.this);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ((DBHandler) dbHelper).insertSellingAd(db, isbn, price, publisher, status);
+
+                // Εμφάνιση μηνύματος επιτυχίας με Toast
+                Toast.makeText(selling_add.this, "Η αγγελία καταχωρήθηκε με επιτυχία.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,8 +89,7 @@ public class selling_add extends AppCompatActivity {
     }
 
 
-
-        private void checkIsbn(String isbn) {
+    private void checkIsbn(String isbn) {
         SQLiteOpenHelper dbHelper = new DBHandler(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -111,6 +112,7 @@ public class selling_add extends AppCompatActivity {
                 radioGroup.getChildAt(i).setEnabled(true);
             }
             createButton.setEnabled(true);
+            priceButton.setEnabled(true);
         } else {
             // ISBN not found, unlock fields and show a pop-up message
             bookTitleEditText.setEnabled(true);
@@ -121,7 +123,7 @@ public class selling_add extends AppCompatActivity {
                 radioGroup.getChildAt(i).setEnabled(true);
             }
             createButton.setEnabled(true);
-
+            priceButton.setEnabled(true);
             // Show the pop-up message
             new AlertDialog.Builder(this)
                     .setTitle("Πληροφορία")
@@ -132,7 +134,7 @@ public class selling_add extends AppCompatActivity {
 
         cursor.close();
         db.close();
-        }
+    }
 
 
     private boolean checkIsbnExistsInSellingAd(String isbn) {
@@ -162,5 +164,42 @@ public class selling_add extends AppCompatActivity {
                 .setMessage("Δεν υπάρχουν αγγελίες για αυτό το βιβλίο στη βάση.")
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
+    }
+
+    private void showAdsAndMeanPrice() {
+        String isbn = isbnEditText.getText().toString();
+        String status = getStatusFromRadioButton(); // Λάβετε την κατάσταση από τα RadioButtons
+
+        if (!isbn.isEmpty()) {
+            // Ελέγξτε αν υπάρχει το ISBN στον πίνακα selling_ad
+            boolean isbnExists = checkIsbnExistsInSellingAd(isbn);
+            if (isbnExists) {
+                // Αν υπάρχει, μεταβείτε στη σελίδα ads_and_mean_price και περάστε τα δεδομένα
+                Intent intent = new Intent(selling_add.this, ads_and_mean_price.class);
+                intent.putExtra("ISBN", isbn);
+                intent.putExtra("STATUS", status); // Περάστε την κατάσταση στο intent
+                startActivity(intent);
+            } else {
+                showNoAdsMessage();
+            }
+        } else {
+            // Αν το ISBN είναι κενό, εμφανίστε μήνυμα
+            new AlertDialog.Builder(selling_add.this)
+                    .setTitle("Πληροφορία")
+                    .setMessage("Παρακαλώ εισάγετε ISBN πριν συνεχίσετε.")
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+        }
+    }
+
+    private String getStatusFromRadioButton() {
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        if (selectedId != -1) {
+            RadioButton radioButton = findViewById(selectedId);
+            return radioButton.getText().toString();
+        } else {
+            return ""; // ή κάποια προκαθορισμένη τιμή αν δεν έχει επιλεγεί κάποιο RadioButton
+        }
+
     }
 }

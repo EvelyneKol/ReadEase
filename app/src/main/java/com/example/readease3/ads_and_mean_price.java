@@ -1,16 +1,20 @@
 package com.example.readease3;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
 public class ads_and_mean_price extends AppCompatActivity {
-
+    private Button createButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +25,11 @@ public class ads_and_mean_price extends AppCompatActivity {
 
         // Find the NumberPicker
         NumberPicker numberPicker = findViewById(R.id.number_picker);
+        createButton = findViewById(R.id.create);
 
-        // Ανάκτηση του ISBN από το Intent
+        // Λάβετε τα δεδομένα από το intent
         String isbn = getIntent().getStringExtra("ISBN");
+        String status = getIntent().getStringExtra("STATUS");
 
         // Ανακτήστε τις αγγελίες από τη βάση δεδομένων
         DBHandler dbHandler = new DBHandler(this);
@@ -67,5 +73,25 @@ public class ads_and_mean_price extends AppCompatActivity {
             // Add the container layout to the main layout
             mainLayout.addView(adContainerLayout);
         }
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String isbn = getIntent().getStringExtra("ISBN");
+                float price = numberPicker.getValue() / 100.0f; // Μετατροπή της τιμής σε float
+                int publisher = 1; // Προσωρινή τιμή για τον publisher, ανάλογα με τη λογική της εφαρμογής σας
+                String status = "ΚΑΛΗ"; // Προσωρινή τιμή για την κατάσταση, ανάλογα με τη λογική της εφαρμογής σας
+
+                // Εισαγωγή νέας αγγελίας στη βάση δεδομένων
+                SQLiteOpenHelper dbHelper = new DBHandler(ads_and_mean_price.this);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ((DBHandler) dbHelper).insertSellingAd(db, isbn, price, publisher, status);
+
+                // Εμφάνιση μηνύματος επιτυχίας με Toast
+                Toast.makeText(ads_and_mean_price.this, "Η αγγελία καταχωρήθηκε με επιτυχία.", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
     }
+
 }

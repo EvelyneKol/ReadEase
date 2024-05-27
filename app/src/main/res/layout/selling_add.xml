@@ -229,6 +229,7 @@
         android:layout_height="wrap_content"
         android:text="ΠΡΟΤΕΙΝΟΜΕΝΕΣ ΤΙΜΕΣ"
         android:textColor="@color/black"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

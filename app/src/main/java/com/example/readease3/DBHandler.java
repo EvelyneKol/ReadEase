@@ -266,7 +266,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert("user", null, values);
     }
     // Method to insert a selling ad into the selling_ad table
-    private void insertSellingAd(SQLiteDatabase db, String isbn, float price, int publisher, String status) {
+    public void insertSellingAd(SQLiteDatabase db, String isbn, float price, int publisher, String status) {
         ContentValues values = new ContentValues();
         values.put("selling_ad_isbn", isbn);
         values.put("selling_price", price);
