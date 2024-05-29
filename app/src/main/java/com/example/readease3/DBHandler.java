@@ -4,7 +4,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
+
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.util.Log;
@@ -46,6 +50,17 @@ public class DBHandler extends SQLiteOpenHelper {
                 "points INTEGER" +
                 ")";
         db.execSQL(createUserTableQuery);
+        // Create the user table
+        String createAudioBookTableQuery = "CREATE TABLE AudioBook (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "isbn TEXT ," +
+                "language TEXT ," +
+                "title TEXT NOT NULL DEFAULT 'unknown'," +
+                "pages INTEGER NOT NULL DEFAULT 0," +
+                "date TEXT NOT NULL," +
+                "price INTEGER NOT NULL" +
+                ")";
+        db.execSQL(createAudioBookTableQuery);
 
         // Create the wallet table
         String createWalletTableQuery = "CREATE TABLE wallet (" +
@@ -166,12 +181,25 @@ public class DBHandler extends SQLiteOpenHelper {
         String createBorrowAdTableQuery = "CREATE TABLE borrow_ad (" +
                 "borrow_ad_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "borrow_ad_isbn TEXT NOT NULL," +
+                "start_date TEXT NOT NULL," +
+                "end_date TEXT NOT NULL," +
                 "borrow_publisher INTEGER," +
                 "borrow_status TEXT CHECK(borrow_status IN ('ΚΑΚΗ', 'ΜΕΤΡΙΑ', 'ΚΑΛΗ', 'ΠΟΛΥ ΚΑΛΗ'))," +
                 "FOREIGN KEY (borrow_ad_isbn) REFERENCES book(isbn) ON UPDATE CASCADE ON DELETE CASCADE," +
                 "FOREIGN KEY (borrow_publisher) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE" +
                 ")";
         db.execSQL(createBorrowAdTableQuery);
+
+        String createBorrowTable = "CREATE TABLE borrow (" +
+                "borrow_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "borrow_ad_id INTEGER," +
+                "start_date TEXT NOT NULL," +
+                "end_date TEXT NOT NULL," +
+                "id_borrower INTEGER," +
+                "FOREIGN KEY (borrow_ad_id) REFERENCES borrow_ad(borrow_ad_id)" +
+                ")";
+        db.execSQL(createBorrowTable);
+
 
         // Insert initial books
         insertBook(db, "9786180149173", "Ψιλά Γράμματα", "LAUREN ASHER", "Εκείνος είναι κληρονόμος μιας εταιρείας που κατασκευάζει… παραμύθια. Εκείνη καλείται να δουλέψει για το πιο απαιτητικό αφεντικό που γνώρισε ποτέ. Αν θέλουν και το δικό τους παραμύθι να έχει ευτυχισμένο τέλος, τότε πρέπει να προσέξουν λίγο περισσότερο τα… ψιλά γράμματα! Ο Ρόουαν Κέιν και τα δύο αδέλφια του κληρονομούν από τον παππού τους μια τεράστια εταιρεία και μια αμύθητη περιουσία. Για να περάσουν όλα αυτά και επίσημα στα χέρια του, ο Ρόουαν πρέπει να αποδείξει ότι είναι ικανός να ανανεώσει την Ντρίμλαντ, το θεματικό πάρκο της εταιρείας. Στην πραγματικότητα, δε θέλει να έχει καμία σχέση μ ’ αυτά, αλλά, από σεβασμό στη μνήμη του παππού του, αποφασίζει να δουλέψει σκληρά και είναι αποφασισμένος να τα καταφέρει. Η Ζάρα είναι απλώς μία από το πλήθος των υπαλλήλων του Ρόουαν Κέιν. Όταν όμως, μεθυσμένη, στέλνει μια επικριτική πρόταση για το πάρκο, τρέμει ότι θα απολυθεί. Αντ’ αυτού, εκείνος της προσφέρει τη δουλειά των ονείρων της. Αλλά υπάρχει μια παγίδα: ο Ρόουαν είναι το πιο απαιτητικό και το πιο σκληρό αφεντικό που υπάρχει. Η καρδιά της Ζάρα δε δίνει καμία σημασία σ’ αυτό. Ήρθε η ώρα να μάθει ο δισεκατομμυριούχος ότι τα χρήματα δεν μπορούν να διορθώσουν ή να αγοράσουν τα πάντα. Και ειδικά τους ανθρώπους! Το πρώτο βιβλίο της σειράς μπεστ σέλερ, όπου πρωταγωνιστούν οι τρεις δισεκατομμυριούχοι αδελφοί της Ντρίμλαντ και οι γυναίκες που θα τους κάνουν να γονατίσουν.", 445, "Αισθηματικα");
@@ -193,9 +221,9 @@ public class DBHandler extends SQLiteOpenHelper {
         insertSellingAd(db, "9786810146189", 12, 3, "ΠΟΛΥ ΚΑΛΗ");
         insertSellingAd(db, "9786810146189", 10, 2, "ΚΑΛΗ");
         // Insert records into the borrow_ad table
-        insertBorrowAd(db, "9786180149173", 1,  "ΚΑΛΗ");
-        insertBorrowAd(db, "9786810146189", 3,  "ΠΟΛΥ ΚΑΛΗ");
-        insertBorrowAd(db, "9786810146189", 2, "ΚΑΛΗ");
+        insertBorrowAd(db, "9786180149173", "15/6/2024", "19/6/2024", 1,  "ΚΑΛΗ");
+        insertBorrowAd(db, "9786810146189", "18/7/2024", "20/7/2024",3,  "ΠΟΛΥ ΚΑΛΗ");
+        insertBorrowAd(db, "9786810146189", "1/8/2024", "19/8/2024",2, "ΚΑΛΗ");
 
         // Insert records into events table
         insertEvents(db,82224,"'Βιβλιοφάγοι'","Μια πρώτη γνωριμία με τον δημιουργό του έργου 'Βιβλιοφάγοι'","2024-08-22", "15:30","17:00 PM","Παπανδρέου 20, Πάτρα",50,1 );
@@ -250,8 +278,17 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert("book", null, values);
     }
+    public void insertBorrow(int borrowAdId, String startDate, String endDate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("borrow_ad_id", borrowAdId);
+        values.put("start_date", startDate);
+        values.put("end_date", endDate);
+        values.put("id_borrower", 1); // Θέτουμε το id_borrower στο 1
 
-
+        // Εισαγωγή των τιμών στον πίνακα borrow
+         db.insert("borrow", null, values);
+    }
     // Method to insert a user into the user table
     private void insertUser(SQLiteDatabase db, String name, String password, String type, String mail, int phone, String userLocation, int points) {
         ContentValues values = new ContentValues();
@@ -277,9 +314,27 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // Method to insert a selling ad into the selling_ad table
-    private void insertBorrowAd(SQLiteDatabase db, String isbn, int publisher, String status) {
+    private void insertBorrowAd(SQLiteDatabase db, String isbn, String start_date, String end_date, int publisher, String status) {
         ContentValues values = new ContentValues();
         values.put("borrow_ad_isbn", isbn);
+
+        // Μετατροπή της συμβολοσειράς της ημερομηνίας εκκίνησης σε αντικείμενο ημερομηνίας
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date startDate = dateFormat.parse(start_date);
+            values.put("start_date", dateFormat.format(startDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        // Μετατροπή της συμβολοσειράς της ημερομηνίας λήξης σε αντικείμενο ημερομηνίας
+        try {
+            Date endDate = dateFormat.parse(end_date);
+            values.put("end_date", dateFormat.format(endDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         values.put("borrow_publisher", publisher);
         values.put("borrow_status", status);
 
@@ -949,6 +1004,63 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // Close the database
         db.close();
+    }
+    public String[] getStartDateAndEndDateFromBorrowId(int borrowId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] dates = new String[2]; // Αποθηκεύουμε τις ημερομηνίες εκκίνησης και λήξης
+
+        Cursor cursor = db.rawQuery("SELECT start_date, end_date FROM borrow_ad WHERE borrow_ad_id = ?", new String[]{String.valueOf(borrowId)});
+        if (cursor.moveToFirst()) {
+            // Αν υπάρχει αποτέλεσμα στο Cursor, ανάκτησε τις ημερομηνίες
+            int startIndex = cursor.getColumnIndex("start_date");
+            int endIndex = cursor.getColumnIndex("end_date");
+
+            if (startIndex != -1 && endIndex != -1) {
+                dates[0] = cursor.getString(startIndex);
+                dates[1] = cursor.getString(endIndex);
+            } else {
+
+            }
+        }
+
+        cursor.close();
+        return dates;
+    }
+    public String getStartDateFromBorrowId(int borrowId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String startDate = null;
+
+        Cursor cursor = db.rawQuery("SELECT start_date FROM borrow_ad WHERE borrow_ad_id = ?", new String[]{String.valueOf(borrowId)});
+        if (cursor.moveToFirst()) {
+            int startDateIndex = cursor.getColumnIndex("start_date");
+            if (startDateIndex != -1) { // Έλεγχος εγκυρότητας του δείκτη
+                startDate = cursor.getString(startDateIndex);
+            } else {
+                // Εδώ μπορείτε να εμφανίσετε ένα μήνυμα σφάλματος ή να διαχειριστείτε το πρόβλημα με άλλο τρόπο
+            }
+        }
+
+        cursor.close();
+        return startDate;
+    }
+
+    // Κώδικας για τη μέθοδο getEndDateFromBorrowId στον DBHandler
+    public String getEndDateFromBorrowId(int borrowId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String endDate = null;
+
+        Cursor cursor = db.rawQuery("SELECT end_date FROM borrow_ad WHERE borrow_ad_id = ?", new String[]{String.valueOf(borrowId)});
+        if (cursor.moveToFirst()) {
+            int endDateIndex = cursor.getColumnIndex("end_date");
+            if (endDateIndex != -1) { // Έλεγχος εγκυρότητας του δείκτη
+                endDate = cursor.getString(endDateIndex);
+            } else {
+                // Εδώ μπορείτε να εμφανίσετε ένα μήνυμα σφάλματος ή να διαχειριστείτε το πρόβλημα με άλλο τρόπο
+            }
+        }
+
+        cursor.close();
+        return endDate;
     }
 
 
