@@ -77,6 +77,15 @@ public class borrow_add extends AppCompatActivity {
                 showDatePickerDialog(endDateEditText);
             }
         });
+
+        // Adding OnClickListener to createButton
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show a message when the button is clicked
+                showMessage();
+            }
+        });
     }
 
     private void showDatePickerDialog(final TextInputEditText editText) {
@@ -141,4 +150,14 @@ public class borrow_add extends AppCompatActivity {
         cursor.close();
         db.close();
     }
+
+    // Method to show a message when createButton is clicked
+    private void showMessage() {
+        new AlertDialog.Builder(this)
+                .setTitle("Message")
+                .setMessage("Η αγγελία καταχωρήθηκε.")
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
+
 }
