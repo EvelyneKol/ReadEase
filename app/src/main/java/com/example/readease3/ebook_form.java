@@ -70,7 +70,7 @@ public class ebook_form extends AppCompatActivity {
 
         // Set the negative button to cancel the dialog
         // Set the negative button to show a toast and navigate to WriterActivity
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Όχι", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
