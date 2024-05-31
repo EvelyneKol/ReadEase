@@ -25,7 +25,7 @@ public class ebook_form extends AppCompatActivity {
 
     private static final int PICK_PDF_FILE = 2;
     private TextView uploadStatusTextView;
-    private EditText editTextName, editTextPrice, editTextDescription;
+    private EditText editTextName, editTitle, editTextPrice, editTextDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class ebook_form extends AppCompatActivity {
         });
         uploadStatusTextView = findViewById(R.id.textView12);
         editTextName = findViewById(R.id.editTextName);
+        editTitle = findViewById(R.id.editTextName);
         editTextPrice = findViewById(R.id.editTextPrice);
         editTextDescription = findViewById(R.id.editText);
     }
@@ -51,7 +52,7 @@ public class ebook_form extends AppCompatActivity {
     }
 
     public void showPopupDialog(View view) {
-        if (editTextName.getText().toString().isEmpty() || editTextPrice.getText().toString().isEmpty() || editTextDescription.getText().toString().isEmpty()) {
+        if (editTextName.getText().toString().isEmpty() || editTitle.getText().toString().isEmpty()|| editTextPrice.getText().toString().isEmpty() || editTextDescription.getText().toString().isEmpty()) {
             Toast.makeText(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", Toast.LENGTH_SHORT).show();
             return;
         }

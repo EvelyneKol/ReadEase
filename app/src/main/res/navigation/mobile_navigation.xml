@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigation_writer_home"
-        android:name="com.example.readease3.ui.writer.writer"
+        android:name="com.example.readease3.ui.writer.writer_home"
         tools:layout="@layout/writer">
         <action
             android:id="@+id/action_writer_home_to_ebook"

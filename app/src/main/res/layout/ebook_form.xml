@@ -20,15 +20,50 @@
         android:src="@drawable/backround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.133" />
+
+    <EditText
+        android:id="@+id/edittitle"
+        android:layout_width="340dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="-220dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Πληκτρολόγησε τίτλο βιβλίου"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.573" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="146dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="-90dp"
+        android:text='Τίτλος βιβλίου'
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editTextName"
+        app:layout_constraintEnd_toEndOf="@id/imageView3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="124dp"
-        android:layout_height="359dp"
+        android:layout_width="203dp"
+        android:layout_height="109dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
@@ -36,10 +71,11 @@
         android:src="@drawable/upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextName"
-        app:layout_constraintVertical_bias="0.917" />
+        app:layout_constraintVertical_bias="0.76" />
+
 
     <EditText
         android:id="@+id/editText"
@@ -55,9 +91,10 @@
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/editTextPrice"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextName"
-        app:layout_constraintVertical_bias="0.643" />
+        app:layout_constraintVertical_bias="0.686" />
 
     <TextView
         android:id="@+id/price"
@@ -72,10 +109,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/editTextPrice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.185" />
+        app:layout_constraintVertical_bias="0.188" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -87,11 +124,10 @@
         android:src="@drawable/ebook"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.089" />
-
+        app:layout_constraintVertical_bias="0.052" />
 
     <TextView
         android:id="@+id/title_ebook"
@@ -122,10 +158,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/editTextName"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.77" />
 
     <EditText
         android:id="@+id/editTextName"
@@ -135,14 +171,14 @@
         android:layout_marginTop="-220dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/edittext_border"
-        android:hint="Enter your name"
+        android:hint="Πληκτρολόγησε το όνομα συγγραφέα"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintVertical_bias="0.481" />
 
     <EditText
         android:id="@+id/editTextPrice"
@@ -160,7 +196,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/writer_name"
         app:layout_constraintTop_toBottomOf="@+id/editTextName"
-        app:layout_constraintVertical_bias="0.414" />
+        app:layout_constraintVertical_bias="0.575" />
 
     <Button
         android:id="@+id/uploadButton"
@@ -172,10 +208,10 @@
         android:text="Ανεβασε PDF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPrice"
-        app:layout_constraintVertical_bias="0.546" />
+        app:layout_constraintVertical_bias="0.598" />
 
     <Button
         android:id="@+id/button9"
@@ -184,15 +220,15 @@
         android:layout_marginTop="-170dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/black_button"
+        android:onClick="showPopupDialog"
         android:text="ΥΠΟΒΟΛΗ"
         android:textColor="#FFFFFF"
-        android:onClick="showPopupDialog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.711"
+        app:layout_constraintVertical_bias="0.904"
         tools:ignore="MissingConstraints" />
 
     <TextView

@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.example.readease3.R;
 
-public class writer extends Fragment {
+public class writer_home extends Fragment {
 
     private WriterViewModel mViewModel;
     private Button ebookButton;
 
-    public static writer newInstance() {
-        return new writer();
+    public static writer_home newInstance() {
+        return new writer_home();
     }
 
     @Override
