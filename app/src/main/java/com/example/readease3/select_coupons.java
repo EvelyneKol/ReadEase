@@ -114,7 +114,7 @@ public class select_coupons extends AppCompatActivity {
 
         // Insert a new coupon
         dbHandler.updatecoupons(type, userName, expiredDate, used);
-        Toast.makeText(select_coupons.this, "New coupon added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(select_coupons.this, "Το νέο κουπόνι προστέθηκε", Toast.LENGTH_SHORT).show();
     }
 
     private void updatePoints() {
@@ -127,7 +127,7 @@ public class select_coupons extends AppCompatActivity {
 
         // Update points for user
         dbHandler.updateUserPoints(userName, total);
-        Toast.makeText(select_coupons.this, "points updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(select_coupons.this, "Οι πόντοι ενημερώθηκαν", Toast.LENGTH_SHORT).show();
     }
 
     private void returnhome() {
