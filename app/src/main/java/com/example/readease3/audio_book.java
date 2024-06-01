@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
@@ -83,44 +84,42 @@ public class audio_book extends AppCompatActivity {
 
         Cursor cursor = db.rawQuery("SELECT title, pages FROM book WHERE isbn = ?", new String[]{isbn});
         if (cursor.moveToFirst()) {
-            int titleIndex = cursor.getColumnIndexOrThrow("title");
-            int pagesIndex = cursor.getColumnIndexOrThrow("pages");
-
-            String title = cursor.getString(titleIndex);
-            int pages = cursor.getInt(pagesIndex);
-
-            bookTitleEditText.setText(title);
-            pageNumberEditText.setText(String.valueOf(pages));
-
-            bookTitleEditText.setEnabled(true);
-            pageNumberEditText.setEnabled(true);
-            priceEditText.setEnabled(true);
-            dateEditText.setEnabled(true);
-            calculateButton.setEnabled(true);
-            createButton.setEnabled(true);
-            englishButton.setEnabled(true);
-            greekButton.setEnabled(true);
+            Pair<String, Integer> bookData = getBookData(cursor);
+            fillFields(bookData.first, bookData.second);
+            unlockFields();
         } else {
             // ISBN not found, unlock fields and show a pop-up message
-            bookTitleEditText.setEnabled(true);
-            pageNumberEditText.setEnabled(true);
-            priceEditText.setEnabled(true);
-            dateEditText.setEnabled(true);
-            calculateButton.setEnabled(true);
-            createButton.setEnabled(true);
-            englishButton.setEnabled(true);
-            greekButton.setEnabled(true);
+            unlockFields();
 
-            // Show the pop-up message
-            new AlertDialog.Builder(this)
-                    .setTitle("Πληροφορία")
-                    .setMessage("Το βιβλίο δεν υπάρχει στην βάση, συμπληρώστε τα στοιχεία του.")
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
+            showNoBookMessage();
         }
 
         cursor.close();
         db.close();
+    }
+
+    private Pair<String, Integer> getBookData(Cursor cursor) {
+        int titleIndex = cursor.getColumnIndexOrThrow("title");
+        int pagesIndex = cursor.getColumnIndexOrThrow("pages");
+
+        String title = cursor.getString(titleIndex);
+        int pages = cursor.getInt(pagesIndex);
+
+        return new Pair<>(title, pages);
+    }
+    private void fillFields(String title, int pages) {
+        bookTitleEditText.setText(title);
+        pageNumberEditText.setText(String.valueOf(pages));
+    }
+    private void unlockFields() {
+        bookTitleEditText.setEnabled(true);
+        pageNumberEditText.setEnabled(true);
+        priceEditText.setEnabled(true);
+        dateEditText.setEnabled(true);
+        calculateButton.setEnabled(true);
+        createButton.setEnabled(true);
+        englishButton.setEnabled(true);
+        greekButton.setEnabled(true);
     }
 
     private void calculatePrice() {
@@ -143,19 +142,27 @@ public class audio_book extends AppCompatActivity {
             int pagesIndex = cursor.getColumnIndexOrThrow("pages");
             int pages = cursor.getInt(pagesIndex);
             double price = pages * 0.10;
-            priceEditText.setText(String.format("%.2f", price));
+            fillFieldsPrice(price);
         } else {
-            // Show a pop-up message if ISBN is not found
-            new AlertDialog.Builder(this)
-                    .setTitle("Σφάλμα")
-                    .setMessage("Δεν βρέθηκε βιβλίο με το συγκεκριμένο ISBN.")
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
+            showNoBookMessage();
         }
 
         cursor.close();
         db.close();
     }
+
+    private void fillFieldsPrice(double price) {
+        priceEditText.setText(String.format("%.2f", price));
+    }
+
+    private void showNoBookMessage() {
+        new AlertDialog.Builder(this)
+                .setTitle("Σφάλμα")
+                .setMessage("Δεν βρέθηκε βιβλίο με το συγκεκριμένο ISBN.")
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
+
     private void setLanguageButtonState(Button selectedButton, Button unselectedButton) {
         // Αλλάξτε το χρώμα του επιλεγμένου κουμπιού σε μαύρο και το χρώμα του κειμένου σε άσπρο
         selectedButton.setBackgroundColor(getResources().getColor(R.color.selectedButtonColor));
