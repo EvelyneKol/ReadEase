@@ -95,59 +95,73 @@ public class search_fragment extends Fragment {
 
         // Display search results
         if (!books.isEmpty()) {
-            // Display the first matching book details
-            Book book = books.get(0);
-            searchedBookISBN = book.getIsbn(); // Store the ISBN of the searched book
-
-            // Update UI with book details
-            String bookDetails = "Title: " + book.getTitle() + "\n" +
-                    "ISBN: " + searchedBookISBN + "\n" +  // Use searchedBookISBN here
-                    "Pages: " + book.getPages();
-            binding.searchResultTextView.setText(bookDetails);
-
-            // Adjust button visibility
-            binding.buyButton.setVisibility(View.VISIBLE);
-            binding.borrowButton.setVisibility(View.VISIBLE);
-            binding.reviewButton.setVisibility(View.VISIBLE);
-
-            reviewButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Create an Intent to start the review activity
-                    Intent intent = new Intent(requireContext(), review.class);
-
-                    // Pass the ISBN of the searched book as an extra
-                    intent.putExtra("searched_book_isbn", searchedBookISBN);
-
-                    // Start the review activity
-                    startActivity(intent);
-                }
-            });
-            buttonBuy.setOnClickListener(v -> {
-                Intent intent = new Intent(getActivity(), ad_result.class);
-                intent.putExtra("action", "buy");
-                intent.putExtra("searched_book_isbn", searchedBookISBN); // pass the ISBN as well
-                startActivity(intent);
-            });
-
-
-            buttonBorrow.setOnClickListener(v -> {
-                Intent intent = new Intent(getActivity(), ad_result.class);
-                intent.putExtra("action", "borrow");
-                intent.putExtra("searched_book_isbn", searchedBookISBN); // pass the ISBN as well
-                startActivity(intent);
-            });
-
-
-        }else {
-            // No matching books found
-            binding.searchResultTextView.setText("Δεν βρέθηκαν βιβλία με αυτόν τον τίτλο.");
-
-            // Hide buttons if no book is found
-            binding.buyButton.setVisibility(View.GONE);
-            binding.borrowButton.setVisibility(View.GONE);
-            binding.reviewButton.setVisibility(View.GONE);
+            Book book = getBooks(books);
+            showBooks(book);
+        } else {
+            showNoBooksMessage();
         }
+    }
+
+    private Book getBooks(List<Book> books) {
+        // Display the first matching book details
+        Book book = books.get(0);
+        searchedBookISBN = book.getIsbn(); // Store the ISBN of the searched book
+        return book;
+    }
+
+    private void showBooks(Book book) {
+        // Update UI with book details
+        String bookDetails = "Title: " + book.getTitle() + "\n" +
+                "ISBN: " + searchedBookISBN + "\n" +  // Use searchedBookISBN here
+                "Pages: " + book.getPages();
+        binding.searchResultTextView.setText(bookDetails);
+
+        // Adjust button visibility
+        binding.buyButton.setVisibility(View.VISIBLE);
+        binding.borrowButton.setVisibility(View.VISIBLE);
+        binding.reviewButton.setVisibility(View.VISIBLE);
+
+        reviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to start the review activity
+                Intent intent = new Intent(requireContext(), review.class);
+
+                // Pass the ISBN of the searched book as an extra
+                intent.putExtra("searched_book_isbn", searchedBookISBN);
+
+                // Start the review activity
+                startActivity(intent);
+            }
+        });
+
+        showAds();
+    }
+
+    private void showAds() {
+        buttonBuy.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ad_result.class);
+            intent.putExtra("action", "buy");
+            intent.putExtra("searched_book_isbn", searchedBookISBN); // pass the ISBN as well
+            startActivity(intent);
+        });
+
+        buttonBorrow.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ad_result.class);
+            intent.putExtra("action", "borrow");
+            intent.putExtra("searched_book_isbn", searchedBookISBN); // pass the ISBN as well
+            startActivity(intent);
+        });
+    }
+
+    private void showNoBooksMessage() {
+        // No matching books found
+        binding.searchResultTextView.setText("Δεν βρέθηκαν βιβλία με αυτόν τον τίτλο.");
+
+        // Hide buttons if no book is found
+        binding.buyButton.setVisibility(View.GONE);
+        binding.borrowButton.setVisibility(View.GONE);
+        binding.reviewButton.setVisibility(View.GONE);
     }
 
     @Override

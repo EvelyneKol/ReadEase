@@ -42,14 +42,13 @@ public class cartManager {
         cartItems.clear();
     }
 
-    public void purchaseItems(DBHandler dbHandler, float totalPrice, int buyerId) {
+    public void checkBalance(DBHandler dbHandler, float totalPrice, int buyerId) {
         float walletBalance = dbHandler.getUserWalletBalance(buyerId);
-        int pointsToAdd = (int) (totalPrice / 10) * 10;// 10 πόντοι για κάθε 10 ευρώ
+        int pointsToAdd = (int) (totalPrice / 10) * 10; // 10 πόντοι για κάθε 10 ευρώ
 
         if (walletBalance >= totalPrice) {
             // Update buyer's wallet balance
-            float newBalance = walletBalance - totalPrice;
-            dbHandler.updateUserWalletBalance(buyerId, newBalance);
+            removePaymentAmount(dbHandler, buyerId, totalPrice);
 
             // Add points to buyer's points balance
             dbHandler.addUserPoints(buyerId, pointsToAdd);
@@ -58,8 +57,7 @@ public class cartManager {
             for (Cart item : cartItems) {
                 int publisherId = item.getSellingPublisher();
                 float itemPrice = item.getSellingPrice();
-                float sellerWalletBalance = dbHandler.getUserWalletBalance(publisherId);
-                dbHandler.updateUserWalletBalance(publisherId, sellerWalletBalance + itemPrice);
+                addPaymentAmount(dbHandler, publisherId, itemPrice);
 
                 // Save purchase in purchase table with price
                 dbHandler.insertPurchase(buyerId, "Book", item.getSellingAdId(), itemPrice);
@@ -71,8 +69,24 @@ public class cartManager {
             // Clear cart after purchase
             clearCart();
         } else {
-            throw new RuntimeException("Το υπόλοιπο δεν επαρκεί για την αγορά.");
+            showNotEnoughMoney();
         }
     }
+
+    private void addPaymentAmount(DBHandler dbHandler, int publisherId, float itemPrice) {
+        float sellerWalletBalance = dbHandler.getUserWalletBalance(publisherId);
+        dbHandler.updateUserWalletBalance(publisherId, sellerWalletBalance + itemPrice);
+    }
+
+    private void removePaymentAmount(DBHandler dbHandler, int buyerId, float totalPrice) {
+        float walletBalance = dbHandler.getUserWalletBalance(buyerId);
+        float newBalance = walletBalance - totalPrice;
+        dbHandler.updateUserWalletBalance(buyerId, newBalance);
+    }
+
+    private void showNotEnoughMoney() {
+        throw new RuntimeException("Το υπόλοιπο δεν επαρκεί για την αγορά.");
+    }
+
 
 }

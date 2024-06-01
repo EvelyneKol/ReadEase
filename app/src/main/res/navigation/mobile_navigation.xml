@@ -97,8 +97,8 @@
         android:label="Create New Review" />
 
     <activity
-        android:id="@+id/selling_add_activity"
-        android:name="com.example.readease3.selling_add"
+        android:id="@+id/selling_ad_activity"
+        android:name="com.example.readease3.selling_ad"
         android:label="Selling Add Activity" />
 
 

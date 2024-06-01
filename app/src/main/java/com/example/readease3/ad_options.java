@@ -26,13 +26,13 @@ public class ad_options extends AppCompatActivity {
     }
 
     public void goToSellingAdd(View view) {
-        // Create an Intent to start the SellingAddActivity
-        Intent intent = new Intent(this, selling_add.class);
+        // Create an Intent to start the SellingAdActivity
+        Intent intent = new Intent(this, selling_ad.class);
         startActivity(intent);
     }
 
     public void goToBorrowAdd(View view) {
-        // Create an Intent to start the SellingAddActivity
+        // Create an Intent to start the BorrowAdActivity
         Intent intent = new Intent(this, borrow_add.class);
         startActivity(intent);
     }

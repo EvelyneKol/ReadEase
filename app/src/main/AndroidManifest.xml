@@ -48,7 +48,7 @@
         <activity android:name=".ad_options" />
         <activity android:name=".events_screen" />
         <activity android:name=".ad_result" />
-        <activity android:name=".selling_add" />
+        <activity android:name=".selling_ad" />
         <activity android:name=".borrow_add" />
         <activity android:name=".review" />
         <activity android:name=".available_quiz" />

@@ -213,7 +213,7 @@ public class DBHandler extends SQLiteOpenHelper {
         insertUser(db, "Jane Smith", "456", "WRITER", "jane@example.com", 987654321, "Πατρα", 150);
         insertUser(db, "Alice Johnson", "789", "USER", "alice@example.com", 555555555, "Πατρα", 200);
         // Insert some  values into the wallet table
-        insertWallet(db, 1, 50.0); // John Doe with initial balance 50.0
+        insertWallet(db, 1, 20.0); // John Doe with initial balance 50.0
         insertWallet(db, 2, 75.0); //  Jane Smith with initial balance 75.0
         insertWallet(db, 3, 100.0); //  Alice Johnson with initial balance 100.0
         // Insert records into the selling_ad table

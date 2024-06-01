@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/background_new"
-    tools:context=".selling_add">
+    tools:context=".selling_ad">
 
     <TextView
         android:id="@+id/title"

@@ -10,7 +10,6 @@ import androidx.core.view.WindowInsetsCompat;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -19,10 +18,9 @@ import androidx.appcompat.app.AlertDialog;
 import android.content.Intent;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-public class selling_add extends AppCompatActivity {
+
+public class selling_ad extends AppCompatActivity {
 
     private TextInputEditText isbnEditText;
     private TextInputEditText bookTitleEditText;
@@ -37,7 +35,7 @@ public class selling_add extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.selling_add);
+        setContentView(R.layout.selling_ad);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -75,12 +73,12 @@ public class selling_add extends AppCompatActivity {
                 int publisher = 1; // Ορίζουμε τον εκδότη ως 1
 
                 // Εισαγωγή νέας αγγελίας στη βάση δεδομένων
-                SQLiteOpenHelper dbHelper = new DBHandler(selling_add.this);
+                SQLiteOpenHelper dbHelper = new DBHandler(selling_ad.this);
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 ((DBHandler) dbHelper).insertSellingAd(db, isbn, price, publisher, status);
 
                 // Εμφάνιση μηνύματος επιτυχίας με Toast
-                Toast.makeText(selling_add.this, "Η αγγελία καταχωρήθηκε με επιτυχία.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(selling_ad.this, "Η αγγελία καταχωρήθηκε με επιτυχία.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -159,7 +157,7 @@ public class selling_add extends AppCompatActivity {
 
     private void showNoAdsMessage() {
         // Δημιουργούμε ένα AlertDialog για να εμφανίσουμε το μήνυμα
-        new AlertDialog.Builder(selling_add.this)
+        new AlertDialog.Builder(selling_ad.this)
                 .setTitle("Πληροφορία")
                 .setMessage("Δεν υπάρχουν αγγελίες για αυτό το βιβλίο στη βάση.")
                 .setPositiveButton(android.R.string.ok, null)
@@ -175,7 +173,7 @@ public class selling_add extends AppCompatActivity {
             boolean isbnExists = checkIsbnExistsInSellingAd(isbn);
             if (isbnExists) {
                 // Αν υπάρχει, μεταβείτε στη σελίδα ads_and_mean_price και περάστε τα δεδομένα
-                Intent intent = new Intent(selling_add.this, ads_and_mean_price.class);
+                Intent intent = new Intent(selling_ad.this, ads_and_mean_price.class);
                 intent.putExtra("ISBN", isbn);
                 intent.putExtra("STATUS", status); // Περάστε την κατάσταση στο intent
                 startActivity(intent);
@@ -184,7 +182,7 @@ public class selling_add extends AppCompatActivity {
             }
         } else {
             // Αν το ISBN είναι κενό, εμφανίστε μήνυμα
-            new AlertDialog.Builder(selling_add.this)
+            new AlertDialog.Builder(selling_ad.this)
                     .setTitle("Πληροφορία")
                     .setMessage("Παρακαλώ εισάγετε ISBN πριν συνεχίσετε.")
                     .setPositiveButton(android.R.string.ok, null)

@@ -67,7 +67,7 @@ public class cart extends Fragment {
 
                 try {
                     // Attempt to purchase items in the cart
-                    cartManager.purchaseItems(dbHandler, totalPrice, userId);
+                    cartManager.checkBalance(dbHandler, totalPrice, userId);
 
                     // Show success message
                     Toast.makeText(getContext(), "Επιτυχής αγορά!", Toast.LENGTH_SHORT).show();
@@ -78,13 +78,11 @@ public class cart extends Fragment {
             }
         });
 
-
         // Εμφάνιση δεδομένων από το CartManager
         LinearLayout cartItemsLayout = root.findViewById(R.id.cartItemsLayout);
         TextView totalPriceTextView = root.findViewById(R.id.totalPriceTextView);
         TextView startPrice = root.findViewById(R.id.startprice);
         List<Cart> cartItems = cartManager.getInstance().getCartItems();
-        float totalPrice = cartManager.getInstance().getTotalPrice();
 
         // Προσθήκη των τίτλων των αγγελιών στο layout
         for (Cart item : cartItems) {
@@ -93,10 +91,16 @@ public class cart extends Fragment {
             cartItemsLayout.addView(textViewTitle);
         }
 
-        // Εμφάνιση του συνολικού ποσού
+        // Υπολογισμός και εμφάνιση του συνολικού ποσού
+        calculatePrice(totalPriceTextView, startPrice);
+
+        return root;
+    }
+
+    private void calculatePrice(TextView totalPriceTextView, TextView startPrice) {
+        float totalPrice = cartManager.getInstance().getTotalPrice();
         totalPriceTextView.setText("Συνολικό ποσό: " + totalPrice);
         startPrice.setText("Αρχική Τιμή: " + totalPrice);
-        return root;
     }
 
     @Override
