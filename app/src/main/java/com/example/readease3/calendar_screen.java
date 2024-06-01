@@ -84,34 +84,14 @@ public class calendar_screen extends AppCompatActivity {
                     // Check book availability
                     if (startDateTextView.getText() != null && !startDateTextView.getText().toString().isEmpty()) {
                         String startDate = startDateTextView.getText().toString().replace("Start Date: ", "");
-                        if (checkBookAvailability(adId, startDate, endDate)){ // Χρήση της μεθόδου που ανακτά τις ημερομηνίες από τη βάση
+                        if (checkBookAvailability(adId, startDate, endDate)) { // Χρήση της μεθόδου που ανακτά τις ημερομηνίες από τη βάση
                             Toast.makeText(calendar_screen.this, "Το βιβλίο είναι διαθέσιμο για δανεισμό!", Toast.LENGTH_SHORT).show();
                             borrowButton.setEnabled(true);
 
-
-                            borrowButton.setOnClickListener(v -> {
-                                // Πάρτε τις ημερομηνίες που επιλέχθηκαν
-                                String startDateStr = startDateTextView.getText().toString().replace("Start Date: ", "");
-                                String endDateStr = endDateTextView.getText().toString().replace("End Date: ", "");
-
-                                // Εισάγετε τα δεδομένα στον πίνακα Borrow
-                                if (startDateStr != null && endDateStr != null) {
-                                    dbHandler.insertBorrow(adId, startDateStr, endDateStr);
-                                    Toast.makeText(calendar_screen.this, "Επιτυχής δανεισμός!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(calendar_screen.this, "Παρουσιάστηκε σφάλμα κατά την εισαγωγή των δεδομένων!", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
+                            // Εγγραφή δανεισμού
+                            registerBorrow(adId);
                         } else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(calendar_screen.this);
-                            builder.setTitle("Μη διαθέσιμο βιβλίο")
-                                    .setMessage("Το βιβλίο δεν είναι διαθέσιμο για δανεισμό σε αυτή την περίοδο. Επιλέξτε άλλες Ημερομηνίες")
-                                    .setPositiveButton("Εντάξει", (dialog, which) -> {
-                                        dialog.dismiss();
-                                        showStartDatePickerDialog(); // Καλείτε την μέθοδο όταν πατηθεί το "Εντάξει"
-                                    })
-                                    .create().show();
+                            showNotAvailableMessage();
                         }
                     } else {
                         Toast.makeText(calendar_screen.this, "Παρακαλώ ορίστε την ημερομηνία έναρξης πρώτα!", Toast.LENGTH_SHORT).show();
@@ -120,6 +100,33 @@ public class calendar_screen extends AppCompatActivity {
 
         endDatePickerDialog.show();
     }
+    private void registerBorrow(int adId) {
+        borrowButton.setOnClickListener(v -> {
+            // Πάρτε τις ημερομηνίες που επιλέχθηκαν
+            String startDateStr = startDateTextView.getText().toString().replace("Start Date: ", "");
+            String endDateStr = endDateTextView.getText().toString().replace("End Date: ", "");
+
+            // Εισάγετε τα δεδομένα στον πίνακα Borrow
+            if (startDateStr != null && endDateStr != null) {
+                dbHandler.insertBorrow(adId, startDateStr, endDateStr);
+                Toast.makeText(calendar_screen.this, "Επιτυχής δανεισμός!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(calendar_screen.this, "Παρουσιάστηκε σφάλμα κατά την εισαγωγή των δεδομένων!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showNotAvailableMessage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(calendar_screen.this);
+        builder.setTitle("Μη διαθέσιμο βιβλίο")
+                .setMessage("Το βιβλίο δεν είναι διαθέσιμο για δανεισμό σε αυτή την περίοδο. Επιλέξτε άλλες Ημερομηνίες")
+                .setPositiveButton("Εντάξει", (dialog, which) -> {
+                    dialog.dismiss();
+                    showStartDatePickerDialog(); // Καλείτε την μέθοδο όταν πατηθεί το "Εντάξει"
+                })
+                .create().show();
+    }
+
 
 
     // Κώδικας για τη μέθοδο checkBookAvailability στην calendar_screen

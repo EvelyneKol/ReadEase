@@ -38,16 +38,7 @@ public class ad_details_borrow extends AppCompatActivity {
         displayAdDetails(adId);
         // Προσθήκη ακροατή γεγονότος στο κουμπί "calendar"
         // Προσθήκη ακροατή γεγονότος στο κουμπί "calendar"
-        Button calendar = findViewById(R.id.calendar);
-        calendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Εκτέλεση του Intent για την calendar_screen με το ad_id ως extra
-                Intent intent = new Intent(ad_details_borrow.this, calendar_screen.class);
-                intent.putExtra("ad_id", adId); // Προσθήκη του ad_id ως extra
-                startActivity(intent);
-            }
-        });
+        showCalendar(adId);
     }
 
 
@@ -73,4 +64,17 @@ public class ad_details_borrow extends AppCompatActivity {
 
 
     }
+    private void showCalendar(int adId) {
+        Button calendar = findViewById(R.id.calendar);
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Εκτέλεση του Intent για την calendar_screen με το ad_id ως extra
+                Intent intent = new Intent(ad_details_borrow.this, calendar_screen.class);
+                intent.putExtra("ad_id", adId); // Προσθήκη του ad_id ως extra
+                startActivity(intent);
+            }
+        });
+    }
+
 }
