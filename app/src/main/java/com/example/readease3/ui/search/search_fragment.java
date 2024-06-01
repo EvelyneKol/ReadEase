@@ -111,9 +111,9 @@ public class search_fragment extends Fragment {
 
     private void showBooks(Book book) {
         // Update UI with book details
-        String bookDetails = "Title: " + book.getTitle() + "\n" +
+        String bookDetails = "Τίτλος Βιβλίου: " + book.getTitle() + "\n" +
                 "ISBN: " + searchedBookISBN + "\n" +  // Use searchedBookISBN here
-                "Pages: " + book.getPages();
+                "Σελίδες: " + book.getPages();
         binding.searchResultTextView.setText(bookDetails);
 
         // Adjust button visibility

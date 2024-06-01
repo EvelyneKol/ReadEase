@@ -25,7 +25,7 @@ public class ad_options extends AppCompatActivity {
         });
     }
 
-    public void goToSellingAdd(View view) {
+    public void showSellingAdd(View view) {
         // Create an Intent to start the SellingAdActivity
         Intent intent = new Intent(this, selling_ad.class);
         startActivity(intent);

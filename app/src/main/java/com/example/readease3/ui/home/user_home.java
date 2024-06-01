@@ -29,14 +29,8 @@ public class user_home extends Fragment {
         adButton = rootView.findViewById(R.id.button1);
         eventButton = rootView.findViewById(R.id.button2);
         audioBookButton = rootView.findViewById(R.id.button4);
-        adButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to AdOptionsActivity
-                Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_adOptionsActivity);
-            }
-        });
 
+        showAdOptions();
         showEvents();
         showAudioBook();
 
@@ -56,12 +50,21 @@ public class user_home extends Fragment {
         audioBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to AdOptionsActivity
+
                 Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_audiobook);
             }
         });
     }
 
+    private void showAdOptions() {
+        adButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to AdOptionsActivity
+                Navigation.findNavController(v).navigate(R.id.action_userHomeFragment_to_adOptionsActivity);
+            }
+        });
+    }
 
     @Override
     public void onDestroyView() {

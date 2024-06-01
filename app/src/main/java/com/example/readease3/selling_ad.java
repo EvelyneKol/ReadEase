@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -73,12 +74,8 @@ public class selling_ad extends AppCompatActivity {
                 int publisher = 1; // Ορίζουμε τον εκδότη ως 1
 
                 // Εισαγωγή νέας αγγελίας στη βάση δεδομένων
-                SQLiteOpenHelper dbHelper = new DBHandler(selling_ad.this);
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                ((DBHandler) dbHelper).insertSellingAd(db, isbn, price, publisher, status);
-
-                // Εμφάνιση μηνύματος επιτυχίας με Toast
-                Toast.makeText(selling_ad.this, "Η αγγελία καταχωρήθηκε με επιτυχία.", Toast.LENGTH_SHORT).show();
+                // Καλέστε τη μέθοδο registerSellingAd
+                registerSellingAd(isbn, price, publisher, status);
             }
         });
 
@@ -93,49 +90,55 @@ public class selling_ad extends AppCompatActivity {
 
         Cursor cursor = db.rawQuery("SELECT title, pages FROM book WHERE isbn = ?", new String[]{isbn});
         if (cursor.moveToFirst()) {
-            int titleIndex = cursor.getColumnIndexOrThrow("title");
-            int pagesIndex = cursor.getColumnIndexOrThrow("pages");
+            Pair<String, Integer> bookData = getBookData(cursor);
+            String title = bookData.first;
+            int pages = bookData.second;
 
-            String title = cursor.getString(titleIndex);
-            int pages = cursor.getInt(pagesIndex);
-
-            bookTitleEditText.setText(title);
-            pageNumberEditText.setText(String.valueOf(pages));
-
-            bookTitleEditText.setEnabled(true);
-            pageNumberEditText.setEnabled(true);
-            valueEditText.setEnabled(true);
-            radioGroup.setEnabled(true);
-            for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                radioGroup.getChildAt(i).setEnabled(true);
-            }
-            createButton.setEnabled(true);
-            priceButton.setEnabled(true);
+            fillFields(title, pages);
+            unlockFields();
         } else {
             // ISBN not found, unlock fields and show a pop-up message
-            bookTitleEditText.setEnabled(true);
-            pageNumberEditText.setEnabled(true);
-            valueEditText.setEnabled(true);
-            radioGroup.setEnabled(true);
-            for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                radioGroup.getChildAt(i).setEnabled(true);
-            }
-            createButton.setEnabled(true);
-            priceButton.setEnabled(true);
-            // Show the pop-up message
-            new AlertDialog.Builder(this)
-                    .setTitle("Πληροφορία")
-                    .setMessage("Το βιβλίο δεν υπάρχει στην βάση, συμπληρώστε τα στοιχεία του.")
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
+            unlockFields();
+            showNoBookMessage();
         }
 
         cursor.close();
         db.close();
     }
 
+    private void unlockFields() {
+        bookTitleEditText.setEnabled(true);
+        pageNumberEditText.setEnabled(true);
+        valueEditText.setEnabled(true);
+        radioGroup.setEnabled(true);
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            radioGroup.getChildAt(i).setEnabled(true);
+        }
+        createButton.setEnabled(true);
+        priceButton.setEnabled(true);
+    }
+    private void fillFields(String title, int pages) {
+        bookTitleEditText.setText(title);
+        pageNumberEditText.setText(String.valueOf(pages));
+    }
+    private Pair<String, Integer> getBookData(Cursor cursor) {
+        int titleIndex = cursor.getColumnIndexOrThrow("title");
+        int pagesIndex = cursor.getColumnIndexOrThrow("pages");
 
-    private boolean checkIsbnExistsInSellingAd(String isbn) {
+        String title = cursor.getString(titleIndex);
+        int pages = cursor.getInt(pagesIndex);
+
+        return new Pair<>(title, pages);
+    }
+    private void showNoBookMessage() {
+        new AlertDialog.Builder(this)
+                .setTitle("Πληροφορία")
+                .setMessage("Το βιβλίο δεν υπάρχει στην βάση, συμπληρώστε τα στοιχεία του.")
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
+
+    private boolean adExists(String isbn) {
         // Εκτελούμε τον κώδικα για να ελέγξουμε αν το ISBN υπάρχει στον πίνακα selling_ad
         SQLiteOpenHelper dbHelper = new DBHandler(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -155,6 +158,7 @@ public class selling_ad extends AppCompatActivity {
         return isbnExists;
     }
 
+
     private void showNoAdsMessage() {
         // Δημιουργούμε ένα AlertDialog για να εμφανίσουμε το μήνυμα
         new AlertDialog.Builder(selling_ad.this)
@@ -170,7 +174,7 @@ public class selling_ad extends AppCompatActivity {
 
         if (!isbn.isEmpty()) {
             // Ελέγξτε αν υπάρχει το ISBN στον πίνακα selling_ad
-            boolean isbnExists = checkIsbnExistsInSellingAd(isbn);
+            boolean isbnExists = adExists(isbn);
             if (isbnExists) {
                 // Αν υπάρχει, μεταβείτε στη σελίδα ads_and_mean_price και περάστε τα δεδομένα
                 Intent intent = new Intent(selling_ad.this, ads_and_mean_price.class);
@@ -199,5 +203,14 @@ public class selling_ad extends AppCompatActivity {
             return ""; // ή κάποια προκαθορισμένη τιμή αν δεν έχει επιλεγεί κάποιο RadioButton
         }
 
+    }
+    private void registerSellingAd(String isbn, float price, int publisher, String status) {
+        // Εισαγωγή νέας αγγελίας στη βάση δεδομένων
+        SQLiteOpenHelper dbHelper = new DBHandler(selling_ad.this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ((DBHandler) dbHelper).insertSellingAd(db, isbn, price, publisher, status);
+
+        // Εμφάνιση μηνύματος επιτυχίας με Toast
+        Toast.makeText(selling_ad.this, "Η αγγελία καταχωρήθηκε με επιτυχία.", Toast.LENGTH_SHORT).show();
     }
 }

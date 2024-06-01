@@ -49,7 +49,7 @@
         android:layout_marginBottom="232dp"
         android:background="@drawable/round_button"
         android:text="ΠΩΛΗΣΗ"
-        android:onClick="goToSellingAdd"
+        android:onClick="showSellingAdd"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

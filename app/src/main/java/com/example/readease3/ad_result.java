@@ -74,7 +74,7 @@ public class ad_result extends AppCompatActivity {
 
             // Create a text view for the ad
             TextView adTextView = new TextView(this);
-            adTextView.setText("Name: " + dbHandler.getUserNameById(ad.getSellingPublisher()) + "\n" + "Condition: " + ad.getSellingStatus() + "\n" + "Price: " + ad.getSellingPrice());
+            adTextView.setText("Οναματεπώνυμο Κατόχου: " + dbHandler.getUserNameById(ad.getSellingPublisher()) + "\n" + "Κατάσταση: " + ad.getSellingStatus() + "\n" + "Τιμή: " + ad.getSellingPrice());
             adContainerLayout.addView(adTextView);
 
             // Create a button for the ad
