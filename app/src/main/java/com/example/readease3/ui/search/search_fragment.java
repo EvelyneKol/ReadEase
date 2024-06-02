@@ -56,14 +56,7 @@ public class search_fragment extends Fragment {
             }
         });
 
-        reviewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to EbookFormActivity
-                Navigation.findNavController(v).navigate(R.id.action_searchFragment_to_review);
-
-            }
-        });
+        showReview();
 
         // Instantiate the DBHandler class
         dbHandler = new DBHandler(requireContext());
@@ -136,6 +129,17 @@ public class search_fragment extends Fragment {
         });
 
         showAds();
+    }
+
+    private void showReview(){
+        reviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to EbookFormActivity
+                Navigation.findNavController(v).navigate(R.id.action_searchFragment_to_review);
+
+            }
+        });
     }
 
     private void showAds() {

@@ -1,7 +1,6 @@
 package com.example.readease3;
 
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +38,7 @@ public class ebook_form extends AppCompatActivity {
         });
         uploadStatusTextView = findViewById(R.id.textView12);
         editTextName = findViewById(R.id.editTextName);
-        editTitle = findViewById(R.id.editTextName);
+        editTitle = findViewById(R.id.edittitle);
         editTextPrice = findViewById(R.id.editTextPrice);
         editTextDescription = findViewById(R.id.editText);
     }
@@ -64,12 +63,10 @@ public class ebook_form extends AppCompatActivity {
         builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                showNestedPopupDialog();
+                chooseStatistics();
             }
         });
 
-        // Set the negative button to cancel the dialog
-        // Set the negative button to show a toast and navigate to WriterActivity
         builder.setNegativeButton("Όχι", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -87,12 +84,12 @@ public class ebook_form extends AppCompatActivity {
     private void clearFormFields() {
         editTextName.getText().clear();
         editTextPrice.getText().clear();
+        editTitle.getText().clear();
         editTextDescription.getText().clear();
-        // Add additional EditText fields to clear if needed
     }
 
 
-    private void showNestedPopupDialog() {
+    private void chooseStatistics() {
         // Create an AlertDialog for the nested dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Διάλεξε μορφή στατιστικών:");
