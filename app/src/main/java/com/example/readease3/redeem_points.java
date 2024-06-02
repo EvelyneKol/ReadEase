@@ -41,7 +41,7 @@ public class redeem_points extends AppCompatActivity {
         if (savedInstanceState != null) {
             points = savedInstanceState.getInt("points");
         } else {
-            points = getIntent().getIntExtra("points", 0);
+            points = getIntent().getIntExtra("points", 100);
         }
 
         String redeemPoints = String.valueOf(points);

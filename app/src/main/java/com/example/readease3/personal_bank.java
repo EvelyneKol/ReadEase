@@ -82,7 +82,7 @@ public class personal_bank extends AppCompatActivity {
 
 
     private void getpoints() {
-        String userName = "John Doe";
+        String userName = "Γιώργος Παπαδόπουλος";
 
         // Call the method to get user points by name
         int points = dbHandler.getUserPointsByname(userName);
