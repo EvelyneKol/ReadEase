@@ -59,6 +59,10 @@ public class review extends AppCompatActivity {
             public void onClick(View v) {
                 String reviewText = reviewEditText.getText().toString().trim();
 
+                if (reviewText.length() > 300) {
+                    reviewText = reviewText.substring(0, 300);
+                }
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
                     if (!reviewText.isEmpty()) {
                         // Use the retrieved ISBN in the insertReview method
@@ -87,6 +91,11 @@ public class review extends AppCompatActivity {
                     // You can use currentReviewId here to update the corresponding review in the database
                     DBHandler dbHandler = new DBHandler(review.this);
                     String updatedReviewText = reviewEditText.getText().toString().trim();
+
+                    if (updatedReviewText.length() > 300) {
+                        updatedReviewText = updatedReviewText.substring(0, 300);
+                    }
+
                     if (!updatedReviewText.isEmpty()) {
                         dbHandler.updateReview(currentReviewId, 1, updatedReviewText);
                         showSuccessfulMessage();

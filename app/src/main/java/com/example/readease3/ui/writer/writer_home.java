@@ -30,7 +30,13 @@ public class writer_home extends Fragment {
         // Initialize ebookButton
         ebookButton = rootView.findViewById(R.id.ebookbutton);
 
-        // Set click listener for ebookButton
+        showEbookForm();
+
+
+        return rootView;
+    }
+
+    private void showEbookForm(){
         ebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +44,5 @@ public class writer_home extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_writer_home_to_ebook);
             }
         });
-
-        return rootView;
     }
 }
