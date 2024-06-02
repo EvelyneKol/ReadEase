@@ -55,11 +55,11 @@ public class ebook_form extends AppCompatActivity {
             Toast.makeText(this, "Παρακαλώ συμπληρώστε όλα τα πεδία", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Create an AlertDialog
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Επιθυμείς να ενημερώνεσαι για τα στατιστικά των πωλήσεων σου;");
 
-        // Set the positive button to open the file picker
+        // Set the button to open the file picker
         builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -76,7 +76,7 @@ public class ebook_form extends AppCompatActivity {
             }
         });
 
-        // Show the dialog
+
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -94,7 +94,7 @@ public class ebook_form extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Διάλεξε μορφή στατιστικών:");
 
-        // Set the positive button to show "Bars"
+        // Set the button to show "Bars"
         builder.setPositiveButton("Με ραβδόγραμμα", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -104,7 +104,7 @@ public class ebook_form extends AppCompatActivity {
             }
         });
 
-        // Set the negative button to show "Pita"
+        // Set the button to for "Pita"
         builder.setNegativeButton("Με πίτα", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
