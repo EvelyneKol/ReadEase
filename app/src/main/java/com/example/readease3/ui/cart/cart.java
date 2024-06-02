@@ -31,6 +31,7 @@ public class cart extends Fragment {
     private cartManager cartManager;
     private Button purchaseButton;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         cart_ViewModel cartViewModel =
@@ -67,7 +68,7 @@ public class cart extends Fragment {
 
                 try {
                     // Attempt to purchase items in the cart
-                    cartManager.checkBalance(dbHandler, totalPrice, userId);
+                    checkBalance(dbHandler, totalPrice, userId);
 
                     // Show success message
                     Toast.makeText(getContext(), "Επιτυχής αγορά!", Toast.LENGTH_SHORT).show();
@@ -101,6 +102,64 @@ public class cart extends Fragment {
         float totalPrice = cartManager.getInstance().getTotalPrice();
         totalPriceTextView.setText("Συνολικό ποσό: " + totalPrice);
         startPrice.setText("Αρχική Τιμή: " + totalPrice);
+    }
+
+    private void checkBalance(DBHandler dbHandler, float totalPrice, int buyerId) {
+        float walletBalance = dbHandler.getUserWalletBalance(buyerId);
+        int pointsToAdd = (int) (totalPrice / 10) * 10; // 10 πόντοι για κάθε 10 ευρώ
+
+        if (walletBalance >= totalPrice) {
+            // Update buyer's wallet balance
+            removePaymentAmount(dbHandler, buyerId, totalPrice);
+
+            // Add points to buyer's points balance
+            addUserPoints(dbHandler, buyerId, pointsToAdd);
+
+            // Distribute the funds to sellers
+            for (Cart item : cartManager.getInstance().getCartItems()) {
+                int publisherId = item.getSellingPublisher();
+                float itemPrice = item.getSellingPrice();
+                addPaymentAmount(dbHandler, publisherId, itemPrice);
+
+                // Save purchase in purchase table with price
+                insertPurchase(dbHandler, buyerId, item.getSellingAdId(), itemPrice);
+
+                // Delete item from selling_ad table
+                deleteAd(dbHandler, item.getSellingAdId());
+            }
+
+            // Clear cart after purchase
+            cartManager.getInstance().clearCart();
+        } else {
+            showNotEnoughMoney();
+        }
+    }
+
+    private void addUserPoints(DBHandler dbHandler, int buyerId, int pointsToAdd) {
+        dbHandler.addUserPoints(buyerId, pointsToAdd);
+    }
+
+    private void insertPurchase(DBHandler dbHandler, int buyerId, int sellingAdId, float itemPrice) {
+        dbHandler.insertPurchase(buyerId, "Book", sellingAdId, itemPrice);
+    }
+
+    private void deleteAd(DBHandler dbHandler, int sellingAdId) {
+        dbHandler.deleteSellingAd(sellingAdId);
+    }
+
+    private void addPaymentAmount(DBHandler dbHandler, int publisherId, float itemPrice) {
+        float sellerWalletBalance = dbHandler.getUserWalletBalance(publisherId);
+        dbHandler.updateUserWalletBalance(publisherId, sellerWalletBalance + itemPrice);
+    }
+
+    private void removePaymentAmount(DBHandler dbHandler, int buyerId, float totalPrice) {
+        float walletBalance = dbHandler.getUserWalletBalance(buyerId);
+        float newBalance = walletBalance - totalPrice;
+        dbHandler.updateUserWalletBalance(buyerId, newBalance);
+    }
+
+    private void showNotEnoughMoney() {
+        throw new RuntimeException("Το υπόλοιπο δεν επαρκεί για την αγορά.");
     }
 
     @Override
