@@ -101,7 +101,7 @@ public class personal_bank extends AppCompatActivity {
         binding.redeempoints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userName = "John Doe";
+                String userName = "Γιώργος Παπαδόπουλος";
                 // Call the method to get user points by name
                 int points = dbHandler.getUserPointsByname(userName);
 

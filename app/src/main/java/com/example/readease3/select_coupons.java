@@ -108,7 +108,7 @@ public class select_coupons extends AppCompatActivity {
 
     private void setNewcoupon(String type) {
         // Example usage
-        String userName = "John Doe";
+        String userName = "Γιώργος Παπαδόπουλος";
         String expiredDate = "2024-10-30";
         String used = "ΟΧΙ";
 
@@ -123,7 +123,7 @@ public class select_coupons extends AppCompatActivity {
         points = getIntent().getIntExtra("points", 0);
         int total= points-redeempoints;
         //int total= 1000;
-        String userName = "John Doe";
+        String userName = "Γιώργος Παπαδόπουλος";
 
         // Update points for user
         dbHandler.updateUserPoints(userName, total);

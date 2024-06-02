@@ -83,7 +83,7 @@ public class redeem_points extends AppCompatActivity {
     private void notEnoughpoints() {
         new AlertDialog.Builder(this)
                 .setTitle("Μη επαρκείς πόντοι")
-                .setMessage("Μας συγχωρείται αλλά ο αριθμός πόντων που επιλέξατε δεν ανήκει στα επιτρεπτά όρια.Πακαλούμε επιλέξτε ένα έγκυρο ποσό πόντων !")
+                .setMessage("Μας συγχωρείτε αλλά ο αριθμός πόντων που επιλέξατε δεν ανήκει στα επιτρεπτά όρια.Πακαλούμε επιλέξτε ένα έγκυρο ποσό πόντων !")
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
     }
